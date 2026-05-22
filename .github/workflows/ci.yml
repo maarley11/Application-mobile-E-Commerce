@@ -1,0 +1,36 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies (Backend)
+        run: echo "npm install in backend" # To be replaced when backend is ready
+
+      - name: Install dependencies (Frontend)
+        run: echo "npm install in frontend" # To be replaced when frontend is ready
+
+      - name: Run Linter
+        run: echo "npm run lint" # To be replaced
+
+      - name: Run Tests
+        run: echo "npm run test" # To be replaced
