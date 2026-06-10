@@ -1,0 +1,309 @@
+'============================================================
+' PROJET  : SEN DIGITAL PULSE — Application Baana
+' FICHIER : uc_membre_pro.puml
+' OBJET   : Diagramme de cas d'utilisation — Acteur Membre Pro
+' AUTEUR  : Généré automatiquement
+' DATE    : 2026-06-08
+'============================================================
+
+@startuml uc_membre_pro
+
+' ──────────────────────────────────────────────────────────
+' 1. PARAMÈTRES GLOBAUX DE STYLE
+' ──────────────────────────────────────────────────────────
+
+' Style "awesome" : affiche les acteurs sous forme de bonhomme moderne
+skinparam actorStyle awesome
+
+' Titre principal du diagramme
+title <size:20><b>Baana — Cas d'utilisation Membre Pro</b></size>\n<i>SEN DIGITAL PULSE</i>
+
+' Police globale
+skinparam defaultFontName  "Segoe UI"
+skinparam defaultFontSize  13
+
+' Style des cas d'utilisation (pastilles)
+skinparam usecase {
+    BackgroundColor #FFF3E0
+    BorderColor     #F97316
+    FontColor       #1E293B
+    BorderThickness 2
+    FontSize        13
+}
+
+' Style des acteurs
+skinparam actor {
+    FontSize  13
+    FontColor #1E293B
+}
+
+' Style des notes
+skinparam note {
+    BackgroundColor #E0F2FE
+    BorderColor     #0EA5E9
+    FontSize        11
+}
+
+' Style des flèches / relations
+skinparam arrow {
+    Color     #64748B
+    FontColor #64748B
+    FontSize  11
+}
+
+' Légende de direction (gauche → droite)
+left to right direction
+
+
+' ──────────────────────────────────────────────────────────
+' 2. DÉFINITION DES ACTEURS
+' ──────────────────────────────────────────────────────────
+
+' --- Acteur principal ---
+' Le Membre Pro est un commerçant qui a souscrit un abonnement payant.
+' Il hérite de toutes les actions du Visiteur.
+actor "Visiteur"   as visiteur   #94A3B8
+actor "Membre Pro" as pro        #10B981
+
+' Le Membre Pro EST un Visiteur (héritage / généralisation)
+' → Il peut donc faire tout ce qu'un Visiteur fait.
+visiteur <|-- pro
+
+' --- Acteurs secondaires (systèmes externes) ---
+actor "WhatsApp\nBusiness"              as whatsapp #25D366
+actor "Firebase Cloud\nMessaging (FCM)" as fcm      #FFCA28
+actor "Agrégateur\nPaiement"            as paiement #6366F1
+
+
+' ──────────────────────────────────────────────────────────
+' 3. RECTANGLE SYSTÈME — PÉRIMÈTRE APPLICATIF
+' ──────────────────────────────────────────────────────────
+
+rectangle "Application Baana — Espace Membre Pro" as systeme #FAFAF9 {
+
+    ' ==========================================================
+    ' 3.1  CAS D'UTILISATION HÉRITÉS DU VISITEUR
+    '      (rappel — déjà accessibles via la généralisation)
+    ' ==========================================================
+
+    ' Le Visiteur peut parcourir le catalogue, voir les prix publics, etc.
+    usecase "Parcourir le catalogue"          as UC_CAT
+    usecase "Rechercher un produit"           as UC_RECH
+    usecase "Voir les détails d'un produit"   as UC_DET
+    usecase "Ajouter au panier"               as UC_PAN
+    usecase "Créer un compte"                 as UC_COMP
+    usecase "Se connecter"                    as UC_CONN
+
+    ' ==========================================================
+    ' 3.2  CAS D'UTILISATION EXCLUSIFS AU MEMBRE PRO
+    ' ==========================================================
+
+    ' --- Achat & Commandes ---
+    ' Le Membre Pro achète au prix de gros (tarif réduit).
+    usecase "Acheter au prix\nde gros"                    as UC_GROS
+    ' Il peut recommander une commande passée en 1 clic.
+    usecase "Recommander une\ncommande précédente"        as UC_RECOM
+    ' Il suit sa commande en temps réel via une timeline.
+    usecase "Suivre sa commande\nen temps réel (timeline)" as UC_SUIVI
+    ' Il peut télécharger ses factures au format PDF.
+    usecase "Télécharger ses\nfactures en PDF"            as UC_FACT
+
+    ' --- Livraison ---
+    ' 3 livraisons gratuites par semaine (zone Dakar uniquement).
+    usecase "Bénéficier de 3\nlivraisons gratuites/sem."  as UC_LIVR
+
+    ' --- Support client ---
+    ' Accès prioritaire au support via WhatsApp Business.
+    usecase "Contacter le support\nclient prioritaire"    as UC_SUPP
+
+    ' --- Abonnement ---
+    ' Voir le statut, changer de formule d'abonnement.
+    usecase "Gérer son\nabonnement"                       as UC_ABO
+    ' Renouveler l'abonnement en un seul clic.
+    usecase "Renouveler son\nabonnement en 1 clic"        as UC_RENOUV
+    ' Rappel automatique 48h avant l'expiration.
+    usecase "Recevoir rappel 48h\navant expiration"       as UC_RAPPEL
+
+    ' --- Dashboard Pro ---
+    ' Tableau de bord personnel avec KPIs.
+    usecase "Consulter le\nDashboard Pro"                 as UC_DASH
+    ' Sous-cas du Dashboard ↓
+    usecase "Voir ses économies\nréalisées ce mois"       as UC_ECO
+    usecase "Voir le nombre de\ncommandes ce mois"        as UC_NBCMD
+    usecase "Suivre les livraisons\ngratuites restantes\n(X/3 cette semaine)" as UC_RESTOCK
+    usecase "Voir ses points\nfidélité"                   as UC_PTS
+
+    ' --- Notifications ---
+    ' Notifications Push (commande, paiement, promo).
+    usecase "Recevoir des\nnotifications Push"            as UC_PUSH
+
+    ' --- Paiement ---
+    ' Payer une commande ou un abonnement.
+    usecase "Effectuer un\npaiement"                      as UC_PAY
+}
+
+
+' ──────────────────────────────────────────────────────────
+' 4. RELATIONS — ACTEUR VISITEUR → CAS D'UTILISATION
+' ──────────────────────────────────────────────────────────
+
+' Le Visiteur accède aux cas d'utilisation de base.
+visiteur --> UC_CAT
+visiteur --> UC_RECH
+visiteur --> UC_DET
+visiteur --> UC_PAN
+visiteur --> UC_COMP
+visiteur --> UC_CONN
+
+
+' ──────────────────────────────────────────────────────────
+' 5. RELATIONS — ACTEUR MEMBRE PRO → CAS D'UTILISATION
+' ──────────────────────────────────────────────────────────
+
+' Grâce à l'héritage, le Membre Pro accède déjà aux UC du Visiteur.
+' Ci-dessous : les UC exclusifs au Membre Pro.
+
+pro --> UC_GROS
+pro --> UC_RECOM
+pro --> UC_SUIVI
+pro --> UC_FACT
+pro --> UC_LIVR
+pro --> UC_SUPP
+pro --> UC_ABO
+pro --> UC_DASH
+pro --> UC_PUSH
+
+
+' ──────────────────────────────────────────────────────────
+' 6. RELATIONS <<include>>
+'    (comportement OBLIGATOIRE déclenché automatiquement)
+' ──────────────────────────────────────────────────────────
+
+' Acheter au prix de gros INCLUT obligatoirement un paiement.
+UC_GROS   ..> UC_PAY   : <<include>>
+
+' Renouveler l'abonnement INCLUT obligatoirement un paiement.
+UC_RENOUV ..> UC_PAY   : <<include>>
+
+' Le Dashboard Pro INCLUT l'affichage de chaque KPI.
+UC_DASH   ..> UC_ECO     : <<include>>
+UC_DASH   ..> UC_NBCMD   : <<include>>
+UC_DASH   ..> UC_RESTOCK : <<include>>
+UC_DASH   ..> UC_PTS     : <<include>>
+
+
+' ──────────────────────────────────────────────────────────
+' 7. RELATIONS <<extend>>
+'    (comportement OPTIONNEL qui peut se déclencher)
+' ──────────────────────────────────────────────────────────
+
+' Le renouvellement en 1 clic est une EXTENSION de la gestion d'abonnement.
+' → Le Membre Pro PEUT renouveler depuis la page de gestion.
+UC_RENOUV .> UC_ABO : <<extend>>
+
+' Le rappel 48h est une EXTENSION de la gestion d'abonnement.
+' → Se déclenche automatiquement 48h avant l'expiration.
+UC_RAPPEL .> UC_ABO : <<extend>>
+
+' Recommander une commande ÉTEND le suivi de commande.
+' → Depuis l'historique, le Membre Pro peut relancer une commande.
+UC_RECOM  .> UC_SUIVI : <<extend>>
+
+' Télécharger une facture ÉTEND le suivi de commande.
+' → Depuis la timeline, le Membre Pro peut télécharger la facture.
+UC_FACT   .> UC_SUIVI : <<extend>>
+
+
+' ──────────────────────────────────────────────────────────
+' 8. RELATIONS — ACTEURS SECONDAIRES
+' ──────────────────────────────────────────────────────────
+
+' WhatsApp Business est utilisé pour le support client prioritaire.
+UC_SUPP  --> whatsapp
+
+' Firebase Cloud Messaging envoie les notifications Push.
+UC_PUSH  --> fcm
+
+' Le rappel 48h passe aussi par FCM (notification Push).
+UC_RAPPEL --> fcm
+
+' L'agrégateur de paiement traite les transactions financières.
+UC_PAY   --> paiement
+
+
+' ──────────────────────────────────────────────────────────
+' 9. NOTES EXPLICATIVES — AVANTAGES MEMBRE PRO
+' ──────────────────────────────────────────────────────────
+
+' Note sur le prix de gros
+note right of UC_GROS #E8F5E9
+  <b>Avantage Pro</b>
+  Le Membre Pro bénéficie de
+  tarifs de gros exclusifs,
+  jusqu'à <b>-40 %</b> sur le
+  prix public affiché.
+end note
+
+' Note sur les livraisons gratuites
+note right of UC_LIVR #E8F5E9
+  <b>Avantage Pro</b>
+  <b>3 livraisons gratuites</b> par
+  semaine dans la <u>zone Dakar</u>.
+  Le compteur se réinitialise
+  chaque lundi à 00h00.
+end note
+
+' Note sur le support prioritaire
+note right of UC_SUPP #E8F5E9
+  <b>Avantage Pro</b>
+  Accès au support via
+  <b>WhatsApp Business</b> avec
+  un temps de réponse
+  garanti < 30 min.
+end note
+
+' Note sur le Dashboard
+note bottom of UC_DASH #E8F5E9
+  <b>Dashboard Pro</b>
+  Vue consolidée des KPIs :
+  économies, commandes,
+  livraisons restantes,
+  points fidélité.
+end note
+
+' Note sur le rappel d'expiration
+note left of UC_RAPPEL #FFF9C4
+  <b>Rappel automatique</b>
+  48h avant l'expiration de
+  l'abonnement, une notification
+  Push est envoyée via FCM.
+end note
+
+' Note sur le renouvellement
+note left of UC_RENOUV #FFF9C4
+  <b>Renouvellement simplifié</b>
+  En 1 clic depuis la page
+  de gestion d'abonnement.
+  Le paiement est déclenché
+  automatiquement via
+  l'agrégateur.
+end note
+
+
+' ──────────────────────────────────────────────────────────
+' 10. LÉGENDE
+' ──────────────────────────────────────────────────────────
+
+legend bottom left
+  |<#10B981>    | Membre Pro (commerçant abonné payant) |
+  |<#94A3B8>    | Visiteur (utilisateur non abonné)     |
+  |<#25D366>    | WhatsApp Business (support)           |
+  |<#FFCA28>    | Firebase Cloud Messaging (Push)       |
+  |<#6366F1>    | Agrégateur Paiement                   |
+  | <b>──▶</b>  | Association (l'acteur utilise le UC)  |
+  | <b>..▶ <<include>></b> | Inclusion (obligatoire)    |
+  | <b>..▶ <<extend>></b>  | Extension (optionnelle)    |
+  | <b>──▷</b>  | Généralisation (héritage)             |
+end legend
+
+@enduml

@@ -1,0 +1,345 @@
+'============================================================
+' PROJET  : SEN DIGITAL PULSE — Application Baana
+' FICHIER : uc_administrateur.puml
+' OBJET   : Diagramme de cas d'utilisation — Acteur Administrateur
+' AUTEUR  : Généré automatiquement
+' DATE    : 2026-06-08
+'============================================================
+
+@startuml uc_administrateur
+
+' ──────────────────────────────────────────────────────────
+' 1. PARAMÈTRES GLOBAUX DE STYLE
+' ──────────────────────────────────────────────────────────
+
+' Style "awesome" : affiche les acteurs sous forme de bonhomme moderne
+skinparam actorStyle awesome
+
+' Titre principal du diagramme
+title <size:20><b>Baana — Cas d'utilisation Administrateur (Back-Office)</b></size>\n<i>SEN DIGITAL PULSE</i>
+
+' Police globale
+skinparam defaultFontName  "Segoe UI"
+skinparam defaultFontSize  13
+
+' Style des cas d'utilisation (pastilles)
+' Fond bleu clair #E3F2FD, bordure bleu foncé #1565C0
+skinparam usecase {
+    BackgroundColor #E3F2FD
+    BorderColor     #1565C0
+    FontColor       #1E293B
+    BorderThickness 2
+    FontSize        13
+}
+
+' Style des acteurs
+skinparam actor {
+    FontSize  13
+    FontColor #1E293B
+}
+
+' Style des notes
+skinparam note {
+    BackgroundColor #E8EAF6
+    BorderColor     #3F51B5
+    FontSize        11
+}
+
+' Style des flèches / relations
+skinparam arrow {
+    Color     #64748B
+    FontColor #64748B
+    FontSize  11
+}
+
+' Légende de direction (gauche → droite)
+left to right direction
+
+
+' ──────────────────────────────────────────────────────────
+' 2. DÉFINITION DES ACTEURS
+' ──────────────────────────────────────────────────────────
+
+' --- Acteur principal ---
+' L'Administrateur gère le back-office web de l'application Baana.
+' Il a accès à toutes les fonctions de gestion.
+actor "Administrateur" as admin #1565C0
+
+' --- Acteurs secondaires (systèmes / personnes externes) ---
+
+' Le livreur partenaire reçoit les assignations de colis
+' et met à jour le statut de livraison.
+actor "Livreur\nPartenaire" as livreur #FF7043
+
+' La passerelle SMS envoie les relances automatiques
+' et manuelles aux abonnés.
+actor "SMS Gateway" as sms #26A69A
+
+
+' ──────────────────────────────────────────────────────────
+' 3. RECTANGLE SYSTÈME — PÉRIMÈTRE APPLICATIF
+' ──────────────────────────────────────────────────────────
+
+rectangle "Back-Office Baana — Espace Administrateur" as systeme #FAFAF9 {
+
+    ' ==========================================================
+    ' 3.1  TABLEAU DE BORD
+    ' ==========================================================
+
+    ' Le dashboard global donne une vue d'ensemble de l'activité.
+    usecase "Consulter le tableau\nde bord global"                as UC_DASH
+
+    ' Sous-cas inclus dans le tableau de bord ↓
+    ' Chiffre d'affaires, statistiques de ventes (quotidien, hebdo, mensuel).
+    usecase "Voir le chiffre d'affaires\net statistiques de vente" as UC_CA
+
+    ' Alertes : stocks faibles, abonnements sur le point d'expirer, etc.
+    usecase "Voir les alertes\n(stocks faibles,\nabonnements expirant)"  as UC_ALERTE
+
+
+    ' ==========================================================
+    ' 3.2  GESTION DU CATALOGUE PRODUITS
+    ' ==========================================================
+
+    ' CRUD complet sur les produits (images, descriptions, stocks).
+    usecase "Ajouter / Modifier /\nSupprimer un produit"          as UC_PROD
+
+    ' Définition du double tarif : prix public + prix Pro (gros).
+    usecase "Définir le prix public\nET le prix Pro"              as UC_PRIX
+
+    ' Import/export en masse via fichier CSV.
+    usecase "Importer / Exporter\ndes produits via CSV"           as UC_CSV
+
+    ' Sous-cas : gestion des images du produit
+    usecase "Gérer les images\ndu produit"                        as UC_IMG
+
+    ' Sous-cas : gérer le stock (quantités disponibles)
+    usecase "Mettre à jour\nle stock"                             as UC_STOCK
+
+
+    ' ==========================================================
+    ' 3.3  GESTION DES ABONNEMENTS
+    ' ==========================================================
+
+    ' Vue d'ensemble des statuts des abonnés Pro.
+    usecase "Voir les statuts\ndes abonnés\n(Actif / Expiré /\nEn attente)"  as UC_STATUT
+
+    ' Relance manuelle d'un abonné par SMS.
+    usecase "Relancer un abonné\nmanuellement (SMS)"              as UC_RELANCE
+
+    ' Configuration des relances automatiques (fréquence, contenu).
+    usecase "Configurer les relances\nautomatiques"               as UC_AUTOREL
+
+    ' Historique de tous les paiements effectués par un membre.
+    usecase "Consulter l'historique\ndes paiements par membre"    as UC_HISTPAY
+
+    ' Sous-cas : envoyer un SMS de relance
+    usecase "Envoyer un SMS\nde relance"                          as UC_SENDSMS
+
+
+    ' ==========================================================
+    ' 3.4  GESTION DES COMMANDES & LOGISTIQUE
+    ' ==========================================================
+
+    ' Liste de toutes les commandes en cours avec leur statut.
+    usecase "Voir la liste des\ncommandes en cours"               as UC_LISTCMD
+
+    ' Génération de la liste de picking pour la préparation en entrepôt.
+    usecase "Générer la liste\nde picking (préparation)"          as UC_PICK
+
+    ' Assignation des colis préparés aux livreurs partenaires.
+    usecase "Assigner les colis\naux livreurs partenaires"        as UC_ASSIGN
+
+    ' Génération du bon de livraison (numéro client + adresse GPS).
+    usecase "Générer les bons\nde livraison\n(n° client + GPS)"   as UC_BDL
+
+    ' Suivi en temps réel des livraisons en cours.
+    usecase "Suivre les livraisons\nen cours"                     as UC_SUIVILIV
+
+    ' Gestion des retours produits et des réclamations clients.
+    usecase "Gérer les retours\net réclamations"                  as UC_RETOUR
+
+    ' Sous-cas : notifier le livreur de l'assignation
+    usecase "Notifier le livreur\nde l'assignation"               as UC_NOTLIV
+
+    ' Sous-cas : mettre à jour le statut de livraison
+    usecase "Mettre à jour le\nstatut de livraison"               as UC_MAJLIV
+}
+
+
+' ──────────────────────────────────────────────────────────
+' 4. RELATIONS — ADMINISTRATEUR → CAS D'UTILISATION
+' ──────────────────────────────────────────────────────────
+
+' --- Tableau de bord ---
+admin --> UC_DASH
+
+' --- Gestion catalogue ---
+admin --> UC_PROD
+admin --> UC_PRIX
+admin --> UC_CSV
+
+' --- Gestion abonnements ---
+admin --> UC_STATUT
+admin --> UC_RELANCE
+admin --> UC_AUTOREL
+admin --> UC_HISTPAY
+
+' --- Gestion commandes & logistique ---
+admin --> UC_LISTCMD
+admin --> UC_PICK
+admin --> UC_ASSIGN
+admin --> UC_BDL
+admin --> UC_SUIVILIV
+admin --> UC_RETOUR
+
+
+' ──────────────────────────────────────────────────────────
+' 5. RELATIONS <<include>>
+'    (comportement OBLIGATOIRE déclenché automatiquement)
+' ──────────────────────────────────────────────────────────
+
+' Le tableau de bord INCLUT obligatoirement l'affichage du CA
+' et des alertes — ce sont des vues intégrées au dashboard.
+UC_DASH ..> UC_CA     : <<include>>
+UC_DASH ..> UC_ALERTE : <<include>>
+
+' Ajouter/modifier un produit INCLUT la gestion des images
+' et la mise à jour du stock — ces étapes sont obligatoires.
+UC_PROD ..> UC_IMG   : <<include>>
+UC_PROD ..> UC_STOCK : <<include>>
+
+' Relancer un abonné manuellement INCLUT l'envoi effectif du SMS.
+UC_RELANCE ..> UC_SENDSMS : <<include>>
+
+' Configurer les relances automatiques INCLUT aussi l'envoi SMS
+' (le système enverra les SMS selon la configuration).
+UC_AUTOREL ..> UC_SENDSMS : <<include>>
+
+' Assigner un colis à un livreur INCLUT la notification au livreur.
+UC_ASSIGN ..> UC_NOTLIV : <<include>>
+
+' Générer la liste de picking INCLUT la consultation des commandes.
+UC_PICK ..> UC_LISTCMD : <<include>>
+
+
+' ──────────────────────────────────────────────────────────
+' 6. RELATIONS <<extend>>
+'    (comportement OPTIONNEL qui peut se déclencher)
+' ──────────────────────────────────────────────────────────
+
+' La définition du prix Pro ÉTEND la gestion produit.
+' → L'admin PEUT définir un prix Pro lors de la création/modification.
+UC_PRIX .> UC_PROD : <<extend>>
+
+' L'import/export CSV ÉTEND la gestion produit.
+' → Alternative optionnelle à la saisie manuelle.
+UC_CSV .> UC_PROD : <<extend>>
+
+' Le bon de livraison ÉTEND l'assignation des colis.
+' → Après assignation, l'admin PEUT générer le bon de livraison.
+UC_BDL .> UC_ASSIGN : <<extend>>
+
+' La mise à jour du statut de livraison ÉTEND le suivi.
+' → Le livreur ou l'admin PEUT mettre à jour le statut.
+UC_MAJLIV .> UC_SUIVILIV : <<extend>>
+
+' La gestion des retours ÉTEND le suivi des livraisons.
+' → Si un problème survient, l'admin PEUT traiter un retour.
+UC_RETOUR .> UC_SUIVILIV : <<extend>>
+
+' L'historique des paiements ÉTEND la vue des statuts abonnés.
+' → L'admin PEUT consulter le détail des paiements depuis la liste.
+UC_HISTPAY .> UC_STATUT : <<extend>>
+
+
+' ──────────────────────────────────────────────────────────
+' 7. RELATIONS — ACTEURS SECONDAIRES
+' ──────────────────────────────────────────────────────────
+
+' Le SMS Gateway est utilisé pour envoyer les SMS de relance.
+UC_SENDSMS --> sms
+
+' Le livreur partenaire reçoit les notifications d'assignation.
+UC_NOTLIV  --> livreur
+
+' Le livreur peut mettre à jour le statut de livraison.
+livreur    --> UC_MAJLIV
+
+
+' ──────────────────────────────────────────────────────────
+' 8. NOTES EXPLICATIVES
+' ──────────────────────────────────────────────────────────
+
+' Note sur le tableau de bord
+note right of UC_DASH #E8F5E9
+  <b>Dashboard Global</b>
+  Vue consolidée :
+  · CA du jour / semaine / mois
+  · Nombre de commandes
+  · Alertes prioritaires
+  · Taux de conversion
+end note
+
+' Note sur le double tarif
+note right of UC_PRIX #FFF9C4
+  <b>Double tarification</b>
+  Chaque produit a deux prix :
+  · <b>Prix public</b> (Visiteur)
+  · <b>Prix Pro</b> (Membre Pro)
+  Le prix Pro offre jusqu'à
+  <b>-40 %</b> de réduction.
+end note
+
+' Note sur les relances
+note right of UC_AUTOREL #FFF9C4
+  <b>Relances automatiques</b>
+  Configurables par l'admin :
+  · Fréquence (J-7, J-3, J-1)
+  · Contenu du SMS
+  · Heures d'envoi autorisées
+end note
+
+' Note sur l'assignation aux livreurs
+note right of UC_ASSIGN #E8F5E9
+  <b>Logistique</b>
+  L'admin assigne les colis
+  préparés aux livreurs.
+  Un bon de livraison avec
+  <b>adresse GPS</b> est généré
+  automatiquement.
+end note
+
+' Note sur les retours
+note left of UC_RETOUR #FFEBEE
+  <b>Retours & Réclamations</b>
+  Gestion complète :
+  · Motif du retour
+  · Remboursement / échange
+  · Historique des réclamations
+end note
+
+' Note sur le livreur
+note right of livreur #FFF3E0
+  <b>Livreur Partenaire</b>
+  Reçoit les assignations
+  et met à jour le statut
+  de livraison en temps réel
+  via l'application mobile.
+end note
+
+
+' ──────────────────────────────────────────────────────────
+' 9. LÉGENDE
+' ──────────────────────────────────────────────────────────
+
+legend bottom left
+  |<#1565C0>    | Administrateur (back-office web)      |
+  |<#FF7043>    | Livreur Partenaire                    |
+  |<#26A69A>    | SMS Gateway (relances)                |
+  | <b>──▶</b>  | Association (l'acteur utilise le UC)  |
+  | <b>..▶ <<include>></b> | Inclusion (obligatoire)    |
+  | <b>..▶ <<extend>></b>  | Extension (optionnelle)    |
+end legend
+
+@enduml
