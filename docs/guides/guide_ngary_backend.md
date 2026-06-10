@@ -5,6 +5,9 @@ Tu développes l'API REST robuste qui alimentera l'application Baana. Ton travai
 
 L'outil **Antigravity avec Gemini 3.1 Pro** va t'aider. Ce guide utilise les principes d'optimisation de prompts pour s'assurer que l'IA génère un code sécurisé, performant et prêt pour la production.
 
+> [!NOTE]
+> **A propos des fichiers du projet :** Tu trouveras à la racine le document `CahierDesCharges SDP.docx`. Utilise-le uniquement si tu as besoin de comprendre une règle métier précise (ex: fonctionnement de l'OTP, règles de livraison). Les gros dossiers de maquettes UI (Stitch) ou la charte graphique n'ont volontairement pas été poussés sur Git pour ne pas polluer ton espace de travail. Concentre-toi 100% sur l'API !
+
 ---
 
 ## 🧱 Standards d'Architecture Backend
