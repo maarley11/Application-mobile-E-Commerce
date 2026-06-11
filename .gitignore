@@ -1,5 +1,4 @@
 node_modules/
-
 backend/node_modules/
 baana_app/.dart_tool/
 baana_app/.packages
@@ -8,6 +7,9 @@ baana_app/build/
 baana_app/.flutter-plugins
 baana_app/.flutter-plugins-dependencies
 .env*
+.env
+database.sqlite
+.DS_Store
 
 Stitch_Mouhammad/
 stitch_Ngary/
