@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baana - Boutique Mobile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            /* Custom Colors based on OKLCH requirements translated to HEX for Tailwind config or direct use */
+            --bg-main: #f7faf8; /* oklch(98% 0.005 160) */
+            --text-body: #3c4a42; /* oklch(25% 0.02 160) */
+            --text-secondary: #6c7a71; /* oklch(55% 0.02 160) */
+            --accent-emerald: #10b981; /* oklch(72% 0.17 160) */
+            --accent-orange: #fd761a; /* oklch(75% 0.18 55) */
+            --bg-search: #ebefed; /* oklch(95% 0.008 160) */
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .headline-font { font-family: 'Comfortaa', cursive; }
+        
+        /* Custom Asymmetric Gutters */
+        .px-asymmetric {
+            padding-left: 20px;
+            padding-right: 28px;
+        }
+        .ml-asymmetric { margin-left: 20px; }
+        .mr-asymmetric { margin-right: 28px; }
+
+        /* Hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-container-low": "#f1f4f2",
+                "on-secondary-fixed-variant": "#783200",
+                "on-background": "#181c1c",
+                "primary": "#006c49",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#d4e7dd",
+                "tertiary-fixed-dim": "#b8cbc2",
+                "secondary-fixed": "#ffdbca",
+                "inverse-surface": "#2d3130",
+                "tertiary": "#51625b",
+                "on-surface": "#181c1c",
+                "on-error": "#ffffff",
+                "surface-bright": "#f7faf8",
+                "on-secondary-fixed": "#341100",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-container": "#00422b",
+                "on-primary": "#ffffff",
+                "surface-container-high": "#e6e9e7",
+                "secondary-container": "#fd761a",
+                "on-surface-variant": "#3c4a42",
+                "surface-variant": "#e0e3e1",
+                "on-tertiary-container": "#2c3c36",
+                "surface-container": "#ebefed",
+                "inverse-on-surface": "#eef1ef",
+                "inverse-primary": "#4edea3",
+                "tertiary-container": "#94a79e",
+                "primary-container": "#10b981",
+                "surface-container-highest": "#e0e3e1",
+                "on-tertiary-fixed-variant": "#394a43",
+                "on-secondary-container": "#5c2400",
+                "on-primary-fixed": "#002113",
+                "error-container": "#ffdad6",
+                "outline": "#6c7a71",
+                "on-secondary": "#ffffff",
+                "surface-dim": "#d7dbd9",
+                "background": "#f7faf8",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed-dim": "#ffb690",
+                "primary-fixed-dim": "#4edea3",
+                "primary-fixed": "#6ffbbe",
+                "on-tertiary-fixed": "#0e1f19",
+                "outline-variant": "#bbcabf",
+                "on-primary-fixed-variant": "#005236",
+                "error": "#ba1a1a",
+                "surface-tint": "#006c49",
+                "surface": "#f7faf8",
+                "secondary": "#9d4300"
+              },
+              fontFamily: {
+                "label-md": ["Nunito Sans"],
+                "label-lg": ["Nunito Sans"],
+                "body-md": ["Nunito Sans"],
+                "headline-xl": ["Comfortaa"],
+                "body-sm": ["Nunito Sans"],
+                "headline-md": ["Comfortaa"],
+                "headline-lg": ["Comfortaa"],
+                "body-lg": ["Nunito Sans"]
+              },
+              fontSize: {
+                "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="min-h-screen pb-24 overflow-x-hidden" style="width: 390px; height: 884px; overflow-y: auto; margin: 0 auto; position: relative;">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-40 bg-surface h-[80px] flex items-end pb-2 px-asymmetric">
+<div class="flex justify-between items-center w-full">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Bonjour, Khalil 👋</h1>
+<div class="flex gap-4">
+<button class="relative w-10 h-10 flex items-center justify-center hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary-container rounded-full border-2 border-surface"></span>
+</button>
+<button class="relative w-10 h-10 flex items-center justify-center hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+</button>
+</div>
+</div>
+</header>
+<main class="space-y-8 mt-4">
+<!-- Search Bar -->
+<section class="px-asymmetric">
+<div class="flex items-center bg-surface-container h-[52px] rounded-full px-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-outline mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md text-on-surface-variant placeholder:text-outline-variant" placeholder="Rechercher un produit..." type="text"/>
+</div>
+</section>
+<!-- Promotional Banner -->
+<section class="relative overflow-hidden">
+<div class="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory">
+<!-- Banner 1 -->
+<div class="min-w-[85vw] h-48 ml-asymmetric snap-center relative rounded-[16px] overflow-hidden bg-primary shrink-0">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60" data-alt="A vibrant, high-quality photograph of a bustling Senegalese marketplace with colorful textiles and fresh produce under golden sunlight. The image is rich with warm tones and deep emerald shadows, reflecting a modern and premium African aesthetic. The lighting is soft yet directional, highlighting the textures of handmade woven baskets and vibrant wax fabrics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqaRAWIGG0ENWI64bqB3QVsjNV5jVngSluiO5-DO8t8c3sHmrDQjdkfJPJhxp8UQ7HFJcn3ZJuDvPlArvHj-YYupMtQwpwNBKdY1WbwFkLx4CDbeKvxK3TdANY3T8QcQfBylBgjAfWVgwOoeZG1FJNxptdaiF7S6a66WQWL0E9-JQM6oXivspP3w4-t4xRLjncHmmEIe9_OzJaF686ZjdEUqOcdUy1SgehnK1MG7yNGd73OSYFwXV6xOb0iR9bE5uOaetA1LPDecja"/>
+<div class="absolute inset-0 p-6 flex flex-col justify-end">
+<span class="bg-secondary-container text-on-secondary-container font-label-md px-2 py-1 rounded w-fit mb-2">PROMO DU JOUR</span>
+<h2 class="font-headline-md text-white max-w-[200px]">Arrivages Fruits Frais de Casamance</h2>
+</div>
+</div>
+<!-- Banner 2 (Peek) -->
+<div class="min-w-[85vw] h-48 snap-center relative rounded-[16px] overflow-hidden bg-secondary shrink-0 mr-asymmetric">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40" data-alt="Modern abstract African patterns in shades of deep green and vibrant orange, presented as a high-end digital background. The style is minimalist and editorial, with sharp lines and organic curves that suggest professional craftsmanship. The lighting is even and bright, emphasizing the premium quality of the textile design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC319CIsCwJsU9b0DpcAqgOnn0aAV47krqjpMxrjjqNN5tK2gkK3OQ_FlQLS4TVFoiy3MFZULvz6Ivd8KGKpG5uum48HrHp2eaqJcHHZLtjQLm9nr11ZihW_Nh3tr_Iz3c_U-OUfGHLR8XQXUqm4b51aDnckJenZSRcr6PkX7U0sWE3cCulYnsSR5u0rqb4OPcfbXwDzc_hgDxriseslgDNRgcCvpqVDdPufbRel_zELfESx8XmVw2NqABcul6wYXEV4g23CdiXRplc"/>
+<div class="absolute inset-0 p-6 flex flex-col justify-end">
+<h2 class="font-headline-md text-white">Nouveautés Textiles Dakar</h2>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section>
+<div class="flex justify-between items-center px-asymmetric mb-4">
+<h3 class="font-headline-md text-on-surface">Catégories</h3>
+<button class="text-primary font-label-lg">Voir tout</button>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar px-asymmetric">
+<!-- Cat: All (Selected) -->
+<button class="flex flex-col items-center gap-2 shrink-0">
+<div class="w-[64px] h-[64px] rounded-full bg-primary-container flex items-center justify-center text-on-primary-container transition-transform active:scale-90">
+<span class="material-symbols-outlined text-[28px]">grocery</span>
+</div>
+<span class="font-label-md text-on-surface">Alimentaire</span>
+</button>
+<!-- Cat: Household -->
+<button class="flex flex-col items-center gap-2 shrink-0">
+<div class="w-[64px] h-[64px] rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant transition-transform active:scale-90">
+<span class="material-symbols-outlined text-[28px]">home_speaker</span>
+</div>
+<span class="font-label-md text-outline">Ménager</span>
+</button>
+<!-- Cat: Cosmo -->
+<button class="flex flex-col items-center gap-2 shrink-0">
+<div class="w-[64px] h-[64px] rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant transition-transform active:scale-90">
+<span class="material-symbols-outlined text-[28px]">face_6</span>
+</div>
+<span class="font-label-md text-outline">Cosmétique</span>
+</button>
+<!-- Cat: Textile -->
+<button class="flex flex-col items-center gap-2 shrink-0">
+<div class="w-[64px] h-[64px] rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant transition-transform active:scale-90">
+<span class="material-symbols-outlined text-[28px]">apparel</span>
+</div>
+<span class="font-label-md text-outline">Textile</span>
+</button>
+<!-- Cat: Electronics -->
+<button class="flex flex-col items-center gap-2 shrink-0">
+<div class="w-[64px] h-[64px] rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant transition-transform active:scale-90">
+<span class="material-symbols-outlined text-[28px]">devices</span>
+</div>
+<span class="font-label-md text-outline">Électro</span>
+</button>
+</div>
+</section>
+<!-- Featured Products -->
+<section class="px-asymmetric">
+<h3 class="font-headline-md text-on-surface mb-6">Produits vedettes</h3>
+<div class="grid grid-cols-2 gap-x-6 gap-y-10">
+<!-- Product 1 -->
+<div class="group">
+<div class="relative mb-3 aspect-[4/5] rounded-[12px] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A premium close-up shot of organic brown rice in a traditional handcrafted ceramic bowl. The lighting is studio-quality with soft shadows, set against a clean, emerald-tinted background. The scene exudes a sense of high-quality local Senegalese production, with a focus on natural textures and professional presentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM0ORGQHn0yx9y4tAiU8Jl8sM0yLUawh3BQYlDduGjF0TlZjEZ2DNMz4Khsf9o6GizdaMLAkLJT8iPyhRqn-mn-iaoeV11hTB-z-i2aTqC1bJR_9toIK2GgXEwMCe4TIjkHhX0wOgo-grRYtGlaFzBPTVCvOsRT1Ac-IFS9qTNK_bqlkUpojMxj3_S5tUS2Y402FORwz8b6eigHHxfM4b6tb78L1ZvCqggNe8fCkRi2pppANMZ1Z4xBkvcKt9dQKB5UgKaMF269JTq"/>
+<span class="absolute top-2 left-2 bg-secondary-container text-on-secondary-container font-bold text-[10px] px-2 py-1 rounded">PRO</span>
+<button class="absolute bottom-2 right-2 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-body-md text-on-surface leading-tight">Riz Brisé Parfumé - 5kg</h4>
+<div class="mt-1 flex flex-col">
+<span class="text-outline line-through text-[12px]">4.500 FCFA</span>
+<span class="font-headline-md text-primary">3.950 FCFA</span>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group">
+<div class="relative mb-3 aspect-[4/5] rounded-[12px] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High-end presentation of local Senegalese coffee beans spilling from a rustic burlap sack. The shot is captured with a shallow depth of field, emphasizing the rich, dark roasted texture of the beans. The color palette is warm and earthy, with deep browns and subtle emerald accents in the background lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbJrjFQ_amfoyhml61NYJbNbifky_tiEw4-IYWWGy_HM1-9YbIHGM7jAOOyo_TFMXg16xh1LzT9lC1pl5gIeRVUpmYy_4xdUDGakoSaHis_5XSwVZOD6hW9pTomw-qJSABP8cdPsYFmnH14_ziGhgINEmdkVT1U3X-sUQKjVmFDmREcSJ7bgHQszloQigcPgJgzbclDuadB73_F_2cVBwPTKpq0R-U4-K0WK1HNrZmxIqvOzU6wIQAIcUUfjfTsfbI9guoA0wLGTUu"/>
+<span class="absolute top-2 left-2 bg-secondary-container text-on-secondary-container font-bold text-[10px] px-2 py-1 rounded">PRO</span>
+<button class="absolute bottom-2 right-2 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-body-md text-on-surface leading-tight">Café Touba Royal 500g</h4>
+<div class="mt-1 flex flex-col">
+<span class="text-outline line-through text-[12px]">2.200 FCFA</span>
+<span class="font-headline-md text-primary">1.800 FCFA</span>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group">
+<div class="relative mb-3 aspect-[4/5] rounded-[12px] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="An artistic still life of cold-pressed hibiscus oil in a frosted glass bottle with a wooden cap. The background is a minimalist, emerald-tinted surface that feels clean and luxurious. The lighting highlights the deep red liquid and the premium label design, targeting a discerning e-commerce audience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_gIGwrnTKoXt2mLFJHLRhyg7NpRqttEHVP_O0oL-5hOvWF6rrAUeQQrncx5BJCRReavBvfPhThZ2TKg99LY_6Oa3cBgPheg-PloHnggldky00dn4Iw66ymDQRmtrI5_HdzuveoxiysD_4dzx5Hn9Q3QMg48Ax0M2xjqk_4jqG168wnWlvm7ZdS3f6tqoW__inXyyKpC4HMXukIrOqd2uRsyb-PuS7X56yAR0SwoxaJb7ZRyusRq5wGs7AnSXyoMD-I-yvviVcopSS"/>
+<span class="absolute top-2 left-2 bg-secondary-container text-on-secondary-container font-bold text-[10px] px-2 py-1 rounded">PRO</span>
+<button class="absolute bottom-2 right-2 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-body-md text-on-surface leading-tight">Huile de Bissap Bio</h4>
+<div class="mt-1 flex flex-col">
+<span class="text-outline line-through text-[12px]">7.500 FCFA</span>
+<span class="font-headline-md text-primary">6.200 FCFA</span>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group">
+<div class="relative mb-3 aspect-[4/5] rounded-[12px] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A modern presentation of artisanal honey in a minimalist glass jar with a golden hue. The setting is bright and high-key, using the brand's emerald-tinted neutrals to create a sophisticated, clean look. The honey glows under soft, diffused lighting, emphasizing its purity and premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh7jfn9044Kqt3tiAhH6p9KG_8xuG_HEVzZOAU-J5V54lMguos0ozB8hjUcMk1O5NZ6_gjVdp449pajGE5wQ9K8betUCwEYa8V-Bc8hhnjpo9gxm5XSw8SpXxYuSHKFpbJ2hK3r2eBAh-qqlIkMHK5iT5MGONpoBwIXkKarnQBlABGdoM0qKEpOdj6T4lOIpbPCkAuIuba08E1_EXgaWBPfMCT3axZkeGlLFDOcFSBZldf8Odxvdhc6yQDNspoVyedWDdzYwzzd50Q"/>
+<span class="absolute top-2 left-2 bg-secondary-container text-on-secondary-container font-bold text-[10px] px-2 py-1 rounded">PRO</span>
+<button class="absolute bottom-2 right-2 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-body-md text-on-surface leading-tight">Miel de Casamance 1L</h4>
+<div class="mt-1 flex flex-col">
+<span class="text-outline line-through text-[12px]">5.000 FCFA</span>
+<span class="font-headline-md text-primary">4.500 FCFA</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-lowest h-[80px] z-50 flex justify-around items-center px-asymmetric pb-safe">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1.5 transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md mt-0.5">Accueil</span>
+</a>
+<!-- Catalog -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-variant/50 transition-transform active:scale-90 duration-150 rounded-xl" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md mt-0.5">Catalogue</span>
+</a>
+<!-- Orders -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-variant/50 transition-transform active:scale-90 duration-150 rounded-xl" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md mt-0.5">Commandes</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-variant/50 transition-transform active:scale-90 duration-150 rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md mt-0.5">Profil</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for category selection
+        const categoryButtons = document.querySelectorAll('section:nth-child(3) button');
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryButtons.forEach(b => {
+                    const iconContainer = b.querySelector('div');
+                    const label = b.querySelector('span:last-child');
+                    iconContainer.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    iconContainer.classList.add('bg-surface-container', 'text-on-surface-variant');
+                    label.classList.remove('text-on-surface');
+                    label.classList.add('text-outline');
+                });
+                const iconContainer = btn.querySelector('div');
+                const label = btn.querySelector('span:last-child');
+                iconContainer.classList.add('bg-primary-container', 'text-on-primary-container');
+                iconContainer.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                label.classList.add('text-on-surface');
+                label.classList.remove('text-outline');
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baana - Order Tracking</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#005236",
+                    "primary-fixed-dim": "#4edea3",
+                    "on-primary-container": "#00422b",
+                    "error-light": "oklch(94% 0.03 25)",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7faf8",
+                    "tertiary": "#9d4300",
+                    "surface-container-low": "#f1f4f2",
+                    "secondary": "#8c4f00",
+                    "on-secondary-fixed": "#2d1600",
+                    "inverse-on-surface": "#eef1ef",
+                    "outline-variant": "#bbcabf",
+                    "primary-container": "#10b981",
+                    "on-tertiary-fixed": "#341100",
+                    "on-tertiary-container": "#622700",
+                    "surface-container": "#ebefed",
+                    "secondary-container": "#ffac5b",
+                    "inverse-surface": "#2d3130",
+                    "outline": "#6c7a71",
+                    "primary": "#006c49",
+                    "tertiary-container": "#ff7e2d",
+                    "background": "#f7faf8",
+                    "on-background": "#181c1c",
+                    "on-surface": "#181c1c",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "error-warm": "#E05252",
+                    "on-secondary-container": "#744000",
+                    "on-secondary-fixed-variant": "#6b3b00",
+                    "surface-tint": "#006c49",
+                    "secondary-fixed": "#ffdcc0",
+                    "text-secondary": "#6B7D75",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e6e9e7",
+                    "on-primary-fixed": "#002113",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "inverse-primary": "#4edea3",
+                    "info-warm": "#3B9EC4",
+                    "on-surface-variant": "#3c4a42",
+                    "primary-fixed": "#6ffbbe",
+                    "on-error": "#ffffff",
+                    "surface": "#f7faf8",
+                    "error-container": "#ffdad6",
+                    "surface-input": "#EDF2EF",
+                    "quasi-black": "#2C3E36",
+                    "on-error-container": "#93000a",
+                    "border-muted": "#D4DDD8",
+                    "secondary-fixed-dim": "#ffb875",
+                    "surface-container-highest": "#e0e3e1",
+                    "surface-dim": "#d7dbd9",
+                    "warning-light": "oklch(94% 0.03 55)",
+                    "success-light": "oklch(92% 0.04 160)",
+                    "tertiary-fixed": "#ffdbca",
+                    "surface-variant": "#e0e3e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "element-gap": "24px",
+                    "margin-left": "20px",
+                    "section-gap": "32px",
+                    "gutter-h": "12px",
+                    "margin-right": "28px",
+                    "gutter-v": "16px"
+            },
+            "fontFamily": {
+                    "price-display": [
+                            "Comfortaa"
+                    ],
+                    "subtitle": [
+                            "Nunito"
+                    ],
+                    "label-caps": [
+                            "Nunito"
+                    ],
+                    "body-bold": [
+                            "Nunito"
+                    ],
+                    "headline-md": [
+                            "Comfortaa"
+                    ],
+                    "button-text": [
+                            "Comfortaa"
+                    ],
+                    "headline-lg": [
+                            "Comfortaa"
+                    ],
+                    "caption": [
+                            "Nunito"
+                    ],
+                    "body-reg": [
+                            "Nunito"
+                    ]
+            },
+            "fontSize": {
+                    "price-display": [
+                            "28px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "subtitle": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-caps": [
+                            "11px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-bold": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "22px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "button-text": [
+                            "16px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "28px",
+                            {
+                                    "lineHeight": "34px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "caption": [
+                            "11px",
+                            {
+                                    "lineHeight": "14px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-reg": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: -8px;
+            width: 2px;
+            background-color: #10b981; /* primary-container */
+        }
+        .timeline-line-dashed::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: -8px;
+            width: 2px;
+            background-image: linear-gradient(to bottom, #bbcabf 50%, transparent 50%); /* outline-variant */
+            background-size: 2px 8px;
+            background-repeat: repeat-y;
+        }
+        .timeline-item:last-child .timeline-line::before,
+        .timeline-item:last-child .timeline-line-dashed::before {
+            display: none;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+            }
+            100% {
+                transform: scale(0.8);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+            }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 2s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-background border-b border-muted flex items-center justify-between pl-margin-left pr-margin-right h-[64px]">
+<button aria-label="Go back" class="flex items-center justify-center p-2 rounded-full hover:opacity-80 transition-opacity active:scale-95 text-primary">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Commande #SDP-8492</h1>
+<div class="w-10"></div> <!-- Spacer to balance flex-between -->
+</header>
+<main class="pt-section-gap pb-section-gap pl-margin-left pr-margin-right space-y-section-gap">
+<!-- Timeline Section -->
+<section class="bg-surface-container-lowest rounded-xl border border-muted p-6">
+<div class="relative space-y-6">
+<!-- Step 1: Confirmed -->
+<div class="timeline-item relative flex items-start gap-4">
+<div class="timeline-line relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center mt-1">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<p class="font-body-bold text-body-bold text-on-surface">Confirmée</p>
+<p class="font-caption text-caption text-text-secondary mt-1">Aujourd'hui, 09:42</p>
+</div>
+</div>
+<!-- Step 2: Preparing -->
+<div class="timeline-item relative flex items-start gap-4">
+<div class="timeline-line relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center mt-1">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<p class="font-body-bold text-body-bold text-on-surface">En préparation</p>
+<p class="font-caption text-caption text-text-secondary mt-1">Aujourd'hui, 10:15</p>
+</div>
+</div>
+<!-- Step 3: Delivering (Current) -->
+<div class="timeline-item relative flex items-start gap-4">
+<div class="timeline-line-dashed relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-[#F97316] animate-pulse-ring flex items-center justify-center mt-1">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+</div>
+<div>
+<p class="font-body-bold text-body-bold text-[#F97316]">En livraison</p>
+<p class="font-caption text-caption text-text-secondary mt-1">Arrivée estimée : 11:30</p>
+</div>
+</div>
+<!-- Step 4: Delivered -->
+<div class="timeline-item relative flex items-start gap-4">
+<div class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-surface-variant border-2 border-outline-variant flex items-center justify-center mt-1">
+</div>
+<div>
+<p class="font-body-bold text-body-bold text-text-secondary">Livrée</p>
+<p class="font-caption text-caption text-outline mt-1">En attente</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Delivery Driver Card -->
+<section class="bg-surface-input rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<img alt="Livreur" class="w-12 h-12 rounded-full object-cover border-2 border-surface-container-lowest" data-alt="A portrait of a smiling African delivery driver wearing a green branded cap and uniform, looking professional and friendly. The lighting is natural and bright, conveying a warm, premium, and trustworthy Senegalese modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1bgrsH9QvyFmxnyU53rH10_kvbcB84NXWBY2dy2EQqkjbAxj39h-JOfcUyAM-TzOERhkt7yUnpSolSrSp29IlCGyM57h00DNBcYjkjHOF4cuUQ-iIJqcwe61TtcSzyfek1NHZUjf7woGGR73W0D5DGaUMI1lS5BIfxWTcUnq8FCz001h58dqQMnzAG7dKgTXgBRnmEzNS9HNhVz_HW97GIfDyYCM1skqblHseUcUBekPumrTMytn6ZBcbf1bUQY7LND34TwpZDZk"/>
+<div>
+<p class="font-subtitle text-subtitle text-on-surface">Mamadou Diop</p>
+<p class="font-caption text-caption text-text-secondary mt-1">+221 77 123 45 67</p>
+</div>
+</div>
+<button aria-label="Call driver" class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined" data-icon="call" style="font-variation-settings: 'FILL' 1;">call</span>
+</button>
+</section>
+<!-- GPS Mini-map -->
+<section class="rounded-[16px] overflow-hidden h-[200px] relative bg-surface-container border border-muted">
+<!-- Simulated Map Background -->
+<div class="absolute inset-0 bg-[#E8F0EA] opacity-50" style="background-image: radial-gradient(#bbcabf 1px, transparent 1px); background-size: 20px 20px;"></div>
+<!-- Route Line SVG Placeholder -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path class="animate-[dash_2s_linear_infinite]" d="M 20 80 Q 40 60 50 50 T 80 20" fill="none" stroke="#F97316" stroke-dasharray="5,5" stroke-width="3"></path>
+<circle cx="20" cy="80" fill="#10b981" r="4"></circle>
+<circle class="animate-pulse" cx="80" cy="20" fill="#F97316" r="4"></circle>
+</svg>
+<style>
+                @keyframes dash {
+                  to {
+                    stroke-dashoffset: -10;
+                  }
+                }
+            </style>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/90 backdrop-blur-sm px-3 py-1 rounded-full border border-muted">
+<p class="font-caption text-caption text-on-surface font-bold">Dakar - Plateau</p>
+</div>
+</section>
+<!-- Action Buttons -->
+<section class="flex flex-col gap-4 mt-section-gap">
+<button class="w-full h-[52px] rounded-xl border-2 border-primary text-primary font-button-text text-button-text flex items-center justify-center gap-2 hover:bg-primary/5 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                Télécharger facture PDF
+            </button>
+<button class="w-full h-[52px] rounded-xl border border-outline text-on-surface-variant font-button-text text-button-text flex items-center justify-center gap-2 hover:bg-surface-variant/50 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                Contacter support
+            </button>
+</section>
+</main>
+</body></html>

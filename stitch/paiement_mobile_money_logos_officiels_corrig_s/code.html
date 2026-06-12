@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, height=844, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#006c49",
+                        "primary-container": "#10b981",
+                        "on-primary-container": "#00422b",
+                        "surface": "#f7faf8",
+                        "surface-bright": "#f7faf8",
+                        "surface-dim": "#d7dbd9",
+                        "surface-container-low": "#f1f4f2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#181c1c",
+                        "on-surface-variant": "#3c4a42",
+                        "outline": "#6c7a71",
+                        "outline-variant": "#bbcabf",
+                        "emerald-custom": "oklch(72% 0.17 160)",
+                        "emerald-bg": "oklch(95% 0.008 160)",
+                    },
+                    borderRadius: {
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "stack-sm": "8px",
+                        "margin-left": "20px",
+                        "stack-md": "24px",
+                        "margin-right": "28px",
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Comfortaa"],
+                        "body-md": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "label-lg": ["Nunito Sans"],
+                    },
+                    fontSize: {
+                        "headline-xl": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "16px", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-payment-row {
+            background-color: oklch(98% 0.01 160);
+            border-left: 3px solid #10b981;
+        }
+        input:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+        /* Custom radio styling to avoid material default */
+        .custom-radio {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #6c7a71;
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+            transition: border-color 0.2s ease;
+        }
+        .custom-radio:checked {
+            border-color: #10b981;
+        }
+        .custom-radio::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            background-color: #10b981;
+        }
+        .custom-radio:checked::before {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface overflow-hidden">
+<!-- Main Canvas -->
+<div class="relative w-[390px] h-[844px] mx-auto bg-surface overflow-y-auto">
+<!-- Header: TopAppBar logic -->
+<header class="flex justify-between items-center w-full pl-[20px] pr-[28px] h-[64px] sticky top-0 bg-surface z-50">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary text-[28px]">arrow_back</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg text-primary">Paiement</h1>
+<div class="w-[28px]"></div> <!-- Spacer for center alignment -->
+</header>
+<!-- Content Area -->
+<main class="flex flex-col">
+<!-- Amount Section: Centered, Custom Emerald -->
+<section class="mt-stack-md flex flex-col items-center justify-center py-6">
+<span class="text-on-surface-variant font-label-md uppercase tracking-widest mb-2">Montant à régler</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-[32pt] leading-none text-emerald-custom" style="color: oklch(72% 0.17 160);">45 500</span>
+<span class="font-body-md text-[16pt] text-emerald-custom opacity-80" style="color: oklch(72% 0.17 160);">FCFA</span>
+</div>
+</section>
+<!-- Payment Options Section -->
+<section class="mt-stack-md">
+<div class="ml-margin-left mr-margin-right mb-4">
+<h2 class="text-on-surface font-label-lg" style="font-size: 14px; font-weight: 600;">Choisissez votre moyen de paiement</h2>
+</div>
+<!-- Payment Rows -->
+<div class="flex flex-col space-y-1">
+<!-- Option 1: Wave (Pre-selected) -->
+<label class="active-payment-row flex items-center h-[56px] pl-[17px] pr-[28px] cursor-pointer group transition-colors">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center border border-outline-variant/30">
+<img alt="Wave logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjPwymhuTyn-xoDhgb_Ux0icPYje6nE_p0bSwKIVmplLIE0poIi96Y0JugTWGGZ8nnpOCV29YXKOHWjnKuFidR8siGIkyT-cs4wW6HyBwRwPgIM64Eu44iLNoDPqHyA5o6zGNoFCvMQHOmd_EKkbEH-vw0AIkRVoXkpF7Me2KQ0_j2hfEZUZBChlpA9efotEOz6AmgV56kxuiAu7u_cMR5HwhkHo_zGrORN9_EPEdAkQ9uyi0m4lqpvvVy1hy801AdpT9_HPz2hKvp"/>
+</div>
+<span class="flex-1 ml-4 font-body-md text-on-surface">Wave</span>
+<input checked="" class="custom-radio" name="payment_method" type="radio" value="wave"/>
+</label>
+<!-- Option 2: Orange Money -->
+<label class="flex items-center h-[56px] pl-[20px] pr-[28px] cursor-pointer hover:bg-surface-container-low transition-colors group">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center border border-outline-variant/30">
+<img alt="Orange Money logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWRW9kcRvJ-0Q33Ay7HlhDe263o8Qfw8UetBpD3XjNWlTzxK5-6ZS-gMLRMD3Cvhu9VCoRVv-aJbT_PNTwh-by2KhHiVqnvlW_vuDEEN_Gu_ZCKCWNOg-evR5aP3wF36o12BALGPKVOwGmUogF9bzHtLsSm8dk94LNTNSDIwTM7xrznVV3a_wL52XZYWUyZXUVvc8aTPZra-JYf43EiaYPUHcz5a2wee6RvWBIG9An4KgbnsXztpsEW0kFn6zUYoZVN3vBYPk-w5AW"/>
+</div>
+<span class="flex-1 ml-4 font-body-md text-on-surface">Orange Money</span>
+<input class="custom-radio" name="payment_method" type="radio" value="orange"/>
+</label>
+<!-- Option 3: Free Money -->
+<label class="flex items-center h-[56px] pl-[20px] pr-[28px] cursor-pointer hover:bg-surface-container-low transition-colors group">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center border border-outline-variant/30">
+<img alt="Free Money logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdE4nry4zbNWzivFxPiWmX_YEInlTjYi3xhu-NkaiilLJUMh5gYkexbv8-ojZa29quztcBwOoXFAu--s7nkC0NmPND5kA1mzyqtmVMYcUPvQ4WBc4dELYP50t7l9ukAQNn2zbxvcvxcDFPBLUzgorPKJOaFVmP6g78n6fJjTDfv75r7CNO9PkcA8rjCKlTctY2CB7BrxPzbkB397hbEORBVO60a2VUZfPAU21xivNv-noXJ02vkCcochtI_vMzDyqk9YUVPNQrNEuN"/>
+</div>
+<span class="flex-1 ml-4 font-body-md text-on-surface">Free Money</span>
+<input class="custom-radio" name="payment_method" type="radio" value="free"/>
+</label>
+<!-- Option 4: Carte bancaire -->
+<label class="flex items-center h-[56px] pl-[20px] pr-[28px] cursor-pointer hover:bg-surface-container-low transition-colors group">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-low flex items-center justify-center border border-outline-variant/30">
+<span class="material-symbols-outlined text-on-surface-variant">credit_card</span>
+</div>
+<span class="flex-1 ml-4 font-body-md text-on-surface">Carte bancaire</span>
+<input class="custom-radio" name="payment_method" type="radio" value="card"/>
+</label>
+</div>
+</section>
+<!-- Phone Input Section -->
+<section class="mt-stack-lg px-margin-left pr-margin-right">
+<label class="block text-[14px] font-semibold text-on-surface-variant mb-2">Numéro de téléphone</label>
+<div class="relative flex items-center">
+<div class="absolute left-4 flex items-center gap-2 pr-3 border-r border-outline-variant/50">
+<span class="text-on-surface-variant font-label-md">+221</span>
+</div>
+<input class="w-full h-[52px] pl-[72px] pr-4 rounded-xl text-on-surface font-body-md border-0 transition-all" style="background-color: oklch(95% 0.008 160);" type="tel" value="77 842 56 90"/>
+<button class="absolute right-4 text-primary font-label-md">Modifier</button>
+</div>
+</section>
+<!-- Action Section -->
+<section class="mt-stack-lg px-margin-left pr-margin-right pb-10">
+<button class="w-full h-[52px] bg-primary-container text-white font-bold rounded-xl active:scale-[0.98] transition-transform duration-150 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                    Payer 45 500 FCFA
+                </button>
+<!-- Secure Payment Indicator -->
+<div class="flex items-center justify-center gap-1.5 mt-6 text-outline">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="text-[12pt] font-body-sm">Paiement sécurisé</span>
+</div>
+</section>
+</main>
+<!-- Decorative background element for modern African flair -->
+<div class="absolute bottom-[-100px] right-[-50px] w-[300px] h-[300px] rounded-full opacity-[0.03] pointer-events-none" style="background: repeating-conic-gradient(from 0deg, #006c49 0deg 30deg, transparent 30deg 60deg);">
+</div>
+</div>
+<script>
+        // Simple micro-interaction for payment selection
+        const rows = document.querySelectorAll('label.flex');
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                // Remove active classes from all
+                rows.forEach(r => {
+                    r.classList.remove('active-payment-row');
+                    r.classList.add('pl-[20px]');
+                    r.classList.remove('pl-[17px]');
+                });
+                // Add active classes to current
+                row.classList.add('active-payment-row');
+                row.classList.remove('pl-[20px]');
+                row.classList.add('pl-[17px]');
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html><html class="light" lang="fr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#622700",
+                        "secondary": "#8c4f00",
+                        "on-secondary-container": "#744000",
+                        "surface-container-highest": "#e0e3e1",
+                        "inverse-on-surface": "#eef1ef",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary": "#006c49",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#6b3b00",
+                        "on-primary-container": "#00422b",
+                        "border-muted": "#D4DDD8",
+                        "text-secondary": "#6B7D75",
+                        "surface-bright": "#f7faf8",
+                        "on-tertiary-fixed": "#341100",
+                        "info-warm": "#3B9EC4",
+                        "surface-container-low": "#f1f4f2",
+                        "on-secondary-fixed": "#2d1600",
+                        "tertiary": "#9d4300",
+                        "primary-fixed-dim": "#4edea3",
+                        "outline-variant": "#bbcabf",
+                        "tertiary-fixed-dim": "#ffb690",
+                        "surface": "#f7faf8",
+                        "on-surface": "#181c1c",
+                        "success-light": "oklch(92% 0.04 160)",
+                        "tertiary-container": "#ff7e2d",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#006c49",
+                        "on-primary-fixed-variant": "#005236",
+                        "error-light": "oklch(94% 0.03 25)",
+                        "on-surface-variant": "#3c4a42",
+                        "inverse-primary": "#4edea3",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e9e7",
+                        "on-tertiary-fixed-variant": "#783200",
+                        "on-background": "#181c1c",
+                        "tertiary-fixed": "#ffdbca",
+                        "primary-container": "#10b981",
+                        "surface-container": "#ebefed",
+                        "warning-light": "oklch(94% 0.03 55)",
+                        "outline": "#6c7a71",
+                        "quasi-black": "#2C3E36",
+                        "inverse-surface": "#2d3130",
+                        "secondary-fixed-dim": "#ffb875",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d7dbd9",
+                        "primary-fixed": "#6ffbbe",
+                        "secondary-fixed": "#ffdcc0",
+                        "secondary-container": "#ffac5b",
+                        "background": "#f7faf8",
+                        "surface-input": "#EDF2EF",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002113",
+                        "surface-variant": "#e0e3e1",
+                        "surface-container-lowest": "#ffffff",
+                        "error-warm": "#E05252"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter-v": "16px",
+                        "element-gap": "24px",
+                        "stack-sm": "8px",
+                        "section-gap": "32px",
+                        "gutter-h": "12px",
+                        "margin-right": "28px",
+                        "margin-left": "20px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Nunito"],
+                        "price-display": ["Comfortaa"],
+                        "headline-lg": ["Comfortaa"],
+                        "caption": ["Nunito"],
+                        "body-reg": ["Nunito"],
+                        "headline-md": ["Comfortaa"],
+                        "subtitle": ["Nunito"],
+                        "body-bold": ["Nunito"],
+                        "button-text": ["Comfortaa"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "price-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                        "body-reg": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "subtitle": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-bold": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "button-text": ["16px", {"lineHeight": "20px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7faf8;
+            /* Subtle textile pattern inspired by woven Manjak fabric */
+            background-image: 
+                radial-gradient(#d4ddd8 0.5px, transparent 0.5px), 
+                radial-gradient(#d4ddd8 0.5px, #f7faf8 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            color: #181c1c;
+            overflow-x: hidden;
+        }
+
+        .asymmetric-clip {
+            border-radius: 40px 12px 60px 20px;
+        }
+
+        .organic-button {
+            border-radius: 14px 28px 12px 32px;
+        }
+
+        .text-vertical {
+            writing-mode: vertical-rl;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .nav-active-blob {
+            border-radius: 24px 8px 32px 12px;
+        }
+
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="font-body-reg antialiased" data-mode="connect">
+<!-- TopAppBar (Based on JSON, Adapted for Artisanal Style) -->
+<header class="w-full sticky top-0 z-50 bg-background/80 backdrop-blur-md flex items-center px-margin-left pr-margin-right h-14">
+<div class="flex items-center gap-4 w-full">
+<button class="text-primary hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Besoin d'aide ?</h1>
+</div>
+</header>
+<main class="relative min-h-screen pb-24">
+<!-- Hero Section: L'Artisanat Digital -->
+<section class="mt-8 px-margin-left pr-margin-right overflow-visible">
+<div class="relative flex flex-col items-start">
+
+<h2 class="font-headline-lg text-headline-lg text-quasi-black leading-[1.1] max-w-[280px] z-10">
+                    L'Artisanat <span class="text-primary italic">Digital</span> au service de votre succès.
+                </h2>
+<!-- Large Decorative Adinkra Symbol Background -->
+<div class="absolute -right-12 -top-4 opacity-10 pointer-events-none scale-150 rotate-12">
+<img class="w-64 h-64 object-contain grayscale" data-alt="A large, ornate Adinkra symbol Gye Nyame representng the supremacy of God, rendered as a subtle grayscale watermark on a textured cream background. The symbol has organic, hand-drawn curves and intricate detailing, evoking the feeling of traditional West African wood carvings. The lighting is flat and ethereal, blending the symbol into the background fabric texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZtXMVu9JoIVPR-6TMrJfUM_25GS-q7VbBXukBuJYii-GuN2dxcFZZK0U23O6YrAiTw5VSEIf0_N4Lpe_8WRkR_lMOpsmuzTZNZlQam8XJcepJd-Gx56t9YLPxUu4y4zJn55djoH2pCMwyd6EOSGRVX_oBVxbLETS3pwlsX5R1SWYL-151TJ2Wcvwwj50l99yKhldY_Jawc6hkEmEpO7LCswiO51CIZcoU0ZEq4dQbwe4QxRzNbwL02KQ7bCOAKQ7TxqhK-2TAbAM">
+</div>
+</div>
+</section>
+<!-- Advisor Profile (Asymmetrical Break) -->
+<section class="mt-section-gap px-margin-left">
+<div class="flex items-end gap-6">
+<div class="relative w-48 h-64 asymmetric-clip overflow-hidden border-2 border-primary rotate-[-2deg] flex-shrink-0">
+<img alt="Advisor" class="w-full h-full object-cover scale-110" data-alt="A professional portrait of a handsome West African man with a friendly smile, wearing a modern black polo shirt and a sleek call center headset. He is positioned against a solid, vibrant emerald green background that provides high contrast. The lighting is warm and soft, highlighting his features and the professional yet welcoming nature of premium customer support. The overall aesthetic is clean, modern, and high-end." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGJM6KcLU1KIP9Xe7lUqto6gDUdB1hCyZPJ093aZi1QLngd3Ywttaz9ESPqx2srm3HwG5egxNWTBmU1K3bVNIRD9d057Hh7Rj9lQOHA_KhUHUftxNVX3Hu7w0OcSvzH1B9dYAR-IqqgbLdHUJc2j53X0cKKpGa1IZ_BrlM8Oal0BCqLB-A8yxEHrMMeR55M5XWleiRRxc0b8AlT41QEb_YcHdLmSJdK71kIYa_IeKNsilDKtYFYqLmjlRBgxZ5s7v7HDH3XoemEKQ">
+</div>
+<div class="flex flex-col pb-4">
+<p class="font-label-caps text-label-caps text-text-secondary">VOTRE CONSEILLER</p>
+<h3 class="font-headline-md text-headline-md text-quasi-black">Abdoulaye</h3>
+<div class="flex items-center gap-1 mt-2 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[12px] font-bold uppercase tracking-wider">En ligne</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Support Categories (Bento-inspired asymmetry) -->
+<section class="mt-section-gap px-margin-left pr-margin-right grid grid-cols-6 gap-3">
+<div class="col-span-4 bg-surface-container organic-button p-6 flex flex-col justify-between min-h-[160px] border border-border-muted hover:border-primary transition-all group" style="transform: scale(1) rotate(0deg);">
+<span class="material-symbols-outlined text-primary text-3xl mb-4 group-hover:scale-110 transition-transform">support_agent</span>
+<div>
+<h4 class="font-subtitle text-subtitle text-on-surface">Support Direct</h4>
+<p class="font-caption text-caption text-on-surface-variant">Discutez avec nous sur WhatsApp</p>
+</div>
+</div>
+<div class="col-span-2 bg-tertiary-container organic-button p-4 flex flex-col items-center justify-center text-center text-on-tertiary-container rotate-3" style="transform: scale(1) rotate(0deg);">
+<span class="material-symbols-outlined text-3xl">chat</span>
+<span class="font-label-caps text-[10px] mt-2">CHAT</span>
+</div>
+<div class="col-span-3 bg-primary-container organic-button p-6 flex flex-col justify-between min-h-[140px] -mt-2" style="transform: scale(1) rotate(0deg);">
+<span class="material-symbols-outlined text-on-primary-container text-3xl">menu_book</span>
+<div>
+<h4 class="font-subtitle text-subtitle text-on-primary-container">Guides</h4>
+<p class="font-caption text-caption text-on-primary-fixed-variant">Apprendre à vendre</p>
+</div>
+</div>
+<div class="col-span-3 bg-surface-input organic-button p-6 border border-border-muted flex flex-col justify-between" style="transform: scale(1) rotate(0deg);">
+<span class="material-symbols-outlined text-secondary text-3xl">local_shipping</span>
+<h4 class="font-subtitle text-subtitle text-on-surface">Livraisons</h4>
+</div>
+</section>
+<!-- Search Section -->
+<section class="mt-section-gap px-margin-left pr-margin-right">
+<div class="relative">
+<input class="w-full h-[56px] px-6 bg-surface-container-low organic-button border-2 border-border-muted focus:border-primary focus:ring-0 placeholder:text-text-secondary font-body-reg" placeholder="Rechercher une solution..." type="text" style="transform: scale(1) rotate(0deg);">
+<button class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-primary text-white organic-button flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</section>
+<!-- FAQ Brutalist List -->
+<section class="mt-section-gap px-margin-left pr-margin-right">
+<h5 class="font-label-caps text-label-caps text-tertiary mb-6 border-b border-tertiary-fixed pb-2 inline-block">FAQ POPULAIRES</h5>
+<div class="space-y-4">
+<details class="group bg-surface-container-highest organic-button overflow-hidden transition-all" style="transform: scale(1) rotate(0deg);">
+<summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+<span class="font-subtitle text-subtitle text-on-surface">Comment activer Baana Pro ?</span>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 font-body-reg text-on-surface-variant leading-relaxed">
+                        L'activation se fait directement depuis votre tableau de bord. Il suffit de sélectionner le forfait 'Artisan' et de suivre les étapes de vérification.
+                    </div>
+</details>
+<details class="group bg-white organic-button overflow-hidden border border-border-muted transition-all" style="transform: scale(1) rotate(0deg);">
+<summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+<span class="font-subtitle text-subtitle text-on-surface">Délais de paiement</span>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 font-body-reg text-on-surface-variant">
+                        Les fonds sont transférés sur votre compte Wave ou Orange Money sous 24h ouvrées après validation de la livraison.
+                    </div>
+</details>
+<details class="group bg-white organic-button overflow-hidden border border-border-muted transition-all" style="transform: scale(1) rotate(0deg);">
+<summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+<span class="font-subtitle text-subtitle text-on-surface">Gestion des stocks</span>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 font-body-reg text-on-surface-variant">
+                        Vous pouvez mettre à jour vos stocks en temps réel via l'application mobile Baana.
+                    </div>
+</details>
+</div>
+</section>
+<!-- Artisanal CTA -->
+<section class="mt-section-gap px-margin-left pr-margin-right mb-12">
+<button class="w-full h-[64px] text-white font-button-text text-button-text organic-button flex items-center justify-center gap-3 active:scale-95 transition-all shadow-xl shadow-primary/10 bg-primary-container" style="transform: scale(1) rotate(0deg);"><span class="material-symbols-outlined">call</span><span class="font-bold uppercase tracking-wider">Nous appeler directement</span></button>
+<p class="text-center font-caption text-caption text-text-secondary mt-4">Disponible du Lundi au Samedi, 9h - 19h</p>
+</section>
+</main>
+<!-- Bottom Navigation (Strict Mapping from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full h-[70px] flex justify-around items-center px-4 bg-surface-container border-t border-muted z-50 rounded-t-[24px]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-caps text-label-caps mt-1">Catalogue</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-caps text-label-caps mt-1">Commandes</span>
+</a>
+<!-- Active State: Profil (Help is often under profile/account context) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container nav-active-blob px-4 py-1.5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profil</span>
+</a>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add slight hover tilt to bento items
+            const boxes = document.querySelectorAll('.organic-button');
+            boxes.forEach(box => {
+                box.addEventListener('mouseenter', () => {
+                    box.style.transform = `scale(1.02) rotate(${Math.random() * 2 - 1}deg)`;
+                });
+                box.addEventListener('mouseleave', () => {
+                    box.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Smooth reveal for FAQ
+            const details = document.querySelectorAll('details');
+            details.forEach((targetDetail) => {
+                targetDetail.addEventListener('click', () => {
+                    details.forEach((detail) => {
+                        if (detail !== targetDetail) {
+                            detail.removeAttribute('open');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+
+
+
+</body></html>

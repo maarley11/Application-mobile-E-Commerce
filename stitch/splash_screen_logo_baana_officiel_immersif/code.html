@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --emerald-green: oklch(72% 0.17 160);
+            --deep-green: oklch(35% 0.10 160);
+            --slogan-white: oklch(97% 0.005 160);
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .splash-gradient {
+            background: linear-gradient(to bottom, var(--emerald-green), var(--deep-green));
+        }
+        @keyframes loading-anim {
+            0% { width: 0%; opacity: 0.3; }
+            100% { width: 100%; opacity: 1; }
+        }
+        .loading-line {
+            animation: loading-anim 2.5s ease-in-out forwards;
+        }
+        .brand-text {
+            font-family: 'Comfortaa', cursive;
+        }
+        .organic-shape {
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "oklch(72% 0.17 160)",
+                        "secondary": "#fd761a",
+                        "on-primary": "#ffffff"
+                    },
+                    "fontFamily": {
+                        "comfortaa": ["Comfortaa"],
+                        "nunito": ["Nunito Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+<!-- Main Full Page Splash Container -->
+<main class="splash-gradient fixed inset-0 flex flex-col items-center justify-between overflow-hidden">
+<!-- Subtle Organic Background Elements for depth -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="organic-shape absolute -top-20 -left-20 w-96 h-96 bg-white/20 rounded-full"></div>
+<div class="organic-shape absolute bottom-1/4 -right-20 w-80 h-80 bg-black/10 rounded-full"></div>
+</div>
+<!-- Central Content positioned at the upper third -->
+<div class="relative z-10 flex flex-col items-center mt-[25vh]"><div class="mb-8 w-48 h-auto">
+<img alt="Baana Logo" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5M-K5hwx2YRNHbCi6xHcEShqqmoVaWjr-A3Cycaejya5uVgUmwC9C4Pyif9vY8Uo3jHH3SROCcJjTid62_fQAg8cxGiY5kNNAK-7g3adkNjUDxEL0fV1yFWfHQab0-qadEdOR26R6B1BfJEHCvRCKikfZlNztfCVE4mEWsMX3U3eb60is2jS8swGAXp88E_T5BlWOrFqJGcixhrUgMSbkHt-aDs9qzoJnh6dJZFqqT4rg9uSmrqbImWuMaySeKzrvVYmNi9gD6hYy"/>
+</div>
+<p class="font-nunito text-[11px] tracking-[0.3em] uppercase mt-6 opacity-90" style="color: var(--slogan-white)">
+    LE CONFORT PAR LE DIGITAL
+</p></div>
+<!-- Bottom Loading Indicator -->
+<div class="relative z-10 w-full px-12 mb-16">
+<div class="w-full h-[1.5px] bg-white/20 overflow-hidden rounded-full">
+<div class="loading-line h-full bg-white w-0"></div>
+</div>
+</div>
+</main>
+<script>
+        // Optional: Simple transition log
+        setTimeout(() => {
+            console.log("Loading complete.");
+        }, 2500);
+    </script>
+</body></html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baana - Catalogue Produits</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@100..900&amp;family=Nunito+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar suppression for horizontal chips */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Asymmetrical layout utilities */
+        .asym-container {
+            padding-left: 20px;
+            padding-right: 28px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#4edea3",
+                    "primary": "#006c49",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#394a43",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#51625b",
+                    "surface-container-high": "#e6e9e7",
+                    "surface-dim": "#d7dbd9",
+                    "error": "#ba1a1a",
+                    "surface": "#f7faf8",
+                    "surface-variant": "#e0e3e1",
+                    "on-tertiary-fixed": "#0e1f19",
+                    "on-background": "#181c1c",
+                    "surface-container-low": "#f1f4f2",
+                    "tertiary-fixed-dim": "#b8cbc2",
+                    "secondary": "#9d4300",
+                    "outline": "#6c7a71",
+                    "surface-bright": "#f7faf8",
+                    "on-secondary-fixed-variant": "#783200",
+                    "secondary-container": "#fd761a",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#ebefed",
+                    "surface-container-highest": "#e0e3e1",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#002113",
+                    "primary-fixed": "#6ffbbe",
+                    "outline-variant": "#bbcabf",
+                    "primary-container": "#10b981",
+                    "on-tertiary-container": "#2c3c36",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#4edea3",
+                    "on-surface-variant": "#3c4a42",
+                    "on-primary-container": "#00422b",
+                    "surface-tint": "#006c49",
+                    "on-surface": "#181c1c",
+                    "background": "#f7faf8",
+                    "on-secondary-fixed": "#341100",
+                    "tertiary-container": "#94a79e",
+                    "on-primary-fixed-variant": "#005236",
+                    "inverse-on-surface": "#eef1ef",
+                    "secondary-fixed": "#ffdbca",
+                    "on-secondary-container": "#5c2400",
+                    "tertiary-fixed": "#d4e7dd",
+                    "inverse-surface": "#2d3130",
+                    "secondary-fixed-dim": "#ffb690",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "gutter": "16px",
+                    "stack-lg": "48px",
+                    "margin-right": "28px",
+                    "stack-md": "24px",
+                    "margin-left": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Nunito Sans"],
+                    "headline-xl": ["Comfortaa"],
+                    "body-sm": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "label-md": ["Nunito Sans"],
+                    "label-lg": ["Nunito Sans"],
+                    "headline-md": ["Comfortaa"],
+                    "headline-lg": ["Comfortaa"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed antialiased">
+<!-- Screen Wrapper -->
+<div class="relative mx-auto w-[390px] h-[884px] overflow-hidden bg-surface flex flex-col">
+<!-- Top App Bar -->
+<header class="bg-surface-bright dark:bg-surface-dim flex justify-between items-center w-full pl-[20px] pr-[28px] h-[64px] sticky top-0 z-50">
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed">Catalogue</h1>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[24px]">filter_list</span>
+</button>
+<div class="relative">
+<button class="text-on-surface-variant hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+</button>
+<span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</div>
+</div>
+</header>
+<!-- Search & Filters -->
+<div class="mt-4 asym-container">
+<!-- Search Bar -->
+<div class="w-full flex items-center bg-[oklch(95%_0.008_160)] rounded-full px-4 py-3 h-[52px]">
+<span class="material-symbols-outlined text-outline-variant mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-md font-body-md placeholder:text-outline" placeholder="Rechercher..." type="text"/>
+</div>
+<!-- Chips Section -->
+<div class="flex overflow-x-auto no-scrollbar gap-2 mt-6 -mr-7 pr-7">
+<button class="flex-shrink-0 bg-primary text-white px-5 py-2 rounded-full font-label-lg transition-all active:scale-95">Tout</button>
+<button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-5 py-2 rounded-full font-label-lg transition-all hover:bg-surface-variant/50 active:scale-95">Alimentaire</button>
+<button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-5 py-2 rounded-full font-label-lg transition-all hover:bg-surface-variant/50 active:scale-95">Ménager</button>
+<button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-5 py-2 rounded-full font-label-lg transition-all hover:bg-surface-variant/50 active:scale-95">Cosmétique</button>
+<button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-5 py-2 rounded-full font-label-lg transition-all hover:bg-surface-variant/50 active:scale-95">Textile</button>
+</div>
+</div>
+<!-- Product Grid -->
+<main class="flex-1 overflow-y-auto mt-8 asym-container pb-[100px]">
+<div class="grid grid-cols-2 gap-x-[12px] gap-y-[16px]">
+<!-- Product Item 1 (Promo) -->
+<div class="flex flex-col relative group">
+<div class="relative aspect-square w-full rounded-[12px] overflow-hidden bg-surface-container-low">
+<img alt="Produit Baana" class="w-full h-full object-cover" data-alt="Premium glass bottle of traditional Senegalese beverage with elegant branding and minimalist label design, set against a soft emerald-tinted white background in a high-end luxury lifestyle photography style with soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADq0vMuACkorhD3m7CqDtYCSr0ylQPBT-BiEm2RpGes8M2Q8vMHA_3xkt6WZf0pOFLNIQZITIrAaF9bbe0CuNJAzkAsXRiPQZ-2oNhIVi1jYebUHhRxRIGMf_G3ZR0dyF3FlsYU21aq888AoJLEbBhqkesLuTVQT6_HztqLYrW3QX9Om5UDLCMyi6q62Xk1bAvJJHmdH7Nmi1JQqCL_a8sKCObHVqogEZr-Rr8B_8tp7lIICNSZ2dh9i0qKivfPNJRZrhwQgynjuYP"/>
+<!-- Promo Badge -->
+<div class="absolute top-2 left-2 bg-[oklch(75%_0.18_55)] text-white text-[10px] font-bold px-2 py-0.5 rounded-sm transform -rotate-3 z-10">
+                            PROMO
+                        </div>
+</div>
+<div class="mt-3 pr-8">
+<h3 class="font-semibold text-[14px] leading-tight text-on-surface line-clamp-1">Huile d'Arachide Bio 5L</h3>
+<p class="text-[13px] text-outline line-through mt-0.5">12.500 FCFA</p>
+<p class="text-primary font-bold text-[14px]">10.500 FCFA Pro</p>
+</div>
+<button class="absolute bottom-1 right-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Product Item 2 -->
+<div class="flex flex-col relative group">
+<div class="relative aspect-square w-full rounded-[12px] overflow-hidden bg-surface-container-low">
+<img alt="Produit Baana" class="w-full h-full object-cover" data-alt="High-quality sack of authentic Senegalese rice with rich texture and artisanal packaging details, displayed in a minimalist high-key setting with subtle tonal layering and emerald-green accents reflecting a modern minimalist luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7q8dPtUQSVVWsfGqQuenpup4i6t3cQw4UCraNf83121kNpnZf8hfTqpslZdsuMbEb81EkvEaAXBfg8uTRsJvO-kBg42Dwwtof3bR47REOGNt5mCfPuPr-CqfgdaFi857Ocybm0on0JMNckr-I6zMjypQvTQE9Nt9rAR_O7sT2pBIljJrJKsvX1mgFcxnIjyP_lK6Q0y1j_NfCXGCfoB2UyhN5ON6H2CqGhWEGfb2hcbwUtdHyAZLvdJBY3bIUF0muhUvTctURGwfk"/>
+</div>
+<div class="mt-3 pr-8">
+<h3 class="font-semibold text-[14px] leading-tight text-on-surface line-clamp-1">Riz Parfumé Royal 25kg</h3>
+<p class="text-primary font-bold text-[14px] mt-1">18.750 FCFA Pro</p>
+</div>
+<button class="absolute bottom-1 right-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Product Item 3 -->
+<div class="flex flex-col relative group">
+<div class="relative aspect-square w-full rounded-[12px] overflow-hidden bg-surface-container-low">
+<img alt="Produit Baana" class="w-full h-full object-cover" data-alt="Luxury skincare product in artisanal handcrafted clay-like packaging, reflecting Senegalese craftsmanship and contemporary minimal design. The lighting is soft and diffuse, highlighting the premium texture of the materials against a tinted neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtlo8UUQthY1Qo1Nx814mKPkE7vomuDM93GazTusZaJiIuJ7aeRWrSXYSVBgdEgOpHvYMpwxAbudZGRPc7DFwaeJ7m_s9HNB3iNRd2_Lm20k2PLVvHL4nepDJcSSi-8Fc-LRjS0VMJZBfN_53OaXNHWUuOtZVJ2Bau6mTMUkVHtHg-OKnYWf9KjaC22r83MHX1uOjLE2OV41FCDjr4UvnjDb-ctwuV2XDSXJ-HlawtsjiRSjI5T_ciKyt73HjvBaTGcbK0LxmheeBY"/>
+</div>
+<div class="mt-3 pr-8">
+<h3 class="font-semibold text-[14px] leading-tight text-on-surface line-clamp-1">Beurre de Karité Pur</h3>
+<p class="text-primary font-bold text-[14px] mt-1">4.200 FCFA Pro</p>
+</div>
+<button class="absolute bottom-1 right-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Product Item 4 (Promo) -->
+<div class="flex flex-col relative group">
+<div class="relative aspect-square w-full rounded-[12px] overflow-hidden bg-surface-container-low">
+<img alt="Produit Baana" class="w-full h-full object-cover" data-alt="Collection of vibrant yet sophisticated Senegalese textiles with modern geometric patterns, folded neatly to reveal premium fabric quality. The scene is lit with bright, high-key studio lighting that emphasizes a clean and radiant luxe-eclat visual language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDekGzA3mn951tr8qSVWylHxi-LyRSiBAZkKU6l4TusRn9CuVV20Vrd7jjXCDW7W9gjCzDXanv7a-bVTN-axHBywAy4IJISh5z5zUMz-vvdCv4_HIqzLaYUX0MrHv2-TgYkSbzS0vvdDxAFyiK2NCcu11wHf60nToq-woxxgbc8jCM9Z1sbzR2_uLbbYD3xYgLzDKZOd-GNrKj9T-k3jOwX3T_pc8NdXrCLkzdbiDQ4JYcQvW8qkPNwOg2tPCT6mi7hNBu3Jph0LWPV"/>
+<div class="absolute top-2 left-2 bg-[oklch(75%_0.18_55)] text-white text-[10px] font-bold px-2 py-0.5 rounded-sm transform -rotate-3 z-10">
+                            PROMO
+                        </div>
+</div>
+<div class="mt-3 pr-8">
+<h3 class="font-semibold text-[14px] leading-tight text-on-surface line-clamp-1">Pack Textile Wax Premium</h3>
+<p class="text-[13px] text-outline line-through mt-0.5">35.000 FCFA</p>
+<p class="text-primary font-bold text-[14px]">29.900 FCFA Pro</p>
+</div>
+<button class="absolute bottom-1 right-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Product Item 5 -->
+<div class="flex flex-col relative group">
+<div class="relative aspect-square w-full rounded-[12px] overflow-hidden bg-surface-container-low">
+<img alt="Produit Baana" class="w-full h-full object-cover" data-alt="Artisanal ceramic jar containing traditional Senegalese spices, presented in a clean editorial style with high-end digital craftsmanship. The composition follows controlled asymmetry principles, with the jar slightly off-center to create a dynamic visual flow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsZn_uQIAvTuaymL8otJEupVJep-hOSZUl7cEINSKes31JvaS0X_kVSQ7OkZTukX6l3Fo0QVOqN4PvEYaqc4FdEpKY0xpoCRXB8vVOWxz8fyDNJm3ObW9n0afHrvP87c1F2aXSxei94EZzWOG-fjnESca_V6Z4MZ1f2L7RiTUTAr02tJqLYzv9Y9CInvYHo90K4UVspQsZnig1dqh_5fAeuhNr8ihG_Tl8Zeihmc5ledxrz9b8_Iiyfj8ABDADmvOPz3SE1YVB0wUN"/>
+</div>
+<div class="mt-3 pr-8">
+<h3 class="font-semibold text-[14px] leading-tight text-on-surface line-clamp-1">Epices Pili-Pili Premium</h3>
+<p class="text-primary font-bold text-[14px] mt-1">1.500 FCFA Pro</p>
+</div>
+<button class="absolute bottom-1 right-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Product Item 6 -->
+<div class="flex flex-col relative group">
+<div class="relative aspect-square w-full rounded-[12px] overflow-hidden bg-surface-container-low">
+<img alt="Produit Baana" class="w-full h-full object-cover" data-alt="Minimalist luxury soaps infused with local Senegalese ingredients, arranged on a smooth stone surface with water droplets to emphasize freshness. The palette uses deep emerald greens and pristine whites to evoke a sense of quiet digital craftsmanship and purity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3H5x0CS3Dk4okMBN76MQffLWTQfc8bLWAueRS3SP4Jd86-bJLfmnFOx7Qu17r4d_YeZJA0AeFRpztyrqCCHlfHeL4FU9QfCoTStV5AaJ2Ds561n6K8NU-6N7K4Vw22jk6gZRNzZJtxFkP_vkmIIcofDykXcvx53F9-1ZeTd-nKppMGI518QktjFVlogCUB3lhaVLlRXx2pWtU4xV9jUCufR8GQfvNfpi-XO6sm7xOWklisX1lGk2e2PLEl5xhlsel_f7ip3TEOGmJ"/>
+</div>
+<div class="mt-3 pr-8">
+<h3 class="font-semibold text-[14px] leading-tight text-on-surface line-clamp-1">Savon Noir Traditionnel</h3>
+<p class="text-primary font-bold text-[14px] mt-1">2.800 FCFA Pro</p>
+</div>
+<button class="absolute bottom-1 right-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-[390px] h-[80px] bg-surface-container-lowest dark:bg-surface-container-low flex justify-around items-center px-[20px] pb-safe z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-variant/50 transition-all duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-on-primary-fixed rounded-xl px-4 py-1.5 transition-all duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined fill-icon">grid_view</span>
+<span class="font-label-md text-label-md">Catalogue</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-variant/50 transition-all duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Commandes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-variant/50 transition-all duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profil</span>
+</a>
+</nav>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.classList.add('scale-95');
+            });
+            btn.addEventListener('touchend', function() {
+                this.classList.remove('scale-95');
+            });
+        });
+
+        // Filter chip selection logic
+        const chips = document.querySelectorAll('.no-scrollbar button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-white');
+                    c.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+                });
+                chip.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+                chip.classList.add('bg-primary', 'text-white');
+            });
+        });
+    </script>
+</body></html>

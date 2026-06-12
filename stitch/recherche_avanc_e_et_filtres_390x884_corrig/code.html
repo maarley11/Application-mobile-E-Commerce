@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Custom Checkbox Style */
+        .custom-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            background-color: #006c49;
+            border-color: #006c49;
+        }
+
+        /* Range Slider Styling */
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #006c49;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+        }
+
+        /* Filter Overlay Animation */
+        #filter-overlay {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .overlay-open { transform: translateY(0) !important; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed-dim": "#4edea3",
+                        "tertiary-fixed": "#d4e7dd",
+                        "on-primary-fixed": "#002113",
+                        "outline-variant": "#bbcabf",
+                        "surface-container-highest": "#e0e3e1",
+                        "on-surface-variant": "#3c4a42",
+                        "tertiary": "#51625b",
+                        "surface-tint": "#006c49",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-primary-fixed-variant": "#005236",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#006c49",
+                        "on-background": "#181c1c",
+                        "secondary-container": "#fd761a",
+                        "on-tertiary-fixed": "#0e1f19",
+                        "on-secondary-fixed-variant": "#783200",
+                        "on-tertiary-fixed-variant": "#394a43",
+                        "tertiary-fixed-dim": "#b8cbc2",
+                        "surface-bright": "#f7faf8",
+                        "secondary-fixed": "#ffdbca",
+                        "surface-dim": "#d7dbd9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f1f4f2",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eef1ef",
+                        "inverse-primary": "#4edea3",
+                        "surface": "#f7faf8",
+                        "inverse-surface": "#2d3130",
+                        "on-secondary-fixed": "#341100",
+                        "on-secondary-container": "#5c2400",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#00422b",
+                        "tertiary-container": "#94a79e",
+                        "outline": "#6c7a71",
+                        "surface-container-high": "#e6e9e7",
+                        "primary-container": "#10b981",
+                        "error-container": "#ffdad6",
+                        "background": "#f7faf8",
+                        "primary-fixed": "#6ffbbe",
+                        "on-surface": "#181c1c",
+                        "surface-variant": "#e0e3e1",
+                        "surface-container": "#ebefed",
+                        "secondary": "#9d4300",
+                        "on-tertiary-container": "#2c3c36",
+                        "search-pill": "oklch(95% 0.008 160)"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "stack-sm": "8px",
+                        "margin-left": "20px",
+                        "stack-md": "24px",
+                        "gutter": "16px",
+                        "stack-lg": "48px",
+                        "margin-right": "28px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Comfortaa"],
+                        "body-lg": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "headline-xl": ["Comfortaa"],
+                        "body-sm": ["Nunito Sans"],
+                        "label-lg": ["Nunito Sans"],
+                        "headline-md": ["Comfortaa"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen" style="width: 390px; height: 884px; overflow: hidden; margin: 0 auto; position: relative;">
+<!-- Top Navigation Anchor (Manual Implementation of TopAppBar) -->
+<header class="w-full top-0 sticky z-40 bg-surface-bright flex justify-between items-center pl-[20px] pr-[28px] h-[64px] absolute">
+<h1 class="font-headline-md text-headline-md text-primary">Recherche</h1>
+<button class="text-on-surface-variant flex items-center gap-1 active:scale-95 duration-200" onclick="toggleFilters()">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-lg text-label-lg">Filtres</span>
+</button>
+</header>
+<main class="pb-32 h-[calc(884px-64px-80px)] overflow-y-auto hide-scrollbar">
+<!-- Search Bar Section -->
+<section class="mt-4 pl-[20px] pr-[28px]">
+<div class="relative flex items-center h-[52px] bg-[oklch(95%_0.008_160)] rounded-full px-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md text-on-surface placeholder:text-outline" placeholder="Rechercher un article..." type="text" value="Boubou de luxe"/>
+<button class="ml-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</section>
+<!-- Recent Searches -->
+<section class="mt-stack-md pl-[20px] pr-[28px]">
+<h2 class="font-label-lg text-label-lg text-on-surface-variant mb-4">RECHERCHES RÉCENTES</h2>
+<div class="space-y-4">
+<div class="flex items-center text-on-surface/80 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[20px] mr-3 text-outline">history</span>
+<span class="font-body-md">Pagne tissé traditionnel</span>
+</div>
+<div class="flex items-center text-on-surface/80 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[20px] mr-3 text-outline">history</span>
+<span class="font-body-md">Sac en cuir artisanal</span>
+</div>
+</div>
+</section>
+<!-- Popular Searches / Tags -->
+<section class="mt-stack-md pl-[20px] pr-[28px]">
+<h2 class="font-label-lg text-label-lg text-on-surface-variant mb-4">RECHERCHES POPULAIRES</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-primary text-on-primary rounded-full font-body-sm">Boubou</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-body-sm">Accessoires</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-body-sm">Caftan</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-body-sm">Babouches</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-body-sm">Artisanat</span>
+</div>
+</section>
+<!-- Search Results Grid (No Cards, Items Direct on Surface) -->
+<section class="mt-stack-lg pl-[20px] pr-[28px]">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Résultats <span class="text-outline-variant font-body-md ml-2">(128)</span></h2>
+</div>
+<div class="grid grid-cols-2 gap-x-4 gap-y-8">
+<!-- Product 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high-end Senegalese fashion photography piece featuring a model wearing a luxurious deep emerald green silk boubou. The lighting is soft and cinematic, highlighting the intricate gold embroidery and fabric texture. The background is a minimalist, warm-toned architectural space in Dakar, embodying a modern African luxury aesthetic. The overall mood is sophisticated and radiant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeSa4nwqZXqL2QTk-0E3xiRiM3l9fc_na67Bi2RVkoI6_pkhIyRt2ODBUl6itIsEKJYN0A_Aa2QSl71dZ9VVLhM-UcuJfOrMK6nKoG0Jff84N9hRpHMwz_SQrPooIq6puawB2k2xqXJ8erDRUc7EW5g52ZJw9_ZM7r44_AQnyPbcyoJIpgkUfQW6fBxKV1a51aHG5m3D1SmBdDRM2TQmjnyUkNVcn0Yw-GdRHOAmOJpilNXw-67VnJyLFUBn7m_aDtRW74s7GBz451"/>
+</div>
+<p class="font-body-md text-on-surface truncate">Grand Boubou Impérial Silk</p>
+<p class="font-headline-md text-primary mt-1">85 000 FCFA</p>
+</div>
+<!-- Product 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Minimalist luxury product shot of a pair of handcrafted leather loafers with traditional Senegalese motifs subtly embossed. The shoes are placed on a textured stone surface with warm afternoon sunlight casting long, soft shadows. The color palette features rich earthy browns and hints of emerald green in the background. The style is contemporary, clean, and high-end artisanal fashion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEjdskqHo6BiO0UUkw0Reb1qnBhh6L_F_OgeVGyWvmLAib7DTSlbB0OtnuyElaFv9dAaoVKJ2VGNzeh2JRfQRzLs2UYBncVakSPnQJpEtP7dJ74mmdVYos63XC0cl21EH3DWlNRPqzAnXKt6ioEBBmwMb8bqzXxb-eMeff5kIC0045klzdm6_JfSeEqZycNUvB-8xSUkhfVZ46LIXyk0aft-5UB9aat8WEbxL6W9OMsrN3CtzXOqRg-ce9D45Vi0BJJDNVj6Me6cB9"/>
+</div>
+<p class="font-body-md text-on-surface truncate">Mocassins Cuir Dakar</p>
+<p class="font-headline-md text-primary mt-1">42 500 FCFA</p>
+</div>
+<!-- Product 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A detailed view of a premium African textile piece, a hand-woven indigo cloth from Senegal, draped over a minimalist wooden chair. The fabric shows complex geometric patterns and rich blue hues. The lighting is bright and airy, typical of a high-end Dakar boutique. The composition is asymmetrical and editorial, focusing on texture and craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxFGSj6egaIPXSOfKj7ympojvkk7fRmH37F_CjeEIOqflfXO5HZHtOXYUgSkU9NkvVRNaz1kNNgK1Rw7tn6lWzzs1qM-AM3zgVzqknHJ7MICtRzUxd2mqF0HOADYYVTTYxgyqv58o-hWCoHt-EUmOK3wy9JCivSrWVDtLZKAdrMu7l1zuJHqv259ALZVwlx_U4pxFpH00EqIJWXzJFroUbM22tWa9AlscItL3bNcJ6WgVq5c5BnqPSqyFI9hJ0iWqOrH_RGT7ApRY_"/>
+</div>
+<p class="font-body-md text-on-surface truncate">Tissage Indigo Tradition</p>
+<p class="font-headline-md text-primary mt-1">30 000 FCFA</p>
+</div>
+<!-- Product 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern jewelry display featuring a minimalist gold necklace with a stylized Baobab pendant. The piece is resting on a matte emerald green pedestal. High-key lighting emphasizes the polished gold surfaces. The aesthetic is clean, luxury e-commerce style, with a strong focus on minimalist African-inspired design elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9ZyqP7IqFObxyDXZbCb0QnMeHC5Fr_7cTBbn1gig4XTihQXTHs5FGUXytx_4KSPX6rDhRLIxBBpVgFa-xIAeBZ2HlnG36GaCtWv5akA87hT1OQjbgi0TtgFYTKVn5uWE1BDJd2SURx0306DNZs4BLRw2GxIc3hsV-geH4UHRh6pVymeFL5ARDitb_jpbRA37Fpzxj3IiRiqryfXZgtCOmFR1sgn40pBGgyouj5yl7Sh8nIceVDOOxNOvDrcSS54_3vgsXYk9Emyen"/>
+</div>
+<p class="font-body-md text-on-surface truncate">Collier Baobab Or 18k</p>
+<p class="font-headline-md text-primary mt-1">125 000 FCFA</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-[20px] pb-safe bg-surface-container-lowest z-50 h-[80px] absolute">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Accueil</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1.5 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md text-label-md">Catalogue</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Commandes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profil</span>
+</div>
+</nav>
+<!-- Filter Overlay -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300 absolute" id="filter-backdrop" onclick="toggleFilters()"></div>
+<div class="fixed bottom-0 left-0 w-full bg-white rounded-t-[32px] z-[70] transform translate-y-full px-[20px] pb-8 pt-4 absolute" id="filter-overlay">
+<!-- Handlebar -->
+<div class="w-12 h-1.5 bg-outline-variant/30 rounded-full mx-auto mb-6"></div>
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-headline-md text-primary">Affiner la recherche</h3>
+<button class="text-on-surface-variant" onclick="toggleFilters()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="space-y-8 max-h-[530px] overflow-y-auto hide-scrollbar pr-2">
+<!-- Tri -->
+<div class="filter-section">
+<label class="font-label-lg text-label-lg text-on-surface-variant block mb-4">TRIER PAR</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-5 h-10 rounded-full border border-primary bg-primary/5 text-primary font-body-sm">Pertinence</button>
+<button class="px-5 h-10 rounded-full border border-outline-variant text-on-surface-variant font-body-sm">Prix ↑</button>
+<button class="px-5 h-10 rounded-full border border-outline-variant text-on-surface-variant font-body-sm">Prix ↓</button>
+<button class="px-5 h-10 rounded-full border border-outline-variant text-on-surface-variant font-body-sm">Nouveautés</button>
+</div>
+</div>
+<!-- Catégorie -->
+<div class="filter-section">
+<label class="font-label-lg text-label-lg text-on-surface-variant block mb-4">CATÉGORIES</label>
+<div class="grid grid-cols-2 gap-y-4">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="custom-checkbox w-5 h-5 rounded-[4px] border-outline-variant focus:ring-0 text-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface">Vêtements</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="custom-checkbox w-5 h-5 rounded-[4px] border-outline-variant focus:ring-0 text-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface">Chaussures</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="custom-checkbox w-5 h-5 rounded-[4px] border-outline-variant focus:ring-0 text-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface">Accessoires</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="custom-checkbox w-5 h-5 rounded-[4px] border-outline-variant focus:ring-0 text-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface">Décoration</span>
+</label>
+</div>
+</div>
+<!-- Prix Range -->
+<div class="filter-section">
+<div class="flex justify-between mb-4">
+<label class="font-label-lg text-label-lg text-on-surface-variant">BUDGET (FCFA)</label>
+<span class="font-body-sm text-primary font-bold">5.000 - 150.000</span>
+</div>
+<div class="relative mt-2">
+<input class="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="200000" min="0" step="1000" type="range" value="50000"/>
+</div>
+</div>
+<!-- En Stock -->
+<div class="filter-section flex justify-between items-center">
+<label class="font-label-lg text-label-lg text-on-surface-variant uppercase">DISPONIBLE EN STOCK</label>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full h-[52px] bg-primary text-white font-bold text-body-md rounded-xl active:scale-95 transition-transform" onclick="toggleFilters()">
+                Appliquer les filtres
+            </button>
+</div>
+</div>
+<script>
+        function toggleFilters() {
+            const overlay = document.getElementById('filter-overlay');
+            const backdrop = document.getElementById('filter-backdrop');
+            
+            if (overlay.classList.contains('overlay-open')) {
+                overlay.classList.remove('overlay-open');
+                backdrop.classList.add('hidden');
+                backdrop.classList.remove('opacity-100');
+                document.body.style.overflow = '';
+            } else {
+                overlay.classList.add('overlay-open');
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.add('opacity-100');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+    </script>
+</body></html>

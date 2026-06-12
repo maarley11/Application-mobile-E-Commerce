@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baana Onboarding - Écran Final</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#394a43",
+                        "surface-bright": "#f7faf8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#783200",
+                        "surface-container": "#ebefed",
+                        "outline": "#6c7a71",
+                        "on-tertiary-fixed": "#0e1f19",
+                        "inverse-surface": "#2d3130",
+                        "surface-dim": "#d7dbd9",
+                        "on-tertiary-container": "#2c3c36",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-surface-variant": "#3c4a42",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#94a79e",
+                        "surface": "#f7faf8",
+                        "tertiary": "#51625b",
+                        "primary": "#006c49",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#006c49",
+                        "tertiary-fixed": "#d4e7dd",
+                        "on-surface": "#181c1c",
+                        "primary-container": "#10b981",
+                        "inverse-on-surface": "#eef1ef",
+                        "outline-variant": "#bbcabf",
+                        "surface-container-low": "#f1f4f2",
+                        "on-background": "#181c1c",
+                        "surface-container-highest": "#e0e3e1",
+                        "surface-container-high": "#e6e9e7",
+                        "background": "#f7faf8",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#5c2400",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#6ffbbe",
+                        "secondary": "#9d4300",
+                        "inverse-primary": "#4edea3",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e1",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#ffb690",
+                        "secondary-fixed": "#ffdbca",
+                        "tertiary-fixed-dim": "#b8cbc2",
+                        "on-primary-container": "#00422b",
+                        "on-primary-fixed": "#002113",
+                        "secondary-container": "#fd761a",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#341100",
+                        "orange-vibrant": "#F97316"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-right": "28px",
+                        "margin-left": "20px",
+                        "stack-md": "24px",
+                        "gutter": "16px",
+                        "stack-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "body-sm": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"],
+                        "headline-lg": ["Comfortaa"],
+                        "headline-md": ["Comfortaa"],
+                        "headline-xl": ["Comfortaa"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .floating-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .asymmetric-canvas {
+            padding-left: 20px;
+            padding-right: 28px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md overflow-hidden">
+<!-- Content Wrapper -->
+<main class="flex-1 flex flex-col items-center justify-between py-10">
+<!-- Header/Status Bar Mock -->
+<div class="w-full asymmetric-canvas flex justify-end">
+</div>
+<!-- Center Illustration Section -->
+<div class="relative w-full flex justify-center items-center py-stack-lg flex-1">
+<!-- Mobile Phone Base -->
+<div class="relative w-48 h-96 bg-surface-container-high rounded-[40px] border-8 border-on-surface-variant flex items-center justify-center overflow-hidden z-10">
+<div class="absolute top-0 w-24 h-6 bg-on-surface-variant rounded-b-2xl"></div>
+<div class="p-4 space-y-4 w-full">
+<div class="h-4 w-2/3 bg-outline-variant rounded-full opacity-40"></div>
+<div class="h-32 w-full bg-surface-container rounded-2xl"></div>
+<div class="space-y-2">
+<div class="h-3 w-full bg-outline-variant rounded-full opacity-20"></div>
+<div class="h-3 w-4/5 bg-outline-variant rounded-full opacity-20"></div>
+</div>
+</div>
+</div>
+<!-- Floating Payment Logos -->
+<!-- Wave (Top Left) -->
+<div class="absolute top-1/4 left-1/2 -translate-x-32 z-20 floating-icon" style="animation-delay: 0s;">
+<div class="w-20 h-20 bg-[#C8EBFE] rounded-2xl flex items-center justify-center border border-white border-opacity-30">
+<img alt="Wave Mobile Money Senegal" class="w-14 h-14 object-contain rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjPwymhuTyn-xoDhgb_Ux0icPYje6nE_p0bSwKIVmplLIE0poIi96Y0JugTWGGZ8nnpOCV29YXKOHWjnKuFidR8siGIkyT-cs4wW6HyBwRwPgIM64Eu44iLNoDPqHyA5o6zGNoFCvMQHOmd_EKkbEH-vw0AIkRVoXkpF7Me2KQ0_j2hfEZUZBChlpA9efotEOz6AmgV56kxuiAu7u_cMR5HwhkHo_zGrORN9_EPEdAkQ9uyi0m4lqpvvVy1hy801AdpT9_HPz2hKvp"/>
+</div>
+</div>
+<!-- Orange Money (Middle Right) -->
+<div class="absolute top-1/2 right-1/2 translate-x-36 -translate-y-10 z-20 floating-icon" style="animation-delay: 0.5s;">
+<div class="w-16 h-16 bg-[#FF7900] rounded-2xl flex items-center justify-center border border-white border-opacity-30">
+<img alt="Orange Money Senegal" class="w-12 h-12 object-contain rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWRW9kcRvJ-0Q33Ay7HlhDe263o8Qfw8UetBpD3XjNWlTzxK5-6ZS-gMLRMD3Cvhu9VCoRVv-aJbT_PNTwh-by2KhHiVqnvlW_vuDEEN_Gu_ZCKCWNOg-evR5aP3wF36o12BALGPKVOwGmUogF9bzHtLsSm8dk94LNTNSDIwTM7xrznVV3a_wL52XZYWUyZXUVvc8aTPZra-JYf43EiaYPUHcz5a2wee6RvWBIG9An4KgbnsXztpsEW0kFn6zUYoZVN3vBYPk-w5AW"/>
+</div>
+</div>
+<!-- Free Money (Bottom Left) -->
+<div class="absolute bottom-1/4 left-1/2 -translate-x-36 translate-y-10 z-20 floating-icon" style="animation-delay: 1s;">
+<div class="w-14 h-14 bg-[#E2001A] rounded-2xl flex items-center justify-center border border-white border-opacity-30">
+<img alt="Free Money Senegal" class="w-10 h-10 object-contain rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdE4nry4zbNWzivFxPiWmX_YEInlTjYi3xhu-NkaiilLJUMh5gYkexbv8-ojZa29quztcBwOoXFAu--s7nkC0NmPND5kA1mzyqtmVMYcUPvQ4WBc4dELYP50t7l9ukAQNn2zbxvcvxcDFPBLUzgorPKJOaFVmP6g78n6fJjTDfv75r7CNO9PkcA8rjCKlTctY2CB7BrxPzbkB397hbEORBVO60a2VUZfPAU21xivNv-noXJ02vkCcochtI_vMzDyqk9YUVPNQrNEuN"/>
+</div>
+</div>
+<!-- Abstract background shape -->
+<div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+<div class="w-[400px] h-[400px] border-[40px] border-primary rounded-full"></div>
+</div>
+</div>
+<!-- Bottom Text & Action Section -->
+<div class="w-full asymmetric-canvas space-y-stack-lg">
+<div class="space-y-4">
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface">Payez facilement avec Mobile Money</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant opacity-80 leading-snug">
+                    Wave, Orange Money, Free Money — en un seul clic.
+                </p>
+</div>
+<!-- Footer Section: Pagination & Button -->
+<div class="space-y-stack-md pb-6">
+<!-- Pagination Dots -->
+<div class="flex items-center space-x-2">
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-8 rounded-full bg-orange-vibrant transition-all duration-300"></div>
+</div>
+<!-- CTA Button -->
+<button class="w-full h-[52px] bg-orange-vibrant text-white font-label-lg text-body-md rounded-xl flex items-center justify-center space-x-2 active:scale-95 transition-transform duration-200">
+<span class="">Commencer</span>
+<span class="material-symbols-outlined text-body-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Subtle Grain Overlay for Luxury Texture -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/p6.png');"></div>
+<script>
+        // Simple Interaction logic
+        document.querySelector('button.bg-orange-vibrant').addEventListener('click', () => {
+            // Ripple effect or navigation logic could go here
+            console.log("Onboarding Complete");
+        });
+    </script>
+</body></html>

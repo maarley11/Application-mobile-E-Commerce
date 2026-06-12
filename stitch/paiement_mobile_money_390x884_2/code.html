@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, height=844, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdbca",
+                        "tertiary-container": "#94a79e",
+                        "inverse-on-surface": "#eef1ef",
+                        "on-tertiary-fixed-variant": "#394a43",
+                        "surface-bright": "#f7faf8",
+                        "surface-variant": "#e0e3e1",
+                        "secondary": "#9d4300",
+                        "tertiary-fixed": "#d4e7dd",
+                        "surface-dim": "#d7dbd9",
+                        "surface-container-low": "#f1f4f2",
+                        "secondary-container": "#fd761a",
+                        "on-tertiary-container": "#2c3c36",
+                        "primary": "#006c49",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#b8cbc2",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#10b981",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-tertiary-fixed": "#0e1f19",
+                        "on-surface": "#181c1c",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e0e3e1",
+                        "surface-container-high": "#e6e9e7",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#341100",
+                        "surface-container": "#ebefed",
+                        "secondary-fixed-dim": "#ffb690",
+                        "outline-variant": "#bbcabf",
+                        "background": "#f7faf8",
+                        "surface": "#f7faf8",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#006c49",
+                        "on-primary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#783200",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#3c4a42",
+                        "on-secondary-container": "#5c2400",
+                        "inverse-surface": "#2d3130",
+                        "on-primary-container": "#00422b",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#51625b",
+                        "on-background": "#181c1c",
+                        "inverse-primary": "#4edea3",
+                        "primary-fixed": "#6ffbbe",
+                        "outline": "#6c7a71",
+                        "brand-emerald": "oklch(72% 0.17 160)",
+                        "brand-emerald-dark": "#006c49",
+                        "input-bg": "oklch(95% 0.008 160)"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline-xl": ["Comfortaa", "sans-serif"],
+                        "headline-lg": ["Comfortaa", "sans-serif"],
+                        "headline-md": ["Comfortaa", "sans-serif"],
+                        "body-lg": ["Nunito Sans", "sans-serif"],
+                        "body-md": ["Nunito Sans", "sans-serif"],
+                        "body-sm": ["Nunito Sans", "sans-serif"],
+                        "label-lg": ["Nunito Sans", "sans-serif"],
+                        "label-md": ["Nunito Sans", "sans-serif"]
+                    },
+                    fontSize: {
+                        "headline-xl": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+                        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "label-lg": ["14px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "label-md": ["12px", { lineHeight: "16px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7faf8;
+            color: #181c1c;
+            width: 390px;
+            height: 844px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-radio:checked + label .radio-circle {
+            background-color: #006c49;
+            box-shadow: inset 0 0 0 3px white;
+        }
+        .payment-option.active {
+            background-color: #ecfdf5;
+            border-left: 3px solid oklch(72% 0.17 160);
+        }
+        /* Mobile-Money specific input look */
+        input:focus {
+            outline: none;
+            border-color: #006c49;
+        }
+        /* Asymmetric Layout Rules */
+        .page-margin-left { padding-left: 20px; }
+        .page-margin-right { padding-right: 28px; }
+    </style>
+</head>
+<body class="flex flex-col font-body-md">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-full pl-[20px] pr-[28px] h-[64px] bg-surface-bright sticky top-0 z-50">
+<button class="flex items-center justify-center w-10 h-10 hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface text-[24px]">arrow_back_ios_new</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Paiement</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="flex-1 overflow-y-auto pb-stack-lg">
+<!-- Amount Section -->
+<section class="mt-8 flex flex-col items-center justify-center">
+<span class="font-label-md text-label-md text-on-surface-variant mb-1">Montant à régler</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-xl text-[32px] text-brand-emerald">45 500</span>
+<span class="font-body-md text-[16px] text-brand-emerald font-normal">FCFA</span>
+</div>
+</section>
+<!-- Payment Selection -->
+<section class="mt-stack-lg page-margin-left page-margin-right">
+<h2 class="font-label-lg text-[14px] font-semibold text-on-surface mb-stack-sm">Choisissez votre moyen de paiement</h2>
+<div class="flex flex-col gap-2" id="payment-options">
+<!-- Wave -->
+<div class="payment-option flex items-center h-[56px] px-4 cursor-pointer transition-all duration-200 active" onclick="selectPayment(this)">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center">
+<img alt="Wave" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtZxuUnJ2P9IjJP2YhD8GjeNuP3iX0TkBZzkYlASrGtmfqrFc593bwxl2EyEzsTTHG_HiKbSGCuH31etWPUBM2ufR11EHtt44QorZAVVgo556JuQxYh1B98iKFgRr1bTQRG_2Km06I4fAGpV6WL4qIlBkrU_N5uf7s7ailZIvoQdGkUZOyz--MNVDSZnwmNWjeCATp6BouzS_hCZDy1ogXPOblVsvv7FVRd1XgkK8alk9gd73Z7QQpY9txu"/>
+</div>
+<span class="flex-1 ml-4 font-body-md font-semibold text-on-surface">Wave</span>
+<div class="radio-circle w-5 h-5 rounded-full border-2 border-outline-variant transition-all"></div>
+</div>
+<!-- Orange Money -->
+<div class="payment-option flex items-center h-[56px] px-4 cursor-pointer transition-all duration-200" onclick="selectPayment(this)">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center">
+<img alt="Orange Money" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLvDshXAjYLXUTJAx24VJFR8-p97YzYGt8gBfnxh3Jn2HdvbqiqFuWB3SiDiin31nu_y0a17XY-fK9Y4-T-VfuwybpVcaBepfj4Fl1mJeFabinc7lkEAjfQyVehN-RCUlHhPhbcGuJGq-e5NgNOaDdu9t-tM5wTKfpZrNXQaRUqo2PnqJs5rxKocyn0d4k6NoC5XlUNoy4MMN1kNpZmY07WKQOoi-wqKAxX1rloYy4ImUl9_CgsjgtfjxY52"/>
+</div>
+<span class="flex-1 ml-4 font-body-md font-semibold text-on-surface">Orange Money</span>
+<div class="radio-circle w-5 h-5 rounded-full border-2 border-outline-variant transition-all"></div>
+</div>
+<!-- Free Money -->
+<div class="payment-option flex items-center h-[56px] px-4 cursor-pointer transition-all duration-200" onclick="selectPayment(this)">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center">
+<img alt="Free Money" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLvpkRr5Ga5RH48_LKBaB8oibbrd5HpaIT5k2FHBoPCq3ZpbS5ZbGkHr3LFp97Ad16fCbwlI2ffV0JoGNKJ8Rbn7ucQ4B5RpUtFDA5CWMD1uQCRj0n-y9S-2w1NQSV4WI7fij8kiQiISQr6l8w0WuJI9Wyzc6c5cbym6HcJPcOXG195YcHHZaFSmGIWAg8dAZMux8MS5ilfALtyaCxamGWfIu0Q9-z6QZQsQeO3Fp_DhJRidUODndNQITKQ"/>
+</div>
+<span class="flex-1 ml-4 font-body-md font-semibold text-on-surface">Free Money</span>
+<div class="radio-circle w-5 h-5 rounded-full border-2 border-outline-variant transition-all"></div>
+</div>
+<!-- Card -->
+<div class="payment-option flex items-center h-[56px] px-4 cursor-pointer transition-all duration-200" onclick="selectPayment(this)">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">credit_card</span>
+</div>
+<span class="flex-1 ml-4 font-body-md font-semibold text-on-surface">Carte bancaire</span>
+<div class="radio-circle w-5 h-5 rounded-full border-2 border-outline-variant transition-all"></div>
+</div>
+</div>
+</section>
+<!-- Phone Number Input -->
+<section class="mt-stack-md page-margin-left page-margin-right">
+<label class="block font-label-md text-[14px] text-on-surface-variant mb-2">Numéro de téléphone associé</label>
+<div class="relative">
+<input class="w-full h-[52px] px-4 rounded-xl border-none bg-input-bg font-body-md text-on-surface placeholder-outline-variant" placeholder="Saisissez votre numéro" type="tel" value="+221 77 456 78 90"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-primary font-label-md">Modifier</button>
+</div>
+</section>
+<!-- Secure Note -->
+<section class="mt-stack-md flex justify-center items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-label-md text-[12px]">Paiement 100% sécurisé</span>
+</section>
+</main>
+<!-- Fixed Bottom Button -->
+<footer class="mt-auto page-margin-left page-margin-right pb-10">
+<button class="w-full h-[52px] bg-primary-container text-on-primary-container font-headline-md rounded-xl hover:opacity-90 active:scale-[0.98] transition-all duration-200">
+            Payer 45 500 FCFA
+        </button>
+</footer>
+<script>
+        function selectPayment(element) {
+            // Remove active class from all options
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('active');
+                const circle = opt.querySelector('.radio-circle');
+                circle.style.backgroundColor = 'transparent';
+                circle.style.borderColor = '#bbcabf';
+                circle.style.boxShadow = 'none';
+            });
+
+            // Add active class to clicked element
+            element.classList.add('active');
+            const circle = element.querySelector('.radio-circle');
+            circle.style.backgroundColor = '#006c49';
+            circle.style.borderColor = '#006c49';
+            circle.style.boxShadow = 'inset 0 0 0 3px white';
+        }
+
+        // Initialize first selection
+        window.onload = () => {
+            selectPayment(document.querySelector('.payment-option.active'));
+        };
+    </script>
+</body></html>

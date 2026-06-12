@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baana - Paiement</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#2d1600",
+                        "info-warm": "#3B9EC4",
+                        "secondary": "#8c4f00",
+                        "error-light": "oklch(94% 0.03 25)",
+                        "text-secondary": "#6B7D75",
+                        "on-background": "#181c1c",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-tertiary-fixed": "#341100",
+                        "surface-dim": "#d7dbd9",
+                        "quasi-black": "#2C3E36",
+                        "secondary-fixed-dim": "#ffb875",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#744000",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffdcc0",
+                        "inverse-primary": "#4edea3",
+                        "warning-light": "oklch(94% 0.03 55)",
+                        "inverse-on-surface": "#eef1ef",
+                        "primary": "#006c49",
+                        "surface-bright": "#f7faf8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e9e7",
+                        "outline": "#6c7a71",
+                        "surface-container-highest": "#e0e3e1",
+                        "on-primary-container": "#00422b",
+                        "surface-input": "#EDF2EF",
+                        "tertiary-container": "#ff7e2d",
+                        "primary-fixed": "#6ffbbe",
+                        "tertiary": "#9d4300",
+                        "secondary-container": "#ffac5b",
+                        "error-warm": "#E05252",
+                        "border-muted": "#D4DDD8",
+                        "on-primary-fixed": "#002113",
+                        "tertiary-fixed": "#ffdbca",
+                        "surface-container": "#ebefed",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#6b3b00",
+                        "primary-container": "#10b981",
+                        "surface": "#f7faf8",
+                        "background": "#f7faf8",
+                        "on-tertiary-container": "#622700",
+                        "surface-tint": "#006c49",
+                        "on-surface": "#181c1c",
+                        "surface-variant": "#e0e3e1",
+                        "outline-variant": "#bbcabf",
+                        "surface-container-low": "#f1f4f2",
+                        "on-tertiary-fixed-variant": "#783200",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#4edea3",
+                        "success-light": "oklch(92% 0.04 160)",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ffb690",
+                        "on-surface-variant": "#3c4a42",
+                        "inverse-surface": "#2d3130"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "section-gap": "32px",
+                        "margin-right": "28px",
+                        "element-gap": "24px",
+                        "stack-sm": "8px",
+                        "gutter-v": "16px",
+                        "margin-left": "20px",
+                        "gutter-h": "12px"
+                    },
+                    fontFamily: {
+                        "label-caps": ["Nunito"],
+                        "subtitle": ["Nunito"],
+                        "caption": ["Nunito"],
+                        "body-reg": ["Nunito"],
+                        "headline-md": ["Comfortaa"],
+                        "button-text": ["Comfortaa"],
+                        "headline-lg": ["Comfortaa"],
+                        "price-display": ["Comfortaa"],
+                        "body-bold": ["Nunito"]
+                    },
+                    fontSize: {
+                        "label-caps": ["11px", { lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700" }],
+                        "subtitle": ["16px", { lineHeight: "24px", fontWeight: "600" }],
+                        "caption": ["11px", { lineHeight: "14px", fontWeight: "400" }],
+                        "body-reg": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "headline-md": ["22px", { lineHeight: "28px", fontWeight: "700" }],
+                        "button-text": ["16px", { lineHeight: "20px", fontWeight: "700" }],
+                        "headline-lg": ["28px", { lineHeight: "34px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "price-display": ["28px", { lineHeight: "32px", fontWeight: "700" }],
+                        "body-bold": ["14px", { lineHeight: "20px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            /* Organic background gradient */
+            background-image: radial-gradient(circle at 100% 0%, theme('colors.primary-container/20') 0%, transparent 40%),
+                              radial-gradient(circle at 0% 100%, theme('colors.tertiary-container/10') 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* High contrast focus outline for accessibility */
+        *:focus-visible {
+            outline: 2px solid theme('colors.primary');
+            outline-offset: 2px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pb-20 md:pb-0">
+<!-- Header (Suppressed BottomNav logic dictates we keep TopApp Bar simple for transaction) -->
+<header class="flex justify-between items-center px-margin-left pr-margin-right h-16 w-full bg-background/80 backdrop-blur-md sticky top-0 z-40 flat no shadows">
+<div class="flex items-center gap-gutter-h">
+<button class="p-2 rounded-full hover:bg-surface-variant/10 transition-colors active:scale-95 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<img alt="Baana Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqN4TOGKg-WrCu4B5HRhb0Rr73wxGKg4MauSHvrPcZugIBiLZeAsaznQUFMQZfifmtON0-Hn-OXXX8QD1GhsPUOIARUWH4zTdDwUSRyoNAaSEh5nNg3GSjFyF-8hoiyrXCm4fLiOUySpkvmtx24TSqmjn75YMd_mS9HDsiZ1C_EZgwSyFQqIqScI8YHJJSYRREc_qm_VzHUhT2SsgGEtSlDYDe8J1GvHjtOeHv6UeqswYu0W1w7x6GSwFeWWDtweZWPuBEOtPEL18"/>
+</div>
+</div>
+<div>
+<span class="material-symbols-outlined text-on-surface-variant p-2" style="font-variation-settings: 'FILL' 0;">help</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col px-margin-left pr-margin-right pt-element-gap max-w-md mx-auto w-full relative z-10">
+<!-- Summary Section -->
+<section class="mb-section-gap">
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-border-muted relative overflow-hidden">
+<!-- Abstract organic shape background decoration -->
+<div class="absolute -right-12 -top-12 w-32 h-32 bg-primary-container/30 rounded-full blur-2xl"></div>
+<div class="absolute -left-8 -bottom-8 w-24 h-24 bg-tertiary-container/20 rounded-full blur-xl"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<p class="font-subtitle text-subtitle text-on-surface-variant mb-2">Montant à payer</p>
+<h1 class="font-price-display text-price-display text-primary font-bold tracking-tight">8 000 <span class="text-xl">FCFA</span></h1>
+<div class="mt-4 pt-4 border-t border-border-muted w-full flex justify-between items-center">
+<span class="font-body-reg text-body-reg text-text-secondary">Commande #4928</span>
+<span class="font-body-bold text-body-bold text-on-surface">Boutique Fatou</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Methods Selection -->
+<section class="mb-section-gap flex-grow flex flex-col gap-element-gap">
+<h2 class="font-headline-md text-headline-md text-quasi-black">Choisissez un moyen de paiement</h2>
+<div class="flex flex-col gap-stack-sm">
+<!-- Selected Method: Wave -->
+<label class="relative flex items-center p-4 rounded-xl cursor-pointer bg-surface-container-low transition-all border border-border-muted active:brightness-90 overflow-hidden">
+<input checked="" class="peer sr-only" name="payment_method" type="radio" value="wave"/>
+<!-- Active state highlight -->
+<div class="absolute inset-0 bg-primary-container/10 border-2 border-primary rounded-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary rounded-l-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="flex-shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 border border-border-muted z-10">
+<img alt="Wave logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV3br3pvfIvIuobDAo3Z307BxJgwZEKGRkRVNG0NlyaUkhVFjKCfUg2d4fw-l_Jkkcl-HL5mzUmLwvdeZ9l_XN1YRGOmMqmv6FnNr8K7vA0o1yZV2ftI9KsfPDbFgkw5vwi-yWp7VxnWgFc5XDSuKasJ5pnho6g4em-5MkGhFdz2vNwYvPQb7XVHFrcM92ZxtBj_XTY_2N2dRalftvUSfnCn9D4HESQE3hHu5FqBkBhabzTIE3-wHyjD6u9XuZ9PjCqkA85Rs8nx0"/>
+</div>
+<div class="ml-4 flex-grow z-10">
+<span class="font-body-bold text-body-bold text-on-surface block">Wave</span>
+<span class="font-caption text-caption text-text-secondary">Paiement rapide et sécurisé</span>
+</div>
+<div class="flex-shrink-0 w-6 h-6 rounded-full border-2 border-outline-variant peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors z-10">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</label>
+<!-- Method: Orange Money -->
+<label class="relative flex items-center p-4 rounded-xl cursor-pointer bg-surface-container-lowest hover:bg-surface-container-low transition-all border border-border-muted active:brightness-90 overflow-hidden">
+<input class="peer sr-only" name="payment_method" type="radio" value="orange_money"/>
+<!-- Active state highlight -->
+<div class="absolute inset-0 bg-primary-container/10 border-2 border-primary rounded-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary rounded-l-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="flex-shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 border border-border-muted z-10">
+<img alt="Orange Money logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2oYGIX1bjjEAdyA_zpE0geECkAsiBa1BddT3cdwZs2xOfb7NswNeNtP0scIAa8lYOQHLxREF9bDruUVMoCgqCgtuPJMJXkveJ5RH_rYtu0wD-mGdTPucT5NIJ22K3wP9cUv1jpj_VSGpiTio1LUtHnJAjA49IYOjEXC21c1CEWJ1wbvmUDzgPhEEo0CgLXY_25UNQeZK1FAbq-7aCo4-pcJ3rYQ8CQePBYugSrWhYj7jd6eBHmF0a5Nj6N6LViB29zq-jmLsljbU"/>
+</div>
+<div class="ml-4 flex-grow z-10">
+<span class="font-body-bold text-body-bold text-on-surface block">Orange Money</span>
+<span class="font-caption text-caption text-text-secondary">Via votre compte mobile</span>
+</div>
+<div class="flex-shrink-0 w-6 h-6 rounded-full border-2 border-outline-variant peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors z-10">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</label>
+<!-- Method: Free Money -->
+<label class="relative flex items-center p-4 rounded-xl cursor-pointer bg-surface-container-lowest hover:bg-surface-container-low transition-all border border-border-muted active:brightness-90 overflow-hidden">
+<input class="peer sr-only" name="payment_method" type="radio" value="free_money"/>
+<!-- Active state highlight -->
+<div class="absolute inset-0 bg-primary-container/10 border-2 border-primary rounded-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary rounded-l-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="flex-shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 border border-border-muted z-10">
+<img alt="Free Money logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqpjIDe27tuf1ZSmZ490HaP_5UjNzrh_F-UQcGuwzWIbpPFh39ZdtJ99tTdpzEVKjnh5YUj_aoAxHYEroUQqUylbjGNd_t2Bf3J7e4p55i8zk2KLDyPMtH3XpnyP7ZBF9JQ16Kssw3h7k5Xni3CMEGyTd3lGSOZrvhKKpNNLHBSTjDNlhDkbwYsGC5xfCrbo6X4frG9xO6_YS3g6DvxkNiTtOrtIQ0gs4Q_FX7ibdwM66_2VAelVqrg20lkxnEyOOhTZjDqWNm3Mo"/>
+</div>
+<div class="ml-4 flex-grow z-10">
+<span class="font-body-bold text-body-bold text-on-surface block">Free Money</span>
+<span class="font-caption text-caption text-text-secondary">Paiement mobile simple</span>
+</div>
+<div class="flex-shrink-0 w-6 h-6 rounded-full border-2 border-outline-variant peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors z-10">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</label>
+<!-- Method: Bank Card -->
+<label class="relative flex items-center p-4 rounded-xl cursor-pointer bg-surface-container-lowest hover:bg-surface-container-low transition-all border border-border-muted active:brightness-90 overflow-hidden">
+<input class="peer sr-only" name="payment_method" type="radio" value="card"/>
+<!-- Active state highlight -->
+<div class="absolute inset-0 bg-primary-container/10 border-2 border-primary rounded-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary rounded-l-xl opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="flex-shrink-0 w-12 h-12 bg-surface-variant rounded-lg flex items-center justify-center p-1 border border-border-muted z-10">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]" style="font-variation-settings: 'FILL' 0;">credit_card</span>
+</div>
+<div class="ml-4 flex-grow z-10">
+<span class="font-body-bold text-body-bold text-on-surface block">Carte Bancaire</span>
+<span class="font-caption text-caption text-text-secondary">Visa, Mastercard</span>
+</div>
+<div class="flex-shrink-0 w-6 h-6 rounded-full border-2 border-outline-variant peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors z-10">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Dynamic Input Area (Simulating Wave Phone Input) -->
+<section class="mb-section-gap flex flex-col gap-stack-sm">
+<label class="font-body-bold text-body-bold text-on-surface" for="phone_input">Numéro de téléphone Wave</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-4 font-body-reg text-text-secondary">+221</span>
+<input class="w-full h-[52px] bg-surface-input border-0 focus:ring-0 focus:border-2 focus:border-primary rounded-[12px] pl-[60px] pr-4 font-body-reg text-body-reg text-on-surface placeholder:text-outline-variant transition-colors" id="phone_input" placeholder="77 000 00 00" type="tel"/>
+</div>
+</section>
+<!-- Action Button -->
+<div class="mt-auto pt-element-gap pb-section-gap sticky bottom-0 bg-background/90 backdrop-blur-sm z-20">
+<button class="w-full h-[56px] bg-[#F97316] text-white font-button-text text-button-text rounded-xl flex items-center justify-center gap-2 active:brightness-90 transition-all hover:bg-[#EA580C]">
+<span>Payer 8 000 FCFA</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+<p class="text-center font-caption text-caption text-text-secondary mt-3 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 0;">lock</span>
+                Paiement 100% sécurisé
+            </p>
+</div>
+</main>
+<!-- Suppress BottomNav for transactional screen -->
+</body></html>
