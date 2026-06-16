@@ -19,6 +19,14 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  subscriptionExpiresAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  freeDeliveriesUsedThisWeek: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
 });
 
 module.exports = User;
