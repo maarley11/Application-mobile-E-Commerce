@@ -81,3 +81,100 @@ exports.getProDashboard = async (req, res) => {
     return res.status(500).json({ message: 'Erreur lors de la génération du dashboard analytique.' });
   }
 };
+
+exports.getDashboardStats = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    // 1. Dépenses et nb de commandes ce mois-ci
+    const currentMonthStats = await Order.findOne({
+      where: {
+        userId,
+        createdAt: {
+          [Op.gte]: startOfMonth
+        }
+      },
+      attributes: [
+        [sequelize.fn('COUNT', sequelize.col('id')), 'ordersCount'],
+        [sequelize.fn('SUM', sequelize.col('totalAmount')), 'totalSpentThisMonth']
+      ],
+      raw: true
+    });
+
+    const ordersCount = parseInt(currentMonthStats.ordersCount, 10) || 0;
+    const totalSpentThisMonth = parseInt(currentMonthStats.totalSpentThisMonth, 10) || 0;
+
+    // 2. Savings realized ce mois-ci
+    const quote = sequelize.getDialect() === 'postgres' ? '"' : '`';
+    const savingsResult = await OrderItem.findOne({
+      attributes: [
+        [
+          sequelize.fn('SUM', sequelize.literal(`(${quote}Product${quote}.${quote}publicPrice${quote} - ${quote}OrderItem${quote}.${quote}unitPrice${quote}) * ${quote}OrderItem${quote}.${quote}quantity${quote}`)),
+          'savingsRealized'
+        ]
+      ],
+      include: [
+        {
+          model: Order,
+          attributes: [],
+          where: {
+            userId,
+            createdAt: {
+              [Op.gte]: startOfMonth
+            }
+          }
+        },
+        {
+          model: Product,
+          attributes: []
+        }
+      ],
+      raw: true
+    });
+
+    const savingsRealized = parseInt(savingsResult.savingsRealized, 10) || 0;
+
+    // 3. Achats mensuels sur les 6 derniers mois
+    const startOf6MonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1);
+    
+    // Extrait l'année et le mois (compatible Postgres / Sqlite / MySQL)
+    // Pour assurer une large compatibilité et simplicité avec Sequelize,
+    // On peut utiliser des fonctions dialect-specific ou un fallback
+    const monthExtract = sequelize.getDialect() === 'postgres'
+      ? sequelize.fn('TO_CHAR', sequelize.col('createdAt'), 'YYYY-MM')
+      : sequelize.fn('strftime', '%Y-%m', sequelize.col('createdAt')); // SQLite par défaut ou test
+
+    const monthlyPurchasesResult = await Order.findAll({
+      where: {
+        userId,
+        createdAt: {
+          [Op.gte]: startOf6MonthsAgo
+        }
+      },
+      attributes: [
+        [monthExtract, 'month'],
+        [sequelize.fn('SUM', sequelize.col('totalAmount')), 'spent']
+      ],
+      group: ['month'],
+      order: [[sequelize.literal('month'), 'ASC']],
+      raw: true
+    });
+
+    // Optionnel : remplir les mois vides avec 0 si non présents dans le résultat
+    // (Pour simplifier, on renvoie les données agrégées trouvées)
+
+    return res.status(200).json({
+      totalSpentThisMonth,
+      ordersCount,
+      savingsRealized,
+      monthlyPurchases: monthlyPurchasesResult
+    });
+
+  } catch (error) {
+    console.error('Erreur getDashboardStats:', error);
+    return res.status(500).json({ message: 'Erreur lors de la récupération des statistiques.' });
+  }
+};
+
