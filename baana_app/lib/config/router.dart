@@ -4,6 +4,16 @@ import '../screens/splash_screen.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/register_screen.dart';
 import '../screens/otp_screen.dart';
+import '../screens/main_layout_screen.dart';
+import '../screens/product_detail_screen.dart';
+import '../screens/cart/cart_screen.dart';
+import '../screens/cart/checkout_screen.dart';
+import '../screens/cart/payment_mobile_money_screen.dart';
+import '../screens/cart/confirmation_screen.dart';
+import '../screens/profile/profile_screen.dart';
+import '../screens/profile/dashboard_pro_screen.dart';
+import '../screens/order/order_history_screen.dart';
+import '../screens/order/order_tracking_screen.dart';
 import '../config/colors.dart';
 import '../config/typography.dart';
 
@@ -34,6 +44,66 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/otp',
       builder: (context, state) => const OtpScreen(),
+    ),
+
+    // Home / Main Layout
+    GoRoute(
+      path: '/home',
+      builder: (context, state) => const MainLayoutScreen(),
+    ),
+
+    // Product Detail
+    GoRoute(
+      path: '/product/:id',
+      builder: (context, state) {
+        final productId = state.pathParameters['id']!;
+        return ProductDetailScreen(productId: productId);
+      },
+    ),
+
+    // Cart
+    GoRoute(
+      path: '/cart',
+      builder: (context, state) => const CartScreen(),
+    ),
+
+    // Checkout
+    GoRoute(
+      path: '/checkout',
+      builder: (context, state) => const CheckoutScreen(),
+    ),
+
+    // Payment Mobile Money
+    GoRoute(
+      path: '/payment_mobile_money',
+      builder: (context, state) => const PaymentMobileMoneyScreen(),
+    ),
+
+    // Confirmation
+    GoRoute(
+      path: '/confirmation',
+      builder: (context, state) => const ConfirmationScreen(),
+    ),
+
+    // Profile
+    GoRoute(
+      path: '/profile',
+      builder: (context, state) => const ProfileScreen(),
+    ),
+    GoRoute(
+      path: '/dashboard_pro',
+      builder: (context, state) => const DashboardProScreen(),
+    ),
+    GoRoute(
+      path: '/orders',
+      builder: (context, state) => const OrderHistoryScreen(),
+    ),
+    GoRoute(
+      path: '/order_tracking/:id',
+      builder: (context, state) {
+        final orderId = state.pathParameters['id']!;
+        return OrderTrackingScreen(orderId: orderId);
+      },
     ),
   ],
 );

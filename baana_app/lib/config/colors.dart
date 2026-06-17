@@ -6,7 +6,7 @@ class BaanaColors {
   static const Color accent = Color(0xFFF0A050); // Orange Baana
   static const Color cta = Color(0xFFF97316); // Orange CTA fort
 
-  // Neutres teintés émeraude (Zéro gris/noir pur)
+  // Neutres teintés émeraude
   static const Color background = Color(0xFFF7FAF8); // Blanc teinté
   static const Color inputBackground = Color(0xFFEDF2EF); // Gris teinté clair
   static const Color border = Color(0xFFD4DDD8); // Gris teinté moyen

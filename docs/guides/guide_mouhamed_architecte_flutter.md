@@ -43,11 +43,11 @@ Utilise ces prompts en les copiant dans Antigravity. Ils sont structurés pour g
 Développe le Splash Screen et l'Onboarding de l'application Flutter "baana_app".
 
 ⚠️ INSTRUCTION CRITIQUE : Le design doit FORCÉMENT être basé sur les maquettes UI déjà réalisées. Avant d'écrire la moindre ligne de code, tu DOIS :
-1. Analyser et reproduire fidèlement les images suivantes (situées dans le dossier des maquettes) :
-   - `01_splash.png`
-   - `02_onboarding_1.png`
-   - `03_onboarding_2.png`
-   - `04_onboarding_3.png`
+1. Analyser et reproduire fidèlement les images suivantes (situées dans le dossier `stitch/`) :
+   - `stitch/splash_screen_logo_baana_officiel_immersif/screen.png`
+   - `stitch/onboarding_1_achats_en_gros/screen.png`
+   - `stitch/onboarding_2_livraison/screen.png`
+   - `stitch/onboarding_3_paiements/screen.png`
 2. Analyser impérativement le code existant (ex: `lib/config/colors.dart`, `typography.dart`) pour réutiliser les composants au lieu de les réinventer.
 
 Contexte Technique :
@@ -78,8 +78,8 @@ Implémente le tunnel d'authentification (Inscription et Vérification OTP) et l
 
 ⚠️ INSTRUCTION CRITIQUE : Le design doit FORCÉMENT être basé sur les maquettes UI déjà réalisées. Avant d'écrire la moindre ligne de code, tu DOIS :
 1. Analyser et reproduire fidèlement les images suivantes :
-   - `05_inscription.png`
-   - `06_otp.png`
+   - `stitch/inscription_logo_int_gr_final/screen.png`
+   - `stitch/v_rification_otp/screen.png`
 2. Analyser impérativement le code existant pour réutiliser la structure des `BaanaInput` et autres composants du Design System.
 
 Contexte Technique :
@@ -108,9 +108,9 @@ Développe la HomeScreen et la ProductDetailScreen avec une logique de gestion d
 
 ⚠️ INSTRUCTION CRITIQUE : Le design doit FORCÉMENT être basé sur les maquettes UI déjà réalisées. Avant d'écrire la moindre ligne de code, tu DOIS :
 1. Analyser et reproduire fidèlement les images suivantes :
-   - `07_accueil.png`
-   - `08_catalogue.png`
-   - `09_fiche_produit.png`
+   - `stitch/page_d_accueil_home_format_390x884_px/screen.png`
+   - `stitch/catalogue_produits_format_390x884_px/screen.png`
+   - `stitch/fiche_produit_format_390x884_px/screen.png`
 2. Analyser impérativement le code existant pour garantir une cohérence parfaite de la navigation (`bottomNavigationBar`) et du style (espacements, couleurs, typographies).
 
 Contexte Technique :

@@ -42,8 +42,8 @@ class _OtpScreenState extends State<OtpScreen> {
           backgroundColor: BaanaColors.primary,
         ),
       );
-      // Redirection vers la page d'accueil à faire au J5
-      // context.go('/home');
+      // Redirection vers la page d'accueil
+      context.go('/home');
     }
   }
 
