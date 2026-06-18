@@ -1,4 +1,4 @@
-const { Order, OrderItem, Product, sequelize } = require('../models');
+const { Order, OrderItem, Product, Notification, sequelize } = require('../models');
 
 exports.createOrder = async (req, res) => {
   const { paymentMethod, items } = req.body;
@@ -73,5 +73,59 @@ exports.createOrder = async (req, res) => {
   } catch (error) {
     await t.rollback();
     return res.status(400).json({ message: error.message });
+  }
+};
+
+// PATCH /api/orders/:id/status
+// Réservé aux ADMIN. Met à jour le statut d'une commande et notifie l'utilisateur.
+exports.updateOrderStatus = async (req, res) => {
+  // Vérification du rôle Admin
+  if (!req.user || !req.user.isAdmin) {
+    return res.status(403).json({ message: 'Accès interdit. Réservé aux administrateurs.' });
+  }
+
+  const { status } = req.body;
+  const validStatuses = ['PENDING', 'PREPARING', 'SHIPPING', 'DELIVERED'];
+
+  if (!validStatuses.includes(status)) {
+    return res.status(400).json({
+      message: `Statut invalide. Les valeurs acceptées sont : ${validStatuses.join(', ')}`,
+    });
+  }
+
+  try {
+    const order = await Order.findByPk(req.params.id);
+    if (!order) {
+      return res.status(404).json({ message: 'Commande introuvable' });
+    }
+
+    const oldStatus = order.status;
+    order.status = status;
+    await order.save();
+
+    // Messages de notification selon le statut
+    const statusMessages = {
+      PREPARING: `Votre commande #${order.id} est en cours de préparation. 🍳`,
+      SHIPPING:  `Votre commande #${order.id} est en cours de livraison ! 🚚`,
+      DELIVERED: `Votre commande #${order.id} a été livrée avec succès. ✅ Merci pour votre confiance !`,
+      PENDING:   `Votre commande #${order.id} est en attente de traitement.`,
+    };
+
+    // Création automatique de la notification pour l'utilisateur
+    await Notification.create({
+      userId: order.userId,
+      title: 'Mise à jour de votre commande',
+      message: statusMessages[status] || `Votre commande #${order.id} a changé de statut : ${status}`,
+      type: 'ORDER',
+    });
+
+    return res.status(200).json({
+      message: `Statut mis à jour : ${oldStatus} → ${status}`,
+      order: { id: order.id, status: order.status },
+    });
+
+  } catch (error) {
+    console.error('Erreur updateOrderStatus:', error);
+    return res.status(500).json({ message: 'Erreur serveur' });
   }
 };

@@ -61,9 +61,8 @@ exports.verifyOtp = async (req, res) => {
     user.otpCode = null;
     await user.save();
 
-    // Signer le JWT
     const token = jwt.sign(
-      { userId: user.id, isPro: user.isPro },
+      { userId: user.id, isPro: user.isPro, isAdmin: user.isAdmin },
       process.env.JWT_SECRET || 'secret_dev_key',
       { expiresIn: '7d' }
     );
@@ -75,7 +74,8 @@ exports.verifyOtp = async (req, res) => {
         id: user.id,
         phone: user.phone,
         name: user.name,
-        isPro: user.isPro
+        isPro: user.isPro,
+        isAdmin: user.isAdmin
       }
     });
 

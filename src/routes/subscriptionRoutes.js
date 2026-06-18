@@ -5,6 +5,6 @@ const authMiddleware = require('../middlewares/auth');
 const router = express.Router();
 
 // Route protégée pour les utilisateurs authentifiés
-router.post('/renew', authMiddleware, subscriptionController.renewSubscription);
+router.get('/', authMiddleware, subscriptionController.getSubscriptions);
 
 module.exports = router;

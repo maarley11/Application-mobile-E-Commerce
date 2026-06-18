@@ -1,8 +1,8 @@
 const express = require('express');
-const webhookController = require('../controllers/webhookController');
+const { receiveWebhook } = require('../controllers/webhook.controller');
 
 const router = express.Router();
 
-router.post('/payment', webhookController.paymentWebhook);
+router.post('/payment', receiveWebhook);
 
 module.exports = router;

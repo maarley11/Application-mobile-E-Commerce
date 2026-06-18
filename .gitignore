@@ -16,3 +16,10 @@ stitch_Ngary/
 images/
 comfortaa/
 SenDigitalPulse_CharteGraphique.pptx
+
+# Fichiers générés (tests, rapports)
+coverage/
+*.doc
+dashboard.json
+dashboard_stats.json
+subscriptions.json
