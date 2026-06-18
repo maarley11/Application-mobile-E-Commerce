@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Subscription } = require('../models');
 
 exports.renewSubscription = async (req, res) => {
   try {
@@ -29,7 +29,20 @@ exports.renewSubscription = async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Erreur lors du renouvellement de l\\'abonnement:', error);
+    console.error('Erreur lors du renouvellement de l\'abonnement:', error);
+    return res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
+
+// Get all subscriptions (admin view)
+exports.getSubscriptions = async (req, res) => {
+  try {
+    const subscriptions = await Subscription.findAll({
+      include: [{ model: User, attributes: ['id', 'phone', 'name', 'isPro'] }],
+    });
+    return res.status(200).json(subscriptions);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des abonnements:', error);
     return res.status(500).json({ message: 'Erreur serveur' });
   }
 };

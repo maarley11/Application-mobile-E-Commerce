@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --detectOpenHandles --coverage",
+    "test:watch": "jest --watch",
+    "test:e2e": "newman run postman/baana-api.postman_collection.json -e postman/env.test.json"
   },
   "keywords": [],
   "author": "",
@@ -12,8 +14,8 @@
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
     "express-validator": "^7.3.2",
     "helmet": "^8.2.0",
     "jsonwebtoken": "^9.0.3",
@@ -22,5 +24,10 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.8",
     "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2",
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
   }
 }

@@ -15,6 +15,10 @@ const User = sequelize.define('User', {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
   otpCode: {
     type: DataTypes.STRING,
     allowNull: true,

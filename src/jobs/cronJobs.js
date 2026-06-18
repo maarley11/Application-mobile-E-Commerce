@@ -12,7 +12,7 @@ const startCronJobs = () => {
       );
       console.log('CRON terminé avec succès.');
     } catch (error) {
-      console.error('Erreur lors de l\\'exécution du CRON:', error);
+      console.error('Erreur lors de l\'exécution du CRON:', error);
     }
   });
 };

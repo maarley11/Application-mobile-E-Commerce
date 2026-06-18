@@ -25,4 +25,24 @@ router.post(
   orderController.createOrder
 );
 
+// PATCH /api/orders/:id/status → Mise à jour du statut (Admin seulement, valide via isAdmin dans le JWT)
+router.patch(
+  '/:id/status',
+  authMiddleware,
+  [
+    body('status')
+      .isIn(['PENDING', 'PREPARING', 'SHIPPING', 'DELIVERED'])
+      .withMessage('Statut invalide'),
+  ],
+  (req, res, next) => {
+    const { validationResult } = require('express-validator');
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+  orderController.updateOrderStatus
+);
+
 module.exports = router;
