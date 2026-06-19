@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baana - Profil Utilisateur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-secondary-fixed-variant": "#783200",
+                "on-background": "#181c1c",
+                "on-tertiary-container": "#2c3c36",
+                "on-surface-variant": "#3c4a42",
+                "surface-container-highest": "#e0e3e1",
+                "on-surface": "#181c1c",
+                "error-container": "#ffdad6",
+                "secondary-fixed": "#ffdbca",
+                "tertiary": "#51625b",
+                "outline-variant": "#bbcabf",
+                "on-secondary-fixed": "#341100",
+                "tertiary-container": "#94a79e",
+                "primary-container": "#10b981",
+                "on-primary-fixed": "#002113",
+                "secondary-fixed-dim": "#ffb690",
+                "primary-fixed-dim": "#4edea3",
+                "on-tertiary": "#ffffff",
+                "on-secondary-container": "#5c2400",
+                "primary-fixed": "#6ffbbe",
+                "on-error": "#ffffff",
+                "on-error-container": "#93000a",
+                "secondary-container": "#fd761a",
+                "background": "#f7faf8",
+                "on-primary": "#ffffff",
+                "surface-variant": "#e0e3e1",
+                "inverse-on-surface": "#eef1ef",
+                "inverse-primary": "#4edea3",
+                "primary": "#006c49",
+                "on-tertiary-fixed-variant": "#394a43",
+                "on-secondary": "#ffffff",
+                "surface-tint": "#006c49",
+                "surface-dim": "#d7dbd9",
+                "surface-container-lowest": "#ffffff",
+                "outline": "#6c7a71",
+                "on-primary-fixed-variant": "#005236",
+                "surface-container-high": "#e6e9e7",
+                "secondary": "#9d4300",
+                "on-tertiary-fixed": "#0e1f19",
+                "inverse-surface": "#2d3130",
+                "tertiary-fixed-dim": "#b8cbc2",
+                "surface-container": "#ebefed",
+                "surface-bright": "#f7faf8",
+                "surface": "#f7faf8",
+                "tertiary-fixed": "#d4e7dd",
+                "error": "#ba1a1a",
+                "surface-container-low": "#f1f4f2",
+                "on-primary-container": "#00422b"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "stack-sm": "8px",
+                "margin-left": "20px",
+                "stack-md": "24px",
+                "margin-right": "28px",
+                "gutter": "16px",
+                "stack-lg": "48px"
+            },
+            "fontFamily": {
+                "headline-xl": ["Comfortaa"],
+                "headline-md": ["Comfortaa"],
+                "body-sm": ["Nunito Sans"],
+                "label-md": ["Nunito Sans"],
+                "body-lg": ["Nunito Sans"],
+                "label-lg": ["Nunito Sans"],
+                "headline-lg": ["Comfortaa"],
+                "body-md": ["Nunito Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7faf8;
+            color: #181c1c;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Strict sizing for the container to match prompt requirements */
+        .app-container {
+            width: 390px;
+            height: 884px;
+            margin: 0 auto;
+            position: relative;
+            background: #f7faf8;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        .app-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+        .badge-pro {
+            background-color: oklch(92% 0.04 160);
+            color: #00422b;
+        }
+        .logout-text {
+            color: oklch(55% 0.2 25);
+        }
+        .list-divider {
+            border-bottom: 1px solid rgba(108, 122, 113, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex items-center justify-center min-h-screen bg-surface-container">
+<div class="app-container shadow-2xl">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-40 bg-surface flex justify-between items-center pl-20 pr-28 py-4">
+<h1 class="font-headline-lg text-headline-lg text-primary">Baana</h1>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform hover:opacity-80">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</button>
+</div>
+</header>
+<!-- Profile Hero Section -->
+<section class="mt-stack-md flex flex-col items-center ml-margin-left mr-margin-right">
+<div class="w-[64px] h-[64px] rounded-full bg-primary flex items-center justify-center mb-4">
+<span class="text-white font-bold text-headline-md font-headline-md">KD</span>
+</div>
+<h2 class="font-headline-md text-[22px] leading-tight text-on-surface text-center">Khalil Diop</h2>
+<p class="font-body-sm text-[14px] text-outline mt-1 mb-3 text-center">+221 77 123 45 67</p>
+<div class="badge-pro px-4 py-1 rounded-[20px] flex items-center gap-1.5">
+<span class="text-[12px] font-bold">Membre Pro ⭐</span>
+</div>
+</section>
+<!-- Navigation Menu -->
+<nav class="mt-stack-lg mb-20">
+<ul class="flex flex-col">
+<!-- Dashboard -->
+<li class="active:bg-surface-container-high transition-colors">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="dashboard">dashboard</span>
+</div>
+<span class="font-body-md text-[15px] text-on-surface ml-stack-sm">Tableau de bord</span>
+</a>
+<div class="mx-margin-left mr-margin-right list-divider"></div>
+</li>
+<!-- Commandes -->
+<li class="active:bg-surface-container-high transition-colors">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="receipt_long">receipt_long</span>
+</div>
+<span class="font-body-md text-[15px] text-on-surface ml-stack-sm">Commandes</span>
+</a>
+<div class="mx-margin-left mr-margin-right list-divider"></div>
+</li>
+<!-- Abonnement -->
+<li class="active:bg-surface-container-high transition-colors">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="card_membership">card_membership</span>
+</div>
+<span class="font-body-md text-[15px] text-on-surface ml-stack-sm">Abonnement</span>
+</a>
+<div class="mx-margin-left mr-margin-right list-divider"></div>
+</li>
+<!-- Adresses -->
+<li class="active:bg-surface-container-high transition-colors">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="location_on">location_on</span>
+</div>
+<span class="font-body-md text-[15px] text-on-surface ml-stack-sm">Adresses</span>
+</a>
+<div class="mx-margin-left mr-margin-right list-divider"></div>
+</li>
+<!-- Factures -->
+<li class="active:bg-surface-container-high transition-colors">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="payments">payments</span>
+</div>
+<span class="font-body-md text-[15px] text-on-surface ml-stack-sm">Factures</span>
+</a>
+<div class="mx-margin-left mr-margin-right list-divider"></div>
+</li>
+<!-- Support WhatsApp -->
+<li class="active:bg-surface-container-high transition-colors">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<span class="font-body-md text-[15px] text-on-surface ml-stack-sm">Support WhatsApp</span>
+</a>
+<div class="mx-margin-left mr-margin-right list-divider"></div>
+</li>
+<!-- Paramètres -->
+<li class="active:bg-surface-container-high transition-colors">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+</div>
+<span class="font-body-md text-[15px] text-on-surface ml-stack-sm">Paramètres</span>
+</a>
+<div class="mx-margin-left mr-margin-right list-divider"></div>
+</li>
+<!-- Déconnexion -->
+<li class="active:bg-error-container/20 transition-colors mt-4">
+<a class="flex items-center py-4" href="#">
+<div class="w-12 flex justify-center ml-margin-left">
+<span class="material-symbols-outlined logout-text" data-icon="logout">logout</span>
+</div>
+<span class="font-body-md text-[15px] logout-text ml-stack-sm font-semibold">Déconnexion</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Bottom Nav Bar -->
+<footer class="fixed bottom-0 w-[390px] flex justify-around items-center px-4 py-3 pb-6 bg-surface-container-highest z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-primary/10 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md mt-1">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-primary/10 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md mt-1">Boutique</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-primary/10 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md mt-1">Ventes</span>
+</a>
+<!-- Active State: Profil -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">Profil</span>
+</a>
+</footer>
+</div>
+<script>
+        // Simple micro-interaction for list items
+        document.querySelectorAll('nav li').forEach(item => {
+            item.addEventListener('touchstart', () => {
+                item.style.backgroundColor = 'rgba(0, 108, 73, 0.05)';
+            });
+            item.addEventListener('touchend', () => {
+                item.style.backgroundColor = 'transparent';
+            });
+        });
+    </script>
+</body></html>

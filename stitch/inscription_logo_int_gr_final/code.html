@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baana - Inscription</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#006c49",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#10b981",
+                        "on-primary-container": "#00422b",
+                        "secondary": "#9d4300",
+                        "surface": "#f7faf8",
+                        "on-surface": "#181c1c",
+                        "on-surface-variant": "#3c4a42",
+                        "outline": "#6c7a71",
+                        "emerald-accent": "oklch(72% 0.17 160)",
+                        "orange-accent": "oklch(75% 0.18 55)",
+                        "neutral-dark": "oklch(25% 0.02 160)",
+                        "neutral-white": "oklch(98% 0.005 160)",
+                        "neutral-grey": "oklch(55% 0.02 160)",
+                        "neutral-input": "oklch(95% 0.008 160)",
+                        "legal-grey": "oklch(65% 0.01 160)"
+                    },
+                    borderRadius: {
+                        "button": "12px",
+                        "input": "12px",
+                        "xl": "12px"
+                    },
+                    spacing: {
+                        "ml-baana": "20px",
+                        "mr-baana": "28px",
+                        "stack-lg": "48px",
+                        "stack-md": "24px",
+                        "h-action": "52px"
+                    },
+                    fontFamily: {
+                        "headline": ["Comfortaa", "cursive"],
+                        "body": ["Nunito Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: oklch(98% 0.005 160);
+            color: oklch(25% 0.02 160);
+            font-family: 'Nunito Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .comfortaa-bold { font-family: 'Comfortaa', cursive; font-weight: 700; }
+        .nunito-regular { font-family: 'Nunito Sans', sans-serif; font-weight: 400; }
+        .nunito-semibold { font-family: 'Nunito Sans', sans-serif; font-weight: 600; }
+        .nunito-bold { font-family: 'Nunito Sans', sans-serif; font-weight: 700; }
+
+        /* Asymmetric Layout Enforcement */
+        .page-container {
+            padding-left: 20px;
+            padding-right: 28px;
+        }
+
+        .input-asymmetry {
+            margin-left: 8px; /* Offset from title for controlled asymmetry */
+        }
+
+        /* Material Symbol Global Class */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-surface">
+<!-- Top AppBar (Simplified for Onboarding as per Filter rules: Suppressed Global Nav) -->
+<header class="w-full pt-10 pb-6 page-container">
+<div class="h-8 w-8 overflow-hidden"><img alt="Baana Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtj9FjlbfMHM89KNvPQNH2E51KD0tczQ7HHzWLZw3vLZtjnzCOm9YCi8LylG8pW8iJtE6N1sGHNBr-ZUmDvmqlL_azsu7uD6exjdMFONPorjovGkB9RmCk2VCoR1-z3vb0GdsgwzhGIJVPXYFROk0gyZsd5On5fchcYGxOCfUr3lzt5eJbnZWwvXjVCjObHWB8Nkonrl_mPuzpnr0rMe1zKL7_DEJ4NsPtt6CeV-SScE_LpEeNmGbrghH4"/></div>
+</header>
+<main class="flex-grow flex flex-col page-container">
+<!-- Headline Section -->
+<div class="mt-8 mb-10"><h1 class="comfortaa-bold text-[26pt] leading-tight text-neutral-dark tracking-tight">Créez votre compte</h1><p class="nunito-regular text-[14pt] text-neutral-grey mt-2">Entrez votre numéro de téléphone pour commencer</p></div>
+<!-- Form Section - No Cards, Direct on Background -->
+<div class="space-y-6 flex flex-col">
+<!-- Phone Input with slight right offset for asymmetry -->
+<div class="input-asymmetry relative group">
+<label class="block nunito-semibold text-[12pt] text-neutral-dark mb-2 ml-1" for="phone">Numéro de téléphone</label>
+<div class="relative flex items-center bg-neutral-input h-h-action rounded-input px-4 transition-all duration-300 border-2 border-transparent group-focus-within:border-emerald-accent">
+<!-- Flag & Code -->
+<div class="flex items-center gap-2 pr-3 border-r border-outline/20">
+<span class="text-xl">🇸🇳</span>
+<span class="nunito-bold text-neutral-dark">+221</span>
+</div>
+<!-- Actual Input -->
+<input autocomplete="tel" class="w-full bg-transparent border-none focus:ring-0 text-lg nunito-bold text-neutral-dark placeholder:text-neutral-grey/40 pl-4" id="phone" placeholder="77 000 00 00" type="tel"/>
+</div>
+</div>
+<!-- CTA Button -->
+<div class="pt-4">
+<button class="w-full h-h-action bg-primary-container text-white comfortaa-bold text-[16px] rounded-button active:scale-95 transition-transform duration-150 flex items-center justify-center gap-2">
+                    Recevoir le code
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600;">arrow_forward</span>
+</button>
+</div>
+<!-- Redirection Link -->
+<div class="text-center pt-2">
+<p class="nunito-regular text-[14px] text-neutral-grey">
+                    Vous avez déjà un compte ? 
+                    <a class="nunito-bold text-orange-accent hover:underline decoration-2 underline-offset-4" href="#">Connectez-vous</a>
+</p>
+</div>
+</div>
+<!-- Decorative Element (Modern African Motif) -->
+<div class="mt-12 opacity-10 pointer-events-none self-end">
+</div>
+</main>
+<!-- Footer / Legal Info -->
+<footer class="pb-10 page-container mt-auto">
+<p class="nunito-regular text-[10pt] text-legal-grey leading-relaxed max-w-xs">
+            En continuant, vous acceptez nos Conditions Générales de Vente et notre Politique de Confidentialité. Baana sécurise vos transactions au Sénégal.
+        </p>
+</footer>
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-5%] left-[-10%] w-80 h-80 bg-orange-accent/5 rounded-full blur-[100px]"></div>
+</div>
+<script>
+        // Micro-interaction for phone formatting
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', (e) => {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+            e.target.value = !x[2] ? x[1] : x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '') + (x[4] ? ' ' + x[4] : '');
+        });
+
+        // Focus focus haptics simulation
+        const button = document.querySelector('button');
+        button.addEventListener('touchstart', () => {
+            if (window.navigator.vibrate) window.navigator.vibrate(10);
+        });
+    </script>
+</body></html>

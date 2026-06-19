@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#d4e7dd",
+                    "surface-container": "#ebefed",
+                    "primary-container": "#10b981",
+                    "on-tertiary-fixed": "#0e1f19",
+                    "on-secondary-container": "#5c2400",
+                    "inverse-on-surface": "#eef1ef",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e0e3e1",
+                    "surface-container-highest": "#e0e3e1",
+                    "tertiary": "#51625b",
+                    "secondary-fixed-dim": "#ffb690",
+                    "outline-variant": "#bbcabf",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f1f4f2",
+                    "secondary": "#9d4300",
+                    "on-tertiary-fixed-variant": "#394a43",
+                    "on-primary-container": "#00422b",
+                    "inverse-surface": "#2d3130",
+                    "primary-fixed-dim": "#4edea3",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7faf8",
+                    "tertiary-fixed-dim": "#b8cbc2",
+                    "primary-fixed": "#6ffbbe",
+                    "on-secondary-fixed-variant": "#783200",
+                    "inverse-primary": "#4edea3",
+                    "error-container": "#ffdad6",
+                    "primary": "#006c49",
+                    "tertiary-container": "#94a79e",
+                    "secondary-container": "#fd761a",
+                    "surface-container-high": "#e6e9e7",
+                    "outline": "#6c7a71",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#3c4a42",
+                    "surface": "#f7faf8",
+                    "secondary-fixed": "#ffdbca",
+                    "surface-tint": "#006c49",
+                    "background": "#f7faf8",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#2c3c36",
+                    "on-primary-fixed-variant": "#005236",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d7dbd9",
+                    "on-surface": "#181c1c",
+                    "on-primary-fixed": "#002113",
+                    "on-secondary-fixed": "#341100",
+                    "on-background": "#181c1c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "24px",
+                    "margin-left": "20px",
+                    "gutter": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "48px",
+                    "margin-right": "28px"
+            },
+            "fontFamily": {
+                    "label-lg": ["Nunito Sans"],
+                    "headline-md": ["Comfortaa"],
+                    "label-md": ["Nunito Sans"],
+                    "headline-xl": ["Comfortaa"],
+                    "body-lg": ["Nunito Sans"],
+                    "headline-lg": ["Comfortaa"],
+                    "body-sm": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #f7faf8;
+        color: #181c1c;
+        margin: 0;
+        padding: 0;
+        width: 390px;
+        height: 884px;
+        overflow: hidden;
+        display: flex;
+        flex-col: column;
+      }
+      .canvas-container {
+        width: 390px;
+        height: 884px;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+                    radial-gradient(circle at bottom right, rgba(253, 118, 26, 0.05) 0%, transparent 40%);
+      }
+      .halo-organic {
+        animation: pulse-organic 4s ease-in-out infinite;
+      }
+      @keyframes pulse-organic {
+        0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+        50% { transform: scale(1.1) rotate(5deg); opacity: 0.3; }
+      }
+      .asym-decoration {
+        position: absolute;
+        pointer-events: none;
+      }
+      .custom-order-num {
+        color: oklch(75% 0.18 55);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .success-icon-fill {
+        font-variation-settings: 'FILL' 1;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md">
+<div class="canvas-container flex flex-col items-center">
+<!-- Decoration Elements -->
+<div class="asym-decoration top-20 -left-6 w-24 h-24 bg-primary-container/10 rounded-full blur-2xl"></div>
+<div class="asym-decoration top-64 -right-10 w-40 h-40 bg-secondary-container/10 rounded-full blur-3xl"></div>
+<div class="asym-decoration bottom-32 -left-8 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+<!-- Abstract Confetti / Shapes (Asymmetric) -->
+<svg class="asym-decoration top-40 left-10 w-8 h-8 opacity-40 rotate-12 text-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2L15 8H21L16 13L18 20L12 16L6 20L8 13L3 8H9L12 2Z"></path>
+</svg>
+<div class="asym-decoration top-80 right-12 w-4 h-4 bg-secondary-container rounded-sm rotate-45 opacity-30"></div>
+<div class="asym-decoration top-[450px] left-6 w-3 h-12 bg-primary-container rounded-full -rotate-12 opacity-20"></div>
+<!-- Progress Header (Not requested explicitly but good for 3/3 context) -->
+<div class="w-full px-margin-left pr-margin-right mt-12 flex justify-between items-center">
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="w-4"></div>
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="w-4"></div>
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+</div>
+<!-- Success Message Center Stack -->
+<div class="flex-1 flex flex-col items-center justify-center px-margin-left pr-margin-right text-center">
+<!-- Success Icon with Halo -->
+<div class="relative mb-8">
+<div class="halo-organic absolute inset-0 bg-primary-container/20 rounded-full scale-150 blur-xl"></div>
+<div class="relative w-24 h-24 bg-primary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl success-icon-fill">check_circle</span>
+</div>
+</div>
+<!-- Headline -->
+<h1 class="font-headline-xl text-[28pt] text-on-surface leading-tight mb-2">
+                Commande confirmée !
+            </h1>
+<!-- Order Number -->
+<p class="font-label-lg text-[16px] custom-order-num mb-10 font-bold tracking-wider">
+                #SDP-78291
+            </p>
+<!-- Compact Summary Section -->
+<div class="w-full space-y-6 pt-4 border-t border-outline-variant/20">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-on-surface-variant text-[13pt]">Articles (3)</span>
+<span class="font-label-lg text-on-surface">45 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-on-surface-variant text-[13pt]">Livraison estimée</span>
+<span class="font-label-lg text-on-surface">24 - 48 Heures</span>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="font-headline-md text-on-surface">Total payé</span>
+<span class="font-headline-md text-primary">47 500 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="w-full px-margin-left pr-margin-right pb-16 space-y-4">
+<button class="w-full h-[52px] bg-primary text-white font-label-lg rounded-[12px] flex items-center justify-center transition-transform active:scale-95">
+                Voir mes commandes
+            </button>
+<button class="w-full h-[52px] border-[1.5px] border-primary text-primary bg-transparent font-label-lg rounded-[12px] flex items-center justify-center transition-transform active:scale-95">
+                Retour à l'accueil
+            </button>
+</div>
+<!-- Bottom Navigation Shell Suppression (As per instruction for Confirmation screens) -->
+</div>
+<script>
+        // Simple micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('touchstart', () => {
+                button.classList.add('opacity-90');
+            });
+            button.addEventListener('touchend', () => {
+                button.classList.remove('opacity-90');
+            });
+        });
+
+        // Add subtle floating animation to decorations
+        const shapes = document.querySelectorAll('.asym-decoration');
+        shapes.forEach((shape, index) => {
+            const delay = index * 500;
+            shape.animate([
+                { transform: 'translateY(0px)' },
+                { transform: 'translateY(-15px)' },
+                { transform: 'translateY(0px)' }
+            ], {
+                duration: 4000 + (index * 1000),
+                delay: delay,
+                iterations: Infinity,
+                easing: 'ease-in-out'
+            });
+        });
+    </script>
+</body></html>

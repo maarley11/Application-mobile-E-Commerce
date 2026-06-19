@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, height=884, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-fixed": "#d4e7dd",
+                "surface-container": "#ebefed",
+                "primary-container": "#10b981",
+                "on-tertiary-fixed": "#0e1f19",
+                "on-secondary-container": "#5c2400",
+                "inverse-on-surface": "#eef1ef",
+                "on-primary": "#ffffff",
+                "surface-variant": "#e0e3e1",
+                "surface-container-highest": "#e0e3e1",
+                "tertiary": "#51625b",
+                "secondary-fixed-dim": "#ffb690",
+                "outline-variant": "#bbcabf",
+                "on-secondary": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "surface-container-low": "#f1f4f2",
+                "secondary": "#9d4300",
+                "on-tertiary-fixed-variant": "#394a43",
+                "on-primary-container": "#00422b",
+                "inverse-surface": "#2d3130",
+                "primary-fixed-dim": "#4edea3",
+                "error": "#ba1a1a",
+                "surface-bright": "#f7faf8",
+                "tertiary-fixed-dim": "#b8cbc2",
+                "primary-fixed": "#6ffbbe",
+                "on-secondary-fixed-variant": "#783200",
+                "inverse-primary": "#4edea3",
+                "error-container": "#ffdad6",
+                "primary": "#006c49",
+                "tertiary-container": "#94a79e",
+                "secondary-container": "#fd761a",
+                "surface-container-high": "#e6e9e7",
+                "outline": "#6c7a71",
+                "on-error-container": "#93000a",
+                "on-surface-variant": "#3c4a42",
+                "surface": "#f7faf8",
+                "secondary-fixed": "#ffdbca",
+                "surface-tint": "#006c49",
+                "background": "#f7faf8",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-container": "#2c3c36",
+                "on-primary-fixed-variant": "#005236",
+                "on-error": "#ffffff",
+                "surface-dim": "#d7dbd9",
+                "on-surface": "#181c1c",
+                "on-primary-fixed": "#002113",
+                "on-secondary-fixed": "#341100",
+                "on-background": "#181c1c"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "stack-md": "24px",
+                "margin-left": "20px",
+                "gutter": "16px",
+                "stack-sm": "8px",
+                "stack-lg": "48px",
+                "margin-right": "28px"
+        },
+        "fontFamily": {
+                "label-lg": ["Nunito Sans"],
+                "headline-md": ["Comfortaa"],
+                "label-md": ["Nunito Sans"],
+                "headline-xl": ["Comfortaa"],
+                "body-lg": ["Nunito Sans"],
+                "headline-lg": ["Comfortaa"],
+                "body-sm": ["Nunito Sans"],
+                "body-md": ["Nunito Sans"]
+        },
+        "fontSize": {
+                "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+        }
+      },
+    },
+  }
+</script>
+<style>
+        body {
+            width: 390px;
+            height: 884px;
+            overflow-x: hidden;
+            background-color: #f7faf8;
+            color: #181c1c;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-step {
+            color: #10b981; /* Primary Emerald */
+        }
+        .stack-lg { margin-bottom: 48px; }
+        .stack-md { margin-bottom: 24px; }
+        .stack-sm { margin-bottom: 8px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col font-body-md">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky bg-background flex justify-between items-center px-margin-left pr-margin-right h-16 z-50">
+<button class="transition-opacity duration-200 hover:opacity-80 flex items-center">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Récapitulatif</h1>
+<div class="flex items-center gap-1 font-label-md text-on-surface-variant">
+<span>1</span>
+<span class="text-[8px] opacity-30">•</span>
+<span class="active-step font-bold">2</span>
+<span class="text-[8px] opacity-30">•</span>
+<span>3</span>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pt-stack-sm pb-32">
+<!-- Section: Adresse de Livraison -->
+<section class="pl-margin-left pr-margin-right stack-lg">
+<div class="flex justify-between items-end stack-sm">
+<h2 class="font-label-lg text-label-lg text-on-surface opacity-80 uppercase tracking-widest">Adresse de livraison</h2>
+<button class="text-secondary-container font-label-md hover:underline transition-all">Modifier</button>
+</div>
+<div class="pt-2">
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                    Villa 12, Mermoz<br/>
+                    Dakar, Sénégal
+                </p>
+<div class="mt-4 h-[1px] w-full bg-outline-variant opacity-20"></div>
+</div>
+</section>
+<!-- Section: Articles -->
+<section class="pl-margin-left pr-margin-right stack-lg">
+<div class="flex justify-between items-center stack-sm">
+<h2 class="font-label-lg text-label-lg text-on-surface opacity-80 uppercase tracking-widest">Articles (3)</h2>
+</div>
+<div class="relative h-28 flex items-center pt-2">
+<!-- Stacked Product Images with Asymmetry -->
+<div class="absolute left-0 z-30 w-20 h-24 rounded-xl overflow-hidden border-2 border-background transform -rotate-3 transition-transform hover:rotate-0">
+<img class="w-full h-full object-cover" data-alt="A luxurious handcrafted Senegalese leather handbag in a rich mahogany color, set against a minimalist architectural background with soft natural sunlight. The image follows a high-end editorial fashion aesthetic with warm, earthy tones and precise craftsmanship details, fitting the Baana luxury brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy9R9_gNnBug8jbswaNuhSvjsQD8hosQdjiOZ4BERUXnoQ_w-mDZvmvoWCZL0LqaLpXAy3t0J-x7zdKmnUsJzvNHkqJT9IW8xJYWCMlzVy6mXxGTm8gqY9AQZ8vzadSvDAtoZFkReSkGWCVm9KIH4RtSWrFCbmgJnYo0byX7qqkIg5rp4MKbfa5HoyNL6C5rS-cW9upYOt4FHFXoh67HyJ3BCzp7cfmW_zd0BF0yU21QDACZ8WZQwlJkITYmpBusbi_YEhbBHeKgTp"/>
+</div>
+<div class="absolute left-10 z-20 w-20 h-24 rounded-xl overflow-hidden border-2 border-background rotate-2 opacity-90">
+<img class="w-full h-full object-cover" data-alt="Modern high-performance running sneakers in a vibrant emerald green and white colorway. The shoes are presented in a clean, minimalist studio setting with soft directional lighting that emphasizes the sleek textures and contemporary design. The mood is energetic yet premium, aligned with a curated Senegalese e-commerce experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn9Ru_wSU6JI56fDVc-MLr_fzZce2_RUABomfKY7DKqxwGXDYdcd7pQRw_QXsUtyXB14X62X32HVdRn7bosxTA1ll3aLFEqxwSI4rtbCrX3p_lPPZHJxg9fJxVTgx3OAeKej9SSkcjEgnt9NxWSYz5MSoCFzINgzrEULG_rDtRgHjVeO70KRqGnsixFp6ix1xH2NBGrGYy2gGYTDwQ1y2-zGJAqQsg__23DXs_ZTxFn1KgLa_vSfZG7eD1Gw8lx45D6BH8dWff_PZj"/>
+</div>
+<div class="absolute left-20 z-10 w-20 h-24 rounded-xl overflow-hidden border-2 border-background -rotate-6 opacity-80">
+<img class="w-full h-full object-cover" data-alt="A luxury white ceramic smartwatch with a minimalist interface, placed on a textured stone surface. The lighting is bright and high-key, creating a clean, modern atmosphere. The aesthetic is sophisticated and silent, highlighting digital craftsmanship and premium quality materials for the discerning Dakar audience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_sxmgyEcqanpGr3UJdqAbO4qTm9Gl5v4UVJMD_Vd02_XuZwqNrJh2s37V7HwbUupym8J3ZpvhM5UqmdtwvT4vSmgvKItaa61fGpykCOz8-k-a4RvNqrOJIraQxseJUQ9kht4OlV9ihEYawmsn18NIdVIjIvQrVM2Pd4ABp7fK57k_AWTlPpKI4JjmdeoSjyKrOOxZHgCLollbWdflq6EOebI2LNE1CtEjg14dStSS8C9Ql_2Q4o-1lbNQ0naryw3AoLUsm9Bv-IPQ"/>
+</div>
+<div class="ml-48">
+<p class="font-body-sm text-on-surface-variant italic">+ Détails panier</p>
+</div>
+</div>
+<div class="mt-4 h-[1px] w-full bg-outline-variant opacity-20"></div>
+</section>
+<!-- Section: Mode de livraison -->
+<section class="pl-margin-left pr-margin-right stack-lg">
+<h2 class="font-label-lg text-label-lg text-on-surface opacity-80 uppercase tracking-widest stack-sm">Mode de livraison</h2>
+<div class="space-y-4 pt-2">
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl border border-primary/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">bolt</span>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Livraison Express</p>
+<p class="font-body-sm text-on-surface-variant">Aujourd'hui avant 18h</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+</div>
+</div>
+<p class="font-body-sm text-on-surface-variant/60 text-right">Frais: 2 500 FCFA</p>
+</div>
+</section>
+<!-- Summary & Action -->
+<section class="px-margin-left pr-margin-right mt-auto">
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Sous-total</span>
+<span class="font-body-md text-on-surface font-semibold">85 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Livraison</span>
+<span class="font-body-md text-on-surface font-semibold">2 500 FCFA</span>
+</div>
+<div class="pt-4 flex justify-between items-center border-t border-outline-variant/20">
+<span class="font-headline-md text-on-surface">Total</span>
+<span class="text-primary font-bold text-[20pt] font-headline-md">87 500 FCFA</span>
+</div>
+</div>
+<button class="w-full h-[52px] bg-primary text-on-primary font-label-lg text-lg rounded-xl flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+                Payer
+                <span class="material-symbols-outlined text-sm">lock</span>
+</button>
+<p class="text-center text-on-surface-variant/40 font-label-md mt-4 pb-8 uppercase tracking-widest">Paiement sécurisé par BaanaPay</p>
+</section>
+</main>
+<!-- Bottom Nav Bar (Simulated active shell) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 bg-surface-container-lowest z-50 rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-transform hover:text-primary">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Accueil</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-transform hover:text-primary">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Boutique</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="font-label-md text-label-md">Panier</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-transform hover:text-primary">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profil</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction: Subtle parallax/tilt for product stack on scroll
+        const scrollContainer = document.querySelector('main');
+        const images = document.querySelectorAll('.relative.h-28 > div');
+        
+        scrollContainer.addEventListener('scroll', () => {
+            const scrollY = scrollContainer.scrollTop;
+            images.forEach((img, index) => {
+                const factor = (index + 1) * 0.05;
+                img.style.transform = `translateY(${scrollY * factor}px) rotate(${(index % 2 === 0 ? -1 : 1) * 3}deg)`;
+            });
+        });
+    </script>
+</body></html>

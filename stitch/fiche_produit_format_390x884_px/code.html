@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, height=884, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#4edea3",
+                    "primary": "#006c49",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#394a43",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#51625b",
+                    "surface-container-high": "#e6e9e7",
+                    "surface-dim": "#d7dbd9",
+                    "error": "#ba1a1a",
+                    "surface": "#f7faf8",
+                    "surface-variant": "#e0e3e1",
+                    "on-tertiary-fixed": "#0e1f19",
+                    "on-background": "#181c1c",
+                    "surface-container-low": "#f1f4f2",
+                    "tertiary-fixed-dim": "#b8cbc2",
+                    "secondary": "#9d4300",
+                    "outline": "#6c7a71",
+                    "surface-bright": "#f7faf8",
+                    "on-secondary-fixed-variant": "#783200",
+                    "secondary-container": "#fd761a",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#ebefed",
+                    "surface-container-highest": "#e0e3e1",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#002113",
+                    "primary-fixed": "#6ffbbe",
+                    "outline-variant": "#bbcabf",
+                    "primary-container": "#10b981",
+                    "on-tertiary-container": "#2c3c36",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#4edea3",
+                    "on-surface-variant": "#3c4a42",
+                    "on-primary-container": "#00422b",
+                    "surface-tint": "#006c49",
+                    "on-surface": "#181c1c",
+                    "background": "#f7faf8",
+                    "on-secondary-fixed": "#341100",
+                    "tertiary-container": "#94a79e",
+                    "on-primary-fixed-variant": "#005236",
+                    "inverse-on-surface": "#eef1ef",
+                    "secondary-fixed": "#ffdbca",
+                    "on-secondary-container": "#5c2400",
+                    "tertiary-fixed": "#d4e7dd",
+                    "inverse-surface": "#2d3130",
+                    "secondary-fixed-dim": "#ffb690",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "gutter": "16px",
+                    "stack-lg": "48px",
+                    "margin-right": "28px",
+                    "stack-md": "24px",
+                    "margin-left": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Nunito Sans"],
+                    "headline-xl": ["Comfortaa"],
+                    "body-sm": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "label-md": ["Nunito Sans"],
+                    "label-lg": ["Nunito Sans"],
+                    "headline-md": ["Comfortaa"],
+                    "headline-lg": ["Comfortaa"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            width: 390px;
+            height: 884px;
+            margin: 0 auto;
+            background-color: #f7faf8;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .emerald-price {
+            color: oklch(72% 0.17 160);
+        }
+        .orange-badge {
+            background-color: oklch(94% 0.03 55);
+            color: oklch(45% 0.18 55);
+        }
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+        }
+        .quantity-bg {
+            background-color: oklch(95% 0.008 160);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface">
+<!-- Hero Image Section -->
+<section class="relative w-full h-[354px]">
+<div class="absolute inset-0 z-0">
+<img alt="Cosmétique Naturel Sénégalais" class="w-full h-full object-cover rounded-b-[24px]" data-alt="A high-end, premium photograph of a handcrafted artisanal skincare bottle made in Senegal, resting on a textured organic stone. The bottle features elegant gold leaf detailing and a minimalist label, surrounded by vibrant local hibiscus flowers and deep green palm leaves. The lighting is warm and golden, reflecting a luxury Dakar lifestyle aesthetic with soft focus on the tropical background. The overall mood is sophisticated, radiant, and culturally rich." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANE7k7xqwwvZ4smTKs7pCAs71I--0FSpj7e15bHAq5yUCxdD3lykUs1RfksOmu5yD6XRWuy5oLH01MRdxc_6_grCYAIU6lXCXOXK6tCBVi5w7h4k96cfQLgJAmx4fW5Y8n2_WLC8uX2ryuCjIIX3qgDAoMvqdWnqXpdpZ2-WIfyti7SseIUt3K_0eNExUyFX9ftktoHimKHwKOgKODVmIyzUP264NQZwmiSX3i9i23zy0wfej6U-M8srBI5KRiv328_pHbskO600f_"/>
+</div>
+<!-- Overlays -->
+<div class="absolute top-0 left-0 w-full flex justify-between items-start px-5 pt-8 z-10">
+<button class="w-10 h-10 rounded-full glass-btn flex items-center justify-center text-on-surface active:scale-95 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-btn flex items-center justify-center text-error active:scale-95 transition-transform" onclick="this.querySelector('span').classList.toggle('fill-icon')">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</section>
+<!-- Content Area -->
+<main class="mt-6 px-[20px] pr-[28px] pb-32">
+<!-- Product Identity -->
+<div class="flex flex-col gap-2">
+<h1 class="font-headline-lg text-[22px] text-on-surface leading-tight">
+                Élixir de Beauté "Ndakaru" aux Graines de Baobab
+            </h1>
+<div class="flex items-baseline gap-3">
+<span class="font-headline-xl text-[28px] emerald-price">18.500 FCFA</span>
+<span class="font-body-md text-outline line-through">22.000 FCFA</span>
+</div>
+<div class="inline-flex">
+<span class="orange-badge px-3 py-1 rounded-full font-label-lg text-[12px]">
+                    ÉCONOMISEZ 3.500 FCFA
+                </span>
+</div>
+</div>
+<!-- Stock Status -->
+<div class="mt-6">
+<p class="font-body-sm text-primary-container font-semibold flex items-center gap-1">
+                En stock <span class="material-symbols-outlined text-[16px]">check_circle</span>
+</p>
+</div>
+<!-- Description -->
+<div class="mt-4">
+<p class="font-body-sm text-on-surface-variant leading-relaxed opacity-90">
+                Une huile précieuse pressée à froid, issue du commerce équitable au Sénégal. Riche en vitamines A, D, E et F pour une peau rayonnante et profondément nourrie.
+            </p>
+</div>
+<!-- Quantity Selector -->
+<div class="mt-8">
+<label class="font-label-lg text-outline uppercase tracking-wider block mb-3">Quantité</label>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-5 quantity-bg px-2 py-2 rounded-xl">
+<button class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform" id="minus">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="font-headline-md text-[18px] w-4 text-center" id="qty">1</span>
+<button class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform" id="plus">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Specs (Modern Minimalist Grid) -->
+<div class="mt-8 grid grid-cols-2 gap-4">
+<div class="border-[1px] border-outline-variant/30 p-4 rounded-xl">
+<span class="material-symbols-outlined text-primary mb-2">eco</span>
+<p class="font-label-md text-outline">Ingrédients</p>
+<p class="font-body-sm font-bold">100% Naturel</p>
+</div>
+<div class="border-[1px] border-outline-variant/30 p-4 rounded-xl">
+<span class="material-symbols-outlined text-primary mb-2">local_shipping</span>
+<p class="font-label-md text-outline">Livraison</p>
+<p class="font-body-sm font-bold">24h à Dakar</p>
+</div>
+</div>
+</main>
+<!-- Sticky Footer Action -->
+<div class="fixed bottom-0 left-0 w-full px-5 pb-8 pt-4 bg-white/80 backdrop-blur-md z-40">
+<button class="w-full h-[52px] bg-primary text-on-primary rounded-[12px] font-body-lg font-bold flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">shopping_bag</span>
+            Ajouter au panier — 18.500 FCFA
+        </button>
+</div>
+<script>
+        // Micro-interactions for Quantity
+        const qtySpan = document.getElementById('qty');
+        const plusBtn = document.getElementById('plus');
+        const minusBtn = document.getElementById('minus');
+        let count = 1;
+
+        plusBtn.addEventListener('click', () => {
+            count++;
+            qtySpan.innerText = count;
+            // Visual feedback
+            qtySpan.classList.add('scale-110', 'text-primary');
+            setTimeout(() => {
+                qtySpan.classList.remove('scale-110', 'text-primary');
+            }, 100);
+        });
+
+        minusBtn.addEventListener('click', () => {
+            if (count > 1) {
+                count--;
+                qtySpan.innerText = count;
+                qtySpan.classList.add('scale-90', 'text-secondary');
+                setTimeout(() => {
+                    qtySpan.classList.remove('scale-90', 'text-secondary');
+                }, 100);
+            }
+        });
+
+        // Add subtle parallax-like effect on scroll for the image
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            const img = document.querySelector('img');
+            if (scroll < 400) {
+                img.style.transform = `translateY(${scroll * 0.2}px) scale(${1 + scroll * 0.0002})`;
+            }
+        });
+    </script>
+</body></html>

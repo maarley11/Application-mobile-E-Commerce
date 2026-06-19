@@ -1,0 +1,188 @@
+<!DOCTYPE html><html class="light" lang="fr" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Baana Onboarding - Bienvenue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#394a43",
+                    "surface-bright": "#f7faf8",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#783200",
+                    "surface-container": "#ebefed",
+                    "outline": "#6c7a71",
+                    "on-tertiary-fixed": "#0e1f19",
+                    "inverse-surface": "#2d3130",
+                    "surface-dim": "#d7dbd9",
+                    "on-tertiary-container": "#2c3c36",
+                    "on-primary-fixed-variant": "#005236",
+                    "on-surface-variant": "#3c4a42",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#94a79e",
+                    "surface": "#f7faf8",
+                    "tertiary": "#51625b",
+                    "primary": "#006c49",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#006c49",
+                    "tertiary-fixed": "#d4e7dd",
+                    "on-surface": "#181c1c",
+                    "primary-container": "#10b981",
+                    "inverse-on-surface": "#eef1ef",
+                    "outline-variant": "#bbcabf",
+                    "surface-container-low": "#f1f4f2",
+                    "on-background": "#181c1c",
+                    "surface-container-highest": "#e0e3e1",
+                    "surface-container-high": "#e6e9e7",
+                    "background": "#f7faf8",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#5c2400",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#6ffbbe",
+                    "secondary": "#9d4300",
+                    "inverse-primary": "#4edea3",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e0e3e1",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#ffb690",
+                    "secondary-fixed": "#ffdbca",
+                    "tertiary-fixed-dim": "#b8cbc2",
+                    "on-primary-container": "#00422b",
+                    "on-primary-fixed": "#002113",
+                    "secondary-container": "#fd761a",
+                    "primary-fixed-dim": "#4edea3",
+                    "on-secondary-fixed": "#341100"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "margin-right": "28px",
+                    "margin-left": "20px",
+                    "stack-md": "24px",
+                    "gutter": "16px",
+                    "stack-lg": "48px"
+            },
+            "fontFamily": {
+                    "label-lg": ["Nunito Sans"],
+                    "label-md": ["Nunito Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "body-sm": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "headline-lg": ["Comfortaa"],
+                    "headline-md": ["Comfortaa"],
+                    "headline-xl": ["Comfortaa"]
+            },
+            "fontSize": {
+                    "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7faf8;
+            overflow: hidden;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .asymmetric-canvas {
+            padding-left: 20px;
+            padding-right: 28px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface bg-background min-h-screen pb-[48px] flex-col w-[390px] mx-auto relative h-[884px]" style="width: 390px; height: 884px; min-height: 884px;">
+<!-- Top Bar Navigation -->
+<nav class="w-full flex justify-end px-margin-right pt-8 pb-4"><button class="font-label-lg text-label-lg active:scale-95 transition-transform" style="color: oklch(0.55 0.02 160);">
+            Passer
+        </button></nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-gutter space-y-stack-lg">
+<!-- Illustration Container with Controlled Asymmetry -->
+<div class="relative w-full max-w-[280px] aspect-square flex items-center justify-center z-10 mb-0">
+<!-- Decorative circle behind -->
+<div class="absolute w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+<img alt="Illustration modern e-commerce logistics" class="w-full h-auto object-contain z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1EbN1d-aSX6xqe083ru1Dlz6E4R2XTeLCCzDY15Rxgjl91XJ5g2ukkK87B1kAImpKc_81H8fvs4eNy0oDzz6Wi5oyEPBBPqNHsJVb083i3fbTRlduPcuumX7RR0zzNX-RAUOSCrZDjPNPRL3bVAK4NDvHmJ-sRJVwi0XakHA_NzoafNMKb_DDkfNXCswOGL0970N5h4uh0848rX9XP_Le-vp2_LFx9ZbAkvNyHJZYbamYo52rn5qBjP6o-5kAXo80dcYjuPHKkxks" style="opacity: 1; transform: translateX(0px); transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1);">
+</div>
+<!-- Typography Section -->
+<div class="w-full text-center z-10">
+<h1 class="font-headline-xl text-headline-xl text-on-surface leading-tight mb-4 mx-auto">
+                Achetez en gros, payez moins
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[280px] mx-auto">
+                Accédez aux prix de gros réservés aux membres Pro
+            </p>
+</div>
+</main>
+<!-- Bottom Actions and Pagination -->
+<footer class="w-full pt-stack-md px-margin-left pr-margin-right flex flex-col items-center pb-8">
+<!-- Pagination Dots -->
+<div class="flex gap-2 mb-6">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-6 h-2 rounded-full bg-secondary-container"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<!-- Action Button -->
+<button class="w-full h-[52px] bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-xl flex items-center justify-center active:scale-[0.98] transition-all hover:opacity-90">
+            Suivant
+        </button>
+</footer>
+<!-- Background Atmospheric Effect -->
+<div class="absolute -bottom-20 -left-20 w-64 h-64 bg-secondary/5 rounded-full blur-[80px] pointer-events-none"></div>
+<script>
+        // Micro-interaction for the illustration on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const img = document.querySelector('img');
+            img.style.opacity = '0';
+            img.style.transform = 'translateX(50px)';
+            
+            setTimeout(() => {
+                img.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+                img.style.opacity = '1';
+                img.style.transform = 'translateX(0)';
+            }, 100);
+        });
+
+        // Simple button active state visual feedback
+        const mainBtn = document.querySelector('button.bg-primary-container');
+        mainBtn.addEventListener('click', function() {
+            this.classList.add('opacity-90');
+            setTimeout(() => this.classList.remove('opacity-90'), 200);
+        });
+    </script>
+
+
+
+
+
+
+
+
+</body></html>

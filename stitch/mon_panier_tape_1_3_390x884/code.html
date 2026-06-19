@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mon Panier - Baana</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #f7faf8; /* Tinted Emerald Background */
+            color: #181c1c;
+            font-family: 'Nunito Sans', sans-serif;
+            width: 390px;
+            height: 844px;
+            margin: 0 auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Brutalist Hierarchy & Custom Spacing */
+        .headline-accent {
+            font-family: 'Comfortaa', cursive;
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Micro-interactions */
+        .tap-active:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#006c49", /* Deep Emerald */
+                        "primary-container": "#10b981", /* Bright Emerald */
+                        "on-primary-container": "#00422b",
+                        "surface": "#f7faf8",
+                        "on-surface": "#181c1c",
+                        "on-surface-variant": "#3c4a42",
+                        "outline-variant": "#bbcabf",
+                        "background": "#f7faf8",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    spacing: {
+                        "margin-left": "20px",
+                        "margin-right": "28px",
+                        "stack-lg": "48px",
+                        "stack-md": "24px",
+                        "stack-sm": "8px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Comfortaa"],
+                        "body-md": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background">
+<!-- Top Navigation Anchor (As per Shared Components JSON) -->
+<header class="w-full top-0 sticky z-40 bg-background flex justify-between items-center px-margin-left pr-margin-right h-16">
+<button class="text-primary hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<span class="font-headline-xl text-headline-xl text-primary headline-accent">Baana</span>
+<button class="text-primary hover:opacity-80 transition-opacity duration-200 relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-secondary-container rounded-full"></span>
+</button>
+</header>
+<main class="pb-40">
+<!-- Header Section -->
+<section class="mt-stack-sm px-margin-left pr-margin-right flex justify-between items-baseline">
+<h1 class="font-headline-lg text-[24pt] text-on-surface headline-accent">Mon Panier</h1>
+<div class="flex gap-2 items-center">
+<span class="text-primary-container font-bold text-label-md">1</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-outline-variant font-bold text-label-md">2</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-outline-variant font-bold text-label-md">3</span>
+</div>
+</section>
+<!-- Promotion Badge -->
+<section class="mt-6 px-margin-left pr-margin-right">
+<div class="bg-[#ebf7f1] py-3 px-4 rounded-xl flex items-center gap-3">
+<span class="text-xl">🎉</span>
+<p class="text-on-primary-container font-semibold text-body-sm">Livraison gratuite cette semaine</p>
+</div>
+</section>
+<!-- Cart Items List (Asymmetric: Aligned Left) -->
+<section class="mt-stack-lg pl-margin-left">
+<div class="flex flex-col">
+<!-- Item 1 -->
+<div class="flex gap-4 py-6 border-b border-outline-variant/30 pr-margin-right">
+<div class="w-24 h-24 flex-shrink-0 bg-surface-container rounded-[8px] overflow-hidden">
+<img alt="Traditional Senegalese Fabric" class="w-full h-full object-cover" data-alt="A close-up shot of vibrant, authentic Senegalese wax print fabric with intricate geometric patterns in emerald green and sun-kissed yellow. The lighting is natural and bright, highlighting the rich textile texture. The aesthetic is modern-traditional, high-end e-commerce photography for a luxury boutique in Dakar. Minimalist background in soft off-white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnbE1PHHfIg6pixDQwUrDbL2X4IO_u91RZOXhNGc3bMJmy1QsfanOXKLugHzQJ4ZbmqOO19GWVT_bWetCFTfFHulMqlLYJfThPCBKadWusxP-yGaK-FtO59ALIy4uqar7p6_hjkSZ1p8zwSS837zeG1_CNaJ6zx9nWJjNZ-s9BDifj8p94mH6V07cHeVymhdUc4_FNyylyP0ixSAVhUP_YA4UdPPn3RVGAaSZdJCQxd53hvoORss-_C0_rPiHAecyF87kHkgklxg0-"/>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-[13pt] font-semibold text-on-surface leading-tight">Tissu Wax "Éclat Royal"</h3>
+<p class="text-[11pt] text-on-surface-variant font-normal">Vert Émeraude • 5m</p>
+</div>
+<button class="text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="mt-auto flex justify-between items-center">
+<span class="text-primary-container font-bold text-body-md">25.000 FCFA</span>
+<div class="flex items-center bg-surface-container-low rounded-lg px-2 py-1 gap-4">
+<button class="w-6 h-6 flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="text-sm font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4 py-6 border-b border-outline-variant/30 pr-margin-right">
+<div class="w-24 h-24 flex-shrink-0 bg-surface-container rounded-[8px] overflow-hidden">
+<img alt="Handmade Clay Vessel" class="w-full h-full object-cover" data-alt="A studio photograph of a handcrafted, minimalist ceramic vessel with a matte terracotta finish and subtle emerald-tinted glaze accents. The lighting is soft and directional, creating gentle shadows that emphasize the artisanal silhouette. Set against a clean, luxury light-mode background. The mood is serene and sophisticated, representing high-end African digital craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvSioEvn27uP71qvKoTdZojRYdcZ1OpvBxcmqx3h7-504XLv3DutHfCXb1MV1zecbhhW90E_NVSLBu-PIdMIqVa4Mh9SAeovy0XeGNSk3gijJ7P_CEi6QISp_LHgRWxDvNLAnDn-YpoqMGVzuLEkuH25dNSj3hK6MvZYpftrUNBD291ghk8DWYLTOMQCOSejxW_2RL0gdjDrYJveOXIRd1DAD3wTmsY5lqglGfcaCVwj1JIg1cGW6z7BkjJAX6LJ-xjaZqRARfoE-t"/>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-[13pt] font-semibold text-on-surface leading-tight">Vase Artisanal de Gorée</h3>
+<p class="text-[11pt] text-on-surface-variant font-normal">Terre Cuite • Moyen</p>
+</div>
+<button class="text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="mt-auto flex justify-between items-center">
+<span class="text-primary-container font-bold text-body-md">20.000 FCFA</span>
+<div class="flex items-center bg-surface-container-low rounded-lg px-2 py-1 gap-4">
+<button class="w-6 h-6 flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="text-sm font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Summary Section (Asymmetric: Aligned Right) -->
+<section class="mt-stack-lg px-margin-right text-right flex flex-col items-end">
+<div class="space-y-2 w-full max-w-[200px]">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant text-body-sm">Sous-total</span>
+<span class="text-on-surface font-semibold">45.000 FCFA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant text-body-sm">Livraison</span>
+<span class="text-primary-container font-bold">Gratuite</span>
+</div>
+<div class="pt-4 mt-2 border-t border-outline-variant/20 flex justify-between items-baseline">
+<span class="text-on-surface font-bold text-body-md">Total</span>
+<span class="text-[20pt] font-bold text-on-surface">45.000 FCFA</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar (Fixed) -->
+<footer class="fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-md px-margin-left pr-margin-right pt-6 pb-8 z-50">
+<button class="w-full h-[52px] bg-primary text-white rounded-[12px] font-bold text-body-lg tap-active flex items-center justify-center gap-3 transition-all">
+            Commander — 45.000 FCFA
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full mt-4 text-primary-container font-semibold text-center text-body-sm hover:underline">
+            Continuer mes achats
+        </button>
+</footer>
+<!-- Bottom Navigation Component (Suppressing for Transactional Page but providing structure as requested in hierarchy) -->
+<!-- Note: Following the "Destination Rule", the BottomNavBar is hidden here to prioritize the checkout flow. -->
+<script>
+        // Micro-interaction for quantity selectors
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            if (icon.textContent === 'add' || icon.textContent === 'remove') {
+                icon.parentElement.addEventListener('click', function() {
+                    const span = this.parentElement.querySelector('span:not(.material-symbols-outlined)');
+                    let val = parseInt(span.textContent);
+                    if (icon.textContent === 'add') val++;
+                    else if (icon.textContent === 'remove' && val > 1) val--;
+                    span.textContent = val;
+                });
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html><html class="light" lang="fr" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Baana - Centre de Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d7dbd9",
+                    "background": "#f7faf8",
+                    "error-container": "#ffdad6",
+                    "error-light": "oklch(94% 0.03 25)",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "surface-bright": "#f7faf8",
+                    "surface": "#f7faf8",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#3c4a42",
+                    "on-tertiary-fixed": "#341100",
+                    "surface-tint": "#006c49",
+                    "tertiary": "#9d4300",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bbcabf",
+                    "inverse-surface": "#2d3130",
+                    "primary-container": "#10b981",
+                    "on-background": "#181c1c",
+                    "primary-fixed": "#6ffbbe",
+                    "on-tertiary-container": "#622700",
+                    "on-primary-container": "#00422b",
+                    "on-primary-fixed-variant": "#005236",
+                    "tertiary-fixed": "#ffdbca",
+                    "on-secondary": "#ffffff",
+                    "text-secondary": "#6B7D75",
+                    "warning-light": "oklch(94% 0.03 55)",
+                    "on-secondary-fixed-variant": "#6b3b00",
+                    "inverse-on-surface": "#eef1ef",
+                    "border-muted": "#D4DDD8",
+                    "info-warm": "#3B9EC4",
+                    "primary-fixed-dim": "#4edea3",
+                    "quasi-black": "#2C3E36",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "outline": "#6c7a71",
+                    "success-light": "oklch(92% 0.04 160)",
+                    "error-warm": "#E05252",
+                    "primary": "#006c49",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e6e9e7",
+                    "surface-container": "#ebefed",
+                    "on-tertiary": "#ffffff",
+                    "surface-input": "#EDF2EF",
+                    "surface-container-low": "#f1f4f2",
+                    "on-secondary-container": "#744000",
+                    "secondary": "#8c4f00",
+                    "on-secondary-fixed": "#2d1600",
+                    "tertiary-container": "#ff7e2d",
+                    "surface-variant": "#e0e3e1",
+                    "surface-container-highest": "#e0e3e1",
+                    "on-primary-fixed": "#002113",
+                    "secondary-fixed-dim": "#ffb875",
+                    "secondary-fixed": "#ffdcc0",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#4edea3",
+                    "error": "#ba1a1a",
+                    "on-surface": "#181c1c",
+                    "secondary-container": "#ffac5b",
+                    "cta-orange": "#F97316"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "element-gap": "24px",
+                    "gutter-h": "12px",
+                    "section-gap": "32px",
+                    "stack-sm": "8px",
+                    "margin-right": "28px",
+                    "margin-left": "20px",
+                    "gutter-v": "16px"
+            },
+            "fontFamily": {
+                    "price-display": ["Comfortaa"],
+                    "body-reg": ["Nunito"],
+                    "headline-lg": ["Comfortaa"],
+                    "caption": ["Nunito"],
+                    "body-bold": ["Nunito"],
+                    "subtitle": ["Nunito"],
+                    "label-caps": ["Nunito"],
+                    "button-text": ["Comfortaa"],
+                    "headline-md": ["Comfortaa"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .eclat-solaire-bg {
+            background: radial-gradient(circle at 100% 0%, #ffdbca 0%, transparent 40%),
+                        radial-gradient(circle at 0% 100%, #e0f2f1 0%, transparent 50%),
+                        #f7faf8;
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .fluid-card {
+            border-radius: 24px 60px 24px 60px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fluid-card:active {
+            transform: scale(0.98);
+        }
+
+        .promo-badge {
+            transform: rotate(-3deg);
+        }
+
+        .sun-pattern {
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l2.5 15h15l-12.5 10 5 15-10-7.5-10 7.5 5-15L0 15h15z' fill='%23006c49' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-reg antialiased min-h-screen">
+<div class="eclat-solaire-bg"></div>
+<div class="fixed inset-0 sun-pattern pointer-events-none"></div>
+<header class="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-muted">
+<div class="flex justify-between items-center w-full pl-[20px] pr-[28px] py-4">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Notifications</h1>
+</div>
+<button class="font-button-text text-button-text text-primary hover:opacity-80 transition-opacity">
+                Tout marquer comme lu
+            </button>
+</div>
+</header>
+<main class="relative z-10 pl-[20px] pr-[28px] py-8 pb-32">
+<section class="space-y-6">
+<div class="fluid-card bg-cta-orange p-6 text-white relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-white/20 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: &quot;FILL&quot; 1;">priority_high</span>
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest opacity-90">Urgent</span>
+<h3 class="font-subtitle text-subtitle">Alerte de Paiement</h3>
+</div>
+</div>
+<span class="font-caption text-caption opacity-80">Il y a 2 min</span>
+</div>
+<p class="font-body-bold text-body-bold mb-4">Échec de la transaction pour la commande #BA-8829. Veuillez mettre à jour vos informations de paiement.</p>
+<button class="w-full h-[52px] bg-white text-cta-orange font-button-text text-button-text rounded-xl active:scale-95 transition-all">
+                    Résoudre maintenant
+                </button>
+</div>
+<div class="relative py-4">
+<div class="promo-badge absolute -top-2 -right-2 z-20 bg-cta-orange px-4 py-1 rounded-[6px] text-white font-label-caps text-label-caps shadow-sm">
+                    Offre Spéciale
+                </div>
+<div class="fluid-card bg-surface-container-lowest border-2 border-primary/10 p-6 flex gap-4 items-center">
+<div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium selection of organic Senegalese tropical fruits including mangoes and hibiscus flowers arranged artfully on a hand-woven reed mat. The lighting is warm and golden, reflecting a modern African aesthetic with vibrant greens and rich oranges. The background is a soft-focus emerald-tinted neutral tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlA6_cqY6LU8Dmh1eAw5P4u1UAi_69UgDaX5QtA5TVbqrKTnRG61zGjL8w23WS3rSKUvfYO-g0nbiJDq9sC033ngsuBRdLOat0LErULCBZXuYkzooNkOh2OrnExQ5Xgm_R69d_VHa8U9ErYRbr2WIGcMXoCK9KO4pRuhePDikcOjOVC7MJKd1vb-H8VVXldMsf9F-BMOqXwWdl_vNPwJrvhiqbjHxor06AeiBqBsfzf4jjAr6RWNOmsR7OIRIY1tHzMywvyrHmuFo">
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-subtitle text-subtitle text-primary">Réduction Exclusive !</h3>
+<span class="font-caption text-caption text-text-secondary">10:45</span>
+</div>
+<p class="font-body-reg text-body-reg text-on-surface-variant mt-1">Profitez de -20% sur tout le catalogue Fruits &amp; Légumes jusqu'à ce soir.</p>
+<div class="mt-3 flex gap-2">
+<span class="bg-success-light text-primary px-3 py-1 rounded-full font-label-caps text-label-caps uppercase">Actif</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fluid-card bg-white p-6 border border-border-muted hover:border-primary/30 transition-colors" style="transform: translateY(0px);">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">local_shipping</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h3 class="font-subtitle text-subtitle">Commande Livrée</h3>
+<span class="font-caption text-caption text-text-secondary">Hier</span>
+</div>
+<p class="font-body-reg text-body-reg text-on-surface-variant mt-1">Votre commande #BA-8764 a été livrée avec succès à votre point de relais à Dakar.</p>
+<div class="mt-4 flex items-center gap-2 text-primary font-body-bold text-body-bold">
+<span class="">Détails du colis</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fluid-card bg-white p-6 border border-border-muted opacity-75">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h3 class="font-subtitle text-subtitle">Paiement Confirmé</h3>
+<span class="font-caption text-caption text-text-secondary">2 jours</span>
+</div>
+<p class="font-body-reg text-body-reg text-on-surface-variant mt-1">Nous avons reçu votre règlement de 45,000 CFA pour l'abonnement Premium Mensuel.</p>
+</div>
+</div>
+</div>
+<div class="pt-10 flex flex-col items-center">
+<div class="w-32 h-32 rounded-full bg-surface-variant/30 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-surface-dim text-5xl">notifications_off</span>
+</div>
+<p class="font-body-reg text-body-reg text-text-secondary text-center max-w-[240px]">Vous avez vu toutes vos notifications récentes.</p>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 h-[64px] bg-surface-container z-50 rounded-t-2xl border-t border-muted">
+<a class="flex flex-col items-center justify-center text-text-secondary px-4 py-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary px-4 py-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-caps text-label-caps mt-1">Catalogue</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1.5 transition-transform active:scale-95" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">notifications</span><span class="font-label-caps text-label-caps">Alertes</span></a>
+<a class="flex flex-col items-center justify-center text-text-secondary px-4 py-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profil</span>
+</a>
+</nav>
+<script>
+        document.querySelectorAll('.fluid-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+
+
+</body></html>
