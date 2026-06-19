@@ -21,7 +21,9 @@ exports.getProDashboard = async (req, res) => {
     });
 
     const totalOrders = parseInt(orderStats.totalOrders, 10) || 0;
-    const totalSpent = parseInt(orderStats.totalSpent, 10) || 0;
+    // ✅ FIX Bug #5 : parseFloat au lieu de parseInt pour conserver les décimales
+    // Les montants financiers (CFA) peuvent avoir des centimes
+    const totalSpent = parseFloat(orderStats.totalSpent) || 0;
 
     // KPI 3 : savings (Économies réalisées)
     // On calcule la différence entre le prix public et le prix unitaire payé (qui était le prix pro)
@@ -50,7 +52,8 @@ exports.getProDashboard = async (req, res) => {
       raw: true
     });
 
-    const savings = parseInt(savingsResult.totalSavings, 10) || 0;
+    // ✅ FIX Bug #5 : parseFloat pour les économies également
+    const savings = parseFloat(savingsResult.totalSavings) || 0;
 
     // KPI 4 : freeDeliveriesLeft
     // Calcul des commandes passées cette semaine
@@ -69,11 +72,16 @@ exports.getProDashboard = async (req, res) => {
 
     const freeDeliveriesLeft = Math.max(0, 3 - ordersThisWeek);
 
+    // ✅ FIX Bug #7 : Ajout des loyaltyPoints (attendu par le Flutter DashboardProvider)
+    // Règle métier : 1 point par commande complétée
+    const loyaltyPoints = totalOrders;
+
     return res.status(200).json({
       totalOrders,
       totalSpent,
       savings,
-      freeDeliveriesLeft
+      freeDeliveriesLeft,
+      loyaltyPoints
     });
 
   } catch (error) {
