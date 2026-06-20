@@ -45,4 +45,10 @@ router.patch(
   orderController.updateOrderStatus
 );
 
+// GET /api/orders → Historique de l'utilisateur connecté
+router.get('/', authMiddleware, orderController.getUserOrders);
+
+// GET /api/orders/:id → Détails et suivi de commande
+router.get('/:id', authMiddleware, orderController.getOrderById);
+
 module.exports = router;

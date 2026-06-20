@@ -21,6 +21,14 @@ const Product = sequelize.define('Product', {
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
+  imageUrl: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  badge: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = Product;

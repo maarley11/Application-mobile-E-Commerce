@@ -39,6 +39,7 @@ module.exports = {
   Category,
   Product,
   Order,
+  OrderItem,
   Subscription,
   Notification,
 };
