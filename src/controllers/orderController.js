@@ -144,7 +144,52 @@ exports.updateOrderStatus = async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Erreur updateOrderStatus:', error);
     return res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
+
+// GET /api/orders
+// Historique des commandes de l'utilisateur
+exports.getUserOrders = async (req, res) => {
+  try {
+    const orders = await Order.findAll({
+      where: { userId: req.user.userId },
+      include: [
+        {
+          model: OrderItem,
+          include: [{ model: Product, attributes: ['name', 'imageUrl'] }]
+        }
+      ],
+      order: [['createdAt', 'DESC']]
+    });
+    return res.status(200).json(orders);
+  } catch (error) {
+    console.error('Erreur getUserOrders:', error);
+    return res.status(500).json({ message: 'Erreur serveur lors de la récupération de l\'historique.' });
+  }
+};
+
+// GET /api/orders/:id
+// Suivi détaillé d'une commande spécifique
+exports.getOrderById = async (req, res) => {
+  try {
+    const order = await Order.findOne({
+      where: { id: req.params.id, userId: req.user.userId },
+      include: [
+        {
+          model: OrderItem,
+          include: [{ model: Product, attributes: ['name', 'imageUrl', 'publicPrice', 'proPrice'] }]
+        }
+      ]
+    });
+
+    if (!order) {
+      return res.status(404).json({ message: 'Commande introuvable ou accès refusé.' });
+    }
+
+    return res.status(200).json(order);
+  } catch (error) {
+    console.error('Erreur getOrderById:', error);
+    return res.status(500).json({ message: 'Erreur serveur lors de la récupération de la commande.' });
   }
 };

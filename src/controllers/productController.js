@@ -11,7 +11,7 @@ exports.getProducts = async (req, res) => {
 
     // 1. Recherche Full-Text (dans name ou description)
     if (search) {
-      const likeOp = Op.iLike; // iLike = insensible à la casse (PostgreSQL)
+      const likeOp = Op.iLike; // iLike = insensible à la casse dans PostgreSQL
       where[Op.or] = [
         { name: { [likeOp]: `%${search}%` } },
         { description: { [likeOp]: `%${search}%` } },
