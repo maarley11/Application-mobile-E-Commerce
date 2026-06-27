@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class BaanaColors {
   // Primaire & Accents
-  static const Color primary = Color(0xFF10B981); // Vert Émeraude
+  static const Color primary = Color(0xFF006C49); // Vert Émeraude Profond (Header, Tout, +)
+  static const Color primaryLight = Color(0xFF10B981); // Vert Émeraude Clair (primary-container)
   static const Color accent = Color(0xFFF0A050); // Orange Baana
   static const Color cta = Color(0xFFF97316); // Orange CTA fort
 
@@ -16,7 +17,7 @@ class BaanaColors {
   // Couleurs fonctionnelles
   static const Color error = Color(0xFFE05252); // Rouge teinté
   static const Color info = Color(0xFF3B9EC4); // Bleu teinté
-  static const Color success = Color(0xFF10B981); // Vert (identique à primary)
+  static const Color success = Color(0xFF10B981); // Vert succès
   static const Color warning = Color(0xFFF0A050); // Orange (identique à accent)
 
   // Fonds très clairs pour les badges

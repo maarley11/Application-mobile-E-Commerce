@@ -5,6 +5,8 @@ const morgan = require('morgan');
 require('dotenv').config();
 
 const sequelize = require('./config/database');
+require('./models/User'); // Importation du modèle pour s'assurer qu'il est chargé
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,14 +23,18 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'Baana API is running' });
 });
 
+// Routes API
+app.use('/api/auth', authRoutes);
+
 // Connexion DB et démarrage serveur
 const startServer = async () => {
   try {
     await sequelize.authenticate();
-    console.log('✅ Connecté à PostgreSQL avec succès.');
+    console.log('✅ Connecté à SQLite avec succès.');
     
-    // Pour J1/J2 on peut forcer la synchronisation des tables
-    // await sequelize.sync({ alter: true });
+    // Synchronisation automatique des tables pour le développement
+    await sequelize.sync({ alter: true });
+    console.log('✅ Tables synchronisées');
     
     app.listen(PORT, () => {
       console.log(`🚀 Serveur Baana démarré sur le port ${PORT}`);

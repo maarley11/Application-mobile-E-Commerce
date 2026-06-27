@@ -42,7 +42,7 @@ class _OtpScreenState extends State<OtpScreen> {
           backgroundColor: BaanaColors.primary,
         ),
       );
-      // Redirection vers la page d'accueil
+      // Redirection vers l'accueil (le profil entreprise est déjà géré par authProvider après OTP)
       context.go('/home');
     }
   }

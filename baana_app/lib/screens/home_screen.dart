@@ -9,7 +9,7 @@ import '../providers/cart_provider.dart';
 import '../widgets/product_card.dart';
 import '../widgets/shimmer_loading.dart';
 import '../widgets/baana_input.dart';
-import '../widgets/animated_reactive_background.dart';
+import '../widgets/baana_input.dart';
 import '../models/product.dart';
 import 'dart:ui';
 
@@ -35,18 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: BaanaColors.background,
       body: Stack(
         children: [
-          // Background Réactif et Animé (Parallax + Respiration)
-          AnimatedBuilder(
-            animation: _scrollController,
-            builder: (context, child) {
-              double offset = 0;
-              if (_scrollController.hasClients) {
-                offset = _scrollController.offset;
-              }
-              return Positioned.fill(
-                child: AnimatedReactiveBackground(scrollOffset: offset),
-              );
-            },
+          // Fond uni
+          const Positioned.fill(
+            child: ColoredBox(color: BaanaColors.background),
           ),
           
           // Le SafeArea est retiré pour que le scroll aille jusqu'aux bords de l'écran (derrière le menu et le header)
@@ -138,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           IconButton(
                             icon: const Icon(Icons.notifications_none, color: BaanaColors.textPrimary),
-                            onPressed: () {},
+                            onPressed: () => context.push('/notifications'),
                           ),
                           Stack(
                             clipBehavior: Clip.none,
@@ -150,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 child: IconButton(
                                   icon: const Icon(Icons.shopping_bag_outlined, color: BaanaColors.textPrimary),
-                                  onPressed: () {},
+                                  onPressed: () => context.push('/orders'),
                                 ),
                               ),
                               Positioned(
@@ -408,7 +399,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               separatorBuilder: (context, index) => const SizedBox(width: 16),
                               itemBuilder: (context, index) {
                                 final product = provider.products.reversed.toList()[index];
-                                return _buildFlashSaleCard(product);
+                                final isPro = context.watch<AuthProvider>().isPro;
+                                return _buildFlashSaleCard(product, isPro);
                               },
                             ),
                       ),
@@ -465,8 +457,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
                               final product = provider.products[index];
+                              final isPro = context.watch<AuthProvider>().isPro;
                               return ProductCard(
                                 product: product,
+                                isPro: isPro,
                                 onTap: () => context.push('/product/${product.id}'),
                               );
                             },
@@ -583,7 +577,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Icons.category_outlined;
   }
 
-  Widget _buildFlashSaleCard(Product product) {
+  Widget _buildFlashSaleCard(Product product, bool isPro) {
     return Container(
       width: 120,
       decoration: BoxDecoration(
@@ -656,7 +650,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${(product.price * 0.8).toInt()} FCFA',
+                  '${((isPro ? product.proPrice : product.publicPrice) * 0.8).toInt()} FCFA',
                   style: const TextStyle(
                     color: BaanaColors.primary,
                     fontWeight: FontWeight.bold,

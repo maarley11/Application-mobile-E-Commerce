@@ -9,7 +9,9 @@ router.post(
   '/',
   authMiddleware,
   [
-    body('paymentMethod').isIn(['WAVE', 'ORANGE_MONEY']).withMessage('Méthode de paiement invalide'),
+    body('paymentMethod')
+      .isIn(['WAVE', 'ORANGE_MONEY', 'MOBILE_MONEY', 'CASH', 'CASH_ON_DELIVERY', 'mobile_money', 'cash', 'À la livraison'])
+      .withMessage('Méthode de paiement invalide'),
     body('items').isArray().withMessage('Items doit être un tableau'),
     body('items.*.productId').isInt().withMessage('Product ID manquant ou invalide'),
     body('items.*.quantity').isInt({ min: 1 }).withMessage('Quantité invalide')
@@ -47,6 +49,7 @@ router.patch(
 
 // GET /api/orders → Historique de l'utilisateur connecté
 router.get('/', authMiddleware, orderController.getUserOrders);
+router.get('/history', authMiddleware, orderController.getUserOrders);
 
 // GET /api/orders/:id → Détails et suivi de commande
 router.get('/:id', authMiddleware, orderController.getOrderById);

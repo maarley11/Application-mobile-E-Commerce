@@ -11,5 +11,5 @@ class CartItem {
     this.quantity = 1,
   });
 
-  double get totalPrice => product.price * quantity;
+  double totalPrice(bool isPro) => (isPro ? product.proPrice : product.publicPrice) * quantity;
 }

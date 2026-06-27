@@ -1,7 +1,7 @@
 const { Order, OrderItem, Product, Notification, sequelize } = require('../models');
 
 // Méthodes de paiement autorisées
-const VALID_PAYMENT_METHODS = ['MOBILE_MONEY', 'CARD', 'CASH_ON_DELIVERY'];
+const VALID_PAYMENT_METHODS = ['WAVE', 'ORANGE_MONEY', 'MOBILE_MONEY', 'CASH', 'CASH_ON_DELIVERY', 'mobile_money', 'cash', 'À la livraison'];
 
 exports.createOrder = async (req, res) => {
   const { paymentMethod, items } = req.body;

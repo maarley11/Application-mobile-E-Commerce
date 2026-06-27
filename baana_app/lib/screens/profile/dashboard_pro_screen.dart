@@ -1,16 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'dart:ui';
 import '../../config/colors.dart';
 import '../../config/typography.dart';
 import '../../widgets/manjak_pattern.dart'; // Import for the artistic background
+import '../../providers/auth_provider.dart';
+import '../../providers/dashboard_provider.dart';
 
-class DashboardProScreen extends StatelessWidget {
+class DashboardProScreen extends StatefulWidget {
   const DashboardProScreen({Key? key}) : super(key: key);
+
+  @override
+  State<DashboardProScreen> createState() => _DashboardProScreenState();
+}
+
+class _DashboardProScreenState extends State<DashboardProScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<DashboardProvider>().fetchDashboardStats();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final authProvider = context.watch<AuthProvider>();
+    final dashboardProvider = context.watch<DashboardProvider>();
+    final stats = dashboardProvider.stats ?? {};
+    
+    final String name = authProvider.currentName.isNotEmpty ? authProvider.currentName : 'Pro';
+    final String planName = authProvider.isPro ? authProvider.proPlan.toUpperCase() : 'AUCUN PLAN';
+    final String expiration = authProvider.proExpirationDate != null 
+        ? 'Expire le ${authProvider.proExpirationDate!.day.toString().padLeft(2, '0')}/${authProvider.proExpirationDate!.month.toString().padLeft(2, '0')}/${authProvider.proExpirationDate!.year}'
+        : 'Abonnez-vous pour profiter de Pro';
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -19,7 +44,13 @@ class DashboardProScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: BaanaColors.textPrimary),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/profile');
+            }
+          },
         ),
         centerTitle: true,
         title: Text(
@@ -56,7 +87,7 @@ class DashboardProScreen extends StatelessWidget {
                 children: [
                   // Heading
                   Text(
-                    'Mon Dashboard',
+                    'Espace de $name',
                     style: textTheme.displayLarge?.copyWith(
                       fontWeight: FontWeight.w700,
                       color: BaanaColors.textPrimary,
@@ -121,7 +152,7 @@ class DashboardProScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 12),
                             Text(
-                              'Premium Mensuel',
+                              authProvider.isPro ? 'PREMIUM $planName' : 'NON ABONNÉ',
                               style: textTheme.displayMedium?.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -130,7 +161,7 @@ class DashboardProScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Expire le 12 Octobre 2023',
+                              expiration,
                               style: textTheme.bodyMedium?.copyWith(color: Colors.white70),
                             ),
                             const SizedBox(height: 24),
@@ -148,7 +179,11 @@ class DashboardProScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (!authProvider.isPro) {
+                                      context.push('/subscription_compare');
+                                    }
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: BaanaColors.cta,
                                     foregroundColor: Colors.white,
@@ -159,7 +194,7 @@ class DashboardProScreen extends StatelessWidget {
                                     elevation: 0,
                                   ),
                                   child: Text(
-                                    'Renouveler',
+                                    authProvider.isPro ? 'Renouveler' : 'S\'abonner',
                                     style: textTheme.titleMedium?.copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
@@ -182,7 +217,7 @@ class DashboardProScreen extends StatelessWidget {
                       Expanded(
                         child: _buildGlassKpiCard(
                           context,
-                          title: '12.500 FCFA',
+                          title: '${stats['savingsRealized'] ?? 12500} FCFA',
                           subtitle: 'Économies',
                           icon: Icons.savings_rounded,
                           iconColor: BaanaColors.primary,
@@ -192,7 +227,7 @@ class DashboardProScreen extends StatelessWidget {
                       Expanded(
                         child: _buildGlassKpiCard(
                           context,
-                          title: '08',
+                          title: '${stats['ordersCount'] ?? 8}',
                           subtitle: 'Commandes',
                           icon: Icons.inventory_2_rounded,
                           iconColor: BaanaColors.accent,
@@ -206,7 +241,7 @@ class DashboardProScreen extends StatelessWidget {
                       Expanded(
                         child: _buildGlassKpiCard(
                           context,
-                          title: '2/3',
+                          title: '${authProvider.freeDeliveriesLeft}/3',
                           subtitle: 'Livraisons gratuites',
                           icon: Icons.two_wheeler_rounded,
                           iconColor: BaanaColors.primary,
@@ -216,7 +251,7 @@ class DashboardProScreen extends StatelessWidget {
                       Expanded(
                         child: _buildGlassKpiCard(
                           context,
-                          title: '450',
+                          title: '${authProvider.loyaltyPoints}',
                           subtitle: 'Points fidélité',
                           icon: Icons.stars_rounded,
                           iconColor: BaanaColors.accent,

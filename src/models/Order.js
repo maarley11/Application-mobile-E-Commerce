@@ -7,7 +7,7 @@ const Order = sequelize.define('Order', {
     allowNull: false,
   },
   paymentMethod: {
-    type: DataTypes.ENUM('WAVE', 'ORANGE_MONEY'),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   status: {

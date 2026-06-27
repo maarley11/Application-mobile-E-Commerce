@@ -6,6 +6,7 @@ import '../../config/colors.dart';
 import '../../config/typography.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/manjak_pattern.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Carte de Profil (Glassmorphism)
-                  _buildProfileGlassCard(context, name, phone, initials),
+                  _buildProfileGlassCard(context, name, phone, initials, authProvider.isPro, authProvider.proPlan, authProvider.loyaltyPoints),
                   
                   const SizedBox(height: 32),
 
@@ -101,11 +102,17 @@ class ProfileScreen extends StatelessWidget {
                             _buildMenuItem(context, Icons.receipt_long_outlined, 'Commandes', onTap: () {
                               context.push('/orders');
                             }),
-                            _buildMenuItem(context, Icons.card_membership_outlined, 'Abonnement'),
+                            _buildMenuItem(context, Icons.card_membership_outlined, 'Abonnement', onTap: () {
+                              context.push('/subscription_compare');
+                            }),
                             _buildMenuItem(context, Icons.location_on_outlined, 'Adresses'),
                             _buildMenuItem(context, Icons.payments_outlined, 'Factures'),
-                            _buildMenuItem(context, Icons.chat_bubble_outline, 'Support WhatsApp'),
-                            _buildMenuItem(context, Icons.settings_outlined, 'Paramètres', showDivider: false),
+                            _buildMenuItem(context, Icons.chat_bubble_outline, 'Support & Aide', onTap: () {
+                              context.push('/support');
+                            }),
+                            _buildMenuItem(context, Icons.settings_outlined, 'Paramètres', showDivider: false, onTap: () {
+                              context.push('/settings');
+                            }),
                           ],
                         ),
                       ),
@@ -127,7 +134,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileGlassCard(BuildContext context, String name, String phone, String initials) {
+  Widget _buildProfileGlassCard(BuildContext context, String name, String phone, String initials, bool isPro, String plan, int loyaltyPoints) {
     final textTheme = Theme.of(context).textTheme;
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
@@ -196,37 +203,62 @@ class ProfileScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
               
-              // Pro Badge
+              // Points de fidélité
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      BaanaColors.primary.withOpacity(0.15),
-                      BaanaColors.accent.withOpacity(0.15),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: BaanaColors.accent.withOpacity(0.3)),
+                  color: BaanaColors.accent.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.workspace_premium, color: BaanaColors.accent, size: 18),
-                    const SizedBox(width: 8),
+                    const Icon(Icons.stars_rounded, color: BaanaColors.accent, size: 18),
+                    const SizedBox(width: 6),
                     Text(
-                      'Membre Pro',
+                      '$loyaltyPoints Points de fidélité',
                       style: textTheme.labelLarge?.copyWith(
-                        color: BaanaColors.primary,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 1.1,
+                        color: BaanaColors.accent,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
+              
+              // Pro Badge (Dynamic)
+              if (isPro)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        BaanaColors.primary.withOpacity(0.15),
+                        BaanaColors.accent.withOpacity(0.15),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(color: BaanaColors.accent.withOpacity(0.3)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.workspace_premium, color: BaanaColors.accent, size: 18),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Membre Pro ${plan.toUpperCase()}',
+                        style: textTheme.labelLarge?.copyWith(
+                          color: BaanaColors.primary,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1.1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),

@@ -6,11 +6,13 @@ import '../config/typography.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final VoidCallback onTap;
+  final bool isPro;
 
   const ProductCard({
     super.key,
     required this.product,
     required this.onTap,
+    this.isPro = false,
   });
 
   @override
@@ -57,8 +59,6 @@ class ProductCard extends StatelessWidget {
                         child: Image.network(
                           product.imageUrl,
                           fit: BoxFit.cover,
-                          color: BaanaColors.primary.withOpacity(0.15),
-                          colorBlendMode: BlendMode.srcATop,
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
                               color: BaanaColors.inputBackground,
@@ -72,25 +72,26 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                   // PRO badge
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: BaanaColors.accent, // Secondary Container / Orange
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: const Text(
-                        'PRO',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
+                  if (product.badge != null)
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: BaanaColors.accent, // Secondary Container / Orange
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          product.badge!.toUpperCase(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   // "+" Button
                   Positioned(
                     bottom: 8,
@@ -130,19 +131,20 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(
-              '${(product.price * 1.2).toInt()} FCFA',
-              style: TextStyle(
-                fontFamily: BaanaTypography.bodyFont,
-                fontSize: 12,
-                color: BaanaColors.textSecondary,
-                decoration: TextDecoration.lineThrough,
+            if (isPro)
+              Text(
+                '${product.publicPrice.toInt()} FCFA',
+                style: TextStyle(
+                  fontFamily: BaanaTypography.bodyFont,
+                  fontSize: 12,
+                  color: BaanaColors.textSecondary,
+                  decoration: TextDecoration.lineThrough,
+                ),
               ),
-            ),
             Text(
-              '${product.price.toInt()} FCFA',
+              '${isPro ? product.proPrice.toInt() : product.publicPrice.toInt()} FCFA',
               style: TextStyle(
-                fontFamily: BaanaTypography.headlineFont, // The HTML uses font-headline-md for the main price
+                fontFamily: BaanaTypography.headlineFont,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: BaanaColors.primary,

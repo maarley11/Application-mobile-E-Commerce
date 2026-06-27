@@ -18,11 +18,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
   final _nameController = TextEditingController();
+  
+  // Champs profil entreprise (CDC)
+  final _businessNameController = TextEditingController();
+  final _nineaController = TextEditingController();
+  final _addressController = TextEditingController();
 
   @override
   void dispose() {
     _phoneController.dispose();
     _nameController.dispose();
+    _businessNameController.dispose();
+    _nineaController.dispose();
+    _addressController.dispose();
     super.dispose();
   }
 
@@ -36,8 +44,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // L'API s'attend à ce que le numéro commence par +221
       final phone = '+221${_phoneController.text.trim()}';
       final name = _nameController.text.trim();
+      final businessName = _businessNameController.text.trim();
+      final ninea = _nineaController.text.trim();
+      final address = _addressController.text.trim();
 
-      final error = await authProvider.register(phone, name);
+      final error = await authProvider.register(phone, name, businessName, ninea, address);
 
       if (error != null && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -63,10 +74,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: BaanaColors.textPrimary),
-            onPressed: () => context.pop(),
-          ),
+          leading: context.canPop() 
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios, color: BaanaColors.textPrimary),
+                onPressed: () => context.pop(),
+              )
+            : null,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -130,12 +143,69 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       return null;
                     },
                   ),
+                  const SizedBox(height: 32),
+                  
+                  Text(
+                    'Profil Entreprise',
+                    style: TextStyle(
+                      fontFamily: BaanaTypography.headlineFont,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: BaanaColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  BaanaInput(
+                    labelText: 'Nom de la boutique / entreprise',
+                    hintText: 'Ex: Chez Maimouna',
+                    controller: _businessNameController,
+                    keyboardType: TextInputType.text,
+                    validator: (val) {
+                      if (val == null || val.trim().isEmpty) return 'Ce champ est requis';
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  
+                  BaanaInput(
+                    labelText: 'NINEA (Optionnel)',
+                    hintText: 'Ex: 123456789',
+                    controller: _nineaController,
+                    keyboardType: TextInputType.text,
+                  ),
+                  const SizedBox(height: 24),
+
+                  BaanaInput(
+                    labelText: 'Adresse de livraison habituelle',
+                    hintText: 'Ex: Marché HLM, Boutique 12',
+                    controller: _addressController,
+                    keyboardType: TextInputType.streetAddress,
+                    validator: (val) {
+                      if (val == null || val.trim().isEmpty) return 'Ce champ est requis';
+                      return null;
+                    },
+                  ),
                   const SizedBox(height: 48),
 
                   BaanaButton(
                     text: 'Créer mon compte',
                     onPressed: _submit,
                     isLoading: isLoading,
+                  ),
+                  const SizedBox(height: 16),
+                  Center(
+                    child: TextButton(
+                      onPressed: () => context.go('/login'),
+                      child: Text(
+                        'Déjà un compte ? Se connecter',
+                        style: TextStyle(
+                          fontFamily: BaanaTypography.bodyFont,
+                          color: BaanaColors.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

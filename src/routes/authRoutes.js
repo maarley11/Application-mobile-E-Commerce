@@ -29,4 +29,19 @@ router.post(
   authController.verifyOtp
 );
 
+router.post(
+  '/login',
+  [
+    body('phone')
+      .isString()
+      .custom((value) => {
+        if (!value.startsWith('+221') || value.length !== 13) {
+          throw new Error('Le numéro doit commencer par +221 et faire 13 caractères');
+        }
+        return true;
+      }),
+  ],
+  authController.login
+);
+
 module.exports = router;

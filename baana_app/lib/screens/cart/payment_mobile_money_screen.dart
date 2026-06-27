@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:ui';
+import 'package:provider/provider.dart';
 import '../../config/colors.dart';
 import '../../config/typography.dart';
 import '../../widgets/baana_input.dart';
 import '../../widgets/baana_button.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../providers/cart_provider.dart';
 
 class PaymentMobileMoneyScreen extends StatefulWidget {
   const PaymentMobileMoneyScreen({super.key});
@@ -30,11 +33,22 @@ class _PaymentMobileMoneyScreenState extends State<PaymentMobileMoneyScreen> {
       FocusScope.of(context).unfocus();
       
       // Simulation d'un appel API vers PayDunya / Wave / Orange Money
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 2));
       
+      // Redirection URL vers une page de paiement mobile (ex: PayDunya)
+      final Uri url = Uri.parse('https://paydunya.com/checkout/invoice/mock');
+      try {
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url, mode: LaunchMode.externalApplication);
+        }
+      } catch (e) {
+        debugPrint('Erreur url_launcher: $e');
+      }
+
       if (mounted) {
         setState(() => _isLoading = false);
         // On va vers la confirmation
+        context.read<CartProvider>().clear();
         context.push('/confirmation');
       }
     }

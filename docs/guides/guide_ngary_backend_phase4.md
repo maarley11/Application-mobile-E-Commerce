@@ -1,86 +1,58 @@
-# 🟢 GUIDE FINAL : NGARY — Lead Backend Node.js (PHASE 4)
+# 🟢 GUIDE AVANCÉ : NGARY — Développeur Backend Node.js (PHASE 4)
 
-Félicitations pour avoir accompli la Phase 3 (Abonnements, Analytics, Webhooks) !
-C'est la dernière ligne droite pour finaliser l'API et la préparer pour la mise en production.
+Salut Ngary, super travail sur la **Phase 3** ! 
+Puisque tu as déjà implémenté avec succès les webhooks Mobile Money, la logique d'abonnement "Membre Pro", le cron job de remise à zéro des livraisons, et les endpoints analytiques du Dashboard, notre API est maintenant très solide.
 
-Dans cette Phase 4, tu vas gérer les notifications, le moteur de recherche avancé, la mise à jour des statuts de livraison pour alimenter la Timeline Frontend, et la sécurisation finale.
-
----
-
-## 🏗️ Standards de Sécurité Finaux (Rappel)
-- **CORS :** Il est impératif de configurer proprement les CORS pour n'accepter que les requêtes venant du Frontend (Flutter Web) et des Webhooks des opérateurs.
-- **Rate Limiting :** Protéger les routes sensibles (Login, OTP, Webhook) contre les attaques par force brute.
-- **Nettoyage :** Retirer tous les `console.log` inutiles avant de déployer.
+Nous entrons dans la **Phase 4 : Notifications, Facturation & Mises en production**. 
+L'objectif est d'ajouter les couches de communication avec l'utilisateur et de finaliser les flux transactionnels.
 
 ---
 
 ## 🚀 PROMPTS NODE.JS OPTIMISÉS (Phase 4)
 
-Copie-colle ces blocs dans ton assistant Antigravity pour générer la suite de ton code.
+### 📅 J11 : Système de Notifications Push & In-App
+L'application Flutter a maintenant un écran "Notifications". Il faut que l'API génère ces alertes.
 
-### 📅 J11 : Système de Notifications in-app
 ```text
-Développe un système de notifications in-app pour l'API Express.
+Développe le système de Notifications pour l'API Baana (Push & In-App).
 
-⚠️ INSTRUCTION CRITIQUE : Utilise les modèles existants et crée une nouvelle migration/modèle pour `Notification`.
+⚠️ INSTRUCTION CRITIQUE : Les notifications doivent être stockées en base (In-App) ET envoyées via Firebase Admin SDK (Push).
 
 Exigences :
-1. Modèle `Notification` :
-   - `id` (UUID), `userId` (FK), `title` (String), `message` (Text), `type` (Enum: 'ORDER', 'PROMO', 'SYSTEM'), `isRead` (Boolean, default: false).
-2. Routes (Contrôleur `notificationController.js`) :
-   - `GET /api/notifications` : Retourne les 20 dernières notifications de l'utilisateur connecté, triées par date décroissante.
-   - `PATCH /api/notifications/:id/read` : Marque une notification spécifique comme lue.
-   - `PATCH /api/notifications/read-all` : Marque TOUTES les notifications de l'utilisateur comme lues.
-3. Logique :
-   - Protège ces routes avec le middleware JWT existant.
+1. Modèle `Notification` : `userId`, `title`, `body`, `type` (ORDER, PROMO, SYSTEM), `isRead` (boolean, default false).
+2. Firebase Admin SDK : Configure l'envoi de push notifications vers les tokens des devices utilisateurs (ajoute un champ `fcmToken` au modèle User).
+3. Route `GET /api/notifications` : Liste les notifications de l'utilisateur connecté (triées par date décroissante).
+4. Route `PUT /api/notifications/read-all` : Marque toutes les notifications de l'utilisateur comme lues.
+5. Déclencheurs automatiques : Lorsqu'une commande passe à 'DELIVERED', crée une notification. Lorsqu'un utilisateur gagne des points de fidélité, crée une notification.
 ```
 
-### 📅 J12 : Moteur de Recherche Avancé
+### 📅 J12 : Génération de Factures PDF & Envoi d'Emails
+Les PME (Membres Pro) ont besoin de factures pour leur comptabilité.
+
 ```text
-Améliore le contrôleur des Produits (`productController.js`) pour y ajouter de la recherche et du filtrage.
+Développe un générateur de Factures PDF et un service d'envoi d'emails pour Baana.
 
-⚠️ INSTRUCTION CRITIQUE : Utilise les opérateurs avancés de Sequelize (`[Op.like]`, `[Op.iLike]` si PostgreSQL, `[Op.between]`) pour optimiser la recherche sans récupérer toute la base en mémoire.
-
-Exigences (`GET /api/products`) :
-1. Recherche Full-Text : Gérer un query parameter `?search=chocolat` pour chercher dans le titre ou la description.
-2. Filtre par Catégorie : Gérer `?category=Epicerie`.
-3. Filtre par Prix : Gérer `?minPrice=1000&maxPrice=5000`.
-4. Pagination : Implémenter le couple `?page=1&limit=20`. Renvoyer le total de pages et de produits (utiliser `findAndCountAll` de Sequelize).
-```
-
-### 📅 J13 : Statuts de Livraison (Timeline)
-```text
-Développe la logique de mise à jour des statuts de commandes pour le tracking.
-
-⚠️ INSTRUCTION CRITIQUE : Le statut d'une commande impacte le Frontend (qui affiche une timeline). Assure-toi que la liste des statuts correspond parfaitement au modèle.
+⚠️ INSTRUCTION CRITIQUE : Utilise `pdfkit` ou `puppeteer` pour la génération, et `nodemailer` pour l'envoi.
 
 Exigences :
-1. Vérifier que le modèle `Order` contient une enum `status` avec au moins : `PENDING`, `PREPARING`, `SHIPPING`, `DELIVERED`.
-2. Route `PATCH /api/orders/:id/status` (Protégée pour l'ADMIN ou script interne) :
-   - Permet de faire avancer le statut d'une commande.
-3. Création automatique de notification :
-   - Dans le contrôleur, dès qu'une commande change de statut, créer une entrée dans la table `Notification` (ex: "Votre commande CMD-XX est en cours de livraison !").
+1. Route `GET /api/orders/:id/invoice` : Génère et renvoie un fichier PDF contenant les détails de la commande, la TVA (si applicable), et le montant total (avec ou sans frais de livraison).
+2. Service Email : Lorsqu'une commande est 'PAID' via le webhook de la Phase 3, envoie automatiquement un email récapitulatif de la commande au client (ajoute un champ `email` au User si ce n'est pas déjà fait).
 ```
 
-### 📅 J14 : Sécurité et Préparation au Déploiement
-```text
-Sécurise l'API Express pour un passage en production.
+### 📅 J13 : Points de Fidélité & Intégration SMS (OTP Réel)
+Passage du mode "Mock" au mode réel pour l'inscription.
 
-⚠️ INSTRUCTION CRITIQUE : Cette étape garantit que l'application ne sera pas hackée.
+```text
+Finalise l'authentification OTP et implémente la mécanique des points de fidélité.
 
 Exigences :
-1. Installe et configure le package `helmet` pour sécuriser les headers HTTP.
-2. Installe et configure le package `cors` :
-   - N'autorise que les domaines spécifiques (ton domaine frontend Flutter Web).
-3. Installe et configure `express-rate-limit` :
-   - Max 5 tentatives par minute sur `/api/auth/register` et `/api/auth/verify-otp`.
-4. Centralise la gestion d'erreur dans un middleware `errorHandler.js` pour ne jamais exposer les stacktraces (erreurs Sequelize) à l'utilisateur final en mode `NODE_ENV=production`.
+1. Service SMS : Intègre un vrai fournisseur de SMS (ex: Twilio, InfoBip, ou un agrégateur local comme Orange SMS API) dans la route de demande d'OTP.
+2. Points de fidélité : Modifie le contrôleur de Webhook (Phase 3). Lorsqu'une commande est validée (PAID), ajoute `Math.floor(totalAmount / 1000)` points de fidélité au User (ex: 1 point tous les 1000 FCFA dépensés).
 ```
 
 ---
 
-## 🔍 Validation Finale
-Avant de clore le backend :
-- Vérifie que **toutes** tes PR ont été mergées sur `main`.
-- Fais un test complet (Postman ou ThunderClient) de la route d'inscription, d'achat, de passage au rôle PRO, et de consultation des notifications.
-- La balle sera dans le camp de Mouhamed pour brancher le Frontend Flutter sur tes superbes APIs !
+## 🔍 Ta Checklist Quotidienne
+1. **Clés d'API :** Mets à jour le fichier `.env.example` avec les nouvelles clés (Firebase, SMTP, SMS).
+2. **Postman :** Ajoute ces nouvelles routes à la collection partagée de l'équipe.
+3. **Revue :** Prépare ta Pull Request `feat/back-phase4` pour la validation.

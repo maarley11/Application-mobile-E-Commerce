@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import '../../config/colors.dart';
 import '../../config/typography.dart';
 import '../../providers/cart_provider.dart';
+import '../../providers/auth_provider.dart';
+import '../../providers/order_provider.dart';
 import '../../widgets/baana_button.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -15,10 +17,18 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   String _selectedPaymentMethod = 'mobile_money'; // 'mobile_money' ou 'cash'
+  String? _customAddress;
 
   @override
   Widget build(BuildContext context) {
     final cartProvider = context.watch<CartProvider>();
+    final authProvider = context.watch<AuthProvider>();
+    final orderProvider = context.watch<OrderProvider>();
+    final isPro = authProvider.isPro;
+    final freeDeliveriesLeft = authProvider.freeDeliveriesLeft;
+    
+    final currentAddress = _customAddress ?? 
+        (authProvider.address.isNotEmpty ? authProvider.address : 'Quartier Almadies, Rue 10, Dakar, Sénégal');
 
     return Scaffold(
       backgroundColor: BaanaColors.background,
@@ -46,7 +56,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           children: [
             _buildSectionTitle('Adresse de livraison'),
             const SizedBox(height: 16),
-            _buildAddressCard(),
+            _buildAddressCard(currentAddress),
             
             const SizedBox(height: 32),
             _buildSectionTitle('Méthode de paiement'),
@@ -68,18 +78,40 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             const SizedBox(height: 32),
             _buildSectionTitle('Résumé de la commande'),
             const SizedBox(height: 16),
-            _buildOrderSummary(cartProvider),
+            _buildOrderSummary(cartProvider, isPro, freeDeliveriesLeft),
             
             const SizedBox(height: 48),
             BaanaButton(
               text: 'Confirmer & Payer',
-              onPressed: () {
-                if (_selectedPaymentMethod == 'mobile_money') {
-                  context.push('/payment_mobile_money');
-                } else {
-                  // Directement à la confirmation
-                  cartProvider.clear();
-                  context.push('/confirmation');
+              isLoading: orderProvider.isLoading,
+              onPressed: () async {
+                if (cartProvider.items.isEmpty) return;
+
+                final items = cartProvider.items.values.map((item) {
+                  return {
+                    'productId': item.product.id,
+                    'quantity': item.quantity,
+                    'price': isPro ? item.product.proPrice : item.product.publicPrice,
+                  };
+                }).toList();
+
+                final totalAmount = cartProvider.getTotalAmount(isPro, freeDeliveriesLeft);
+
+                try {
+                  await orderProvider.createOrder(items, totalAmount, _selectedPaymentMethod);
+                  
+                  if (!mounted) return;
+
+                  if (_selectedPaymentMethod == 'mobile_money') {
+                    context.push('/payment_mobile_money');
+                  } else {
+                    cartProvider.clear();
+                    context.push('/confirmation');
+                  }
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Erreur: $e')),
+                  );
                 }
               },
             ),
@@ -101,7 +133,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  Widget _buildAddressCard() {
+  Widget _buildAddressCard(String currentAddress) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -136,7 +168,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Quartier Almadies, Rue 10, Dakar\nSénégal',
+                  currentAddress,
                   style: TextStyle(
                     fontFamily: BaanaTypography.bodyFont,
                     fontSize: 14,
@@ -149,7 +181,41 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.edit_outlined, color: BaanaColors.primary),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  final controller = TextEditingController(text: currentAddress);
+                  return AlertDialog(
+                    title: const Text('Modifier l\'adresse de livraison'),
+                    content: TextField(
+                      controller: controller,
+                      decoration: const InputDecoration(
+                        hintText: 'Saisissez votre adresse',
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: BaanaColors.primary),
+                        ),
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Annuler', style: TextStyle(color: Colors.grey)),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _customAddress = controller.text;
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Enregistrer', style: TextStyle(color: BaanaColors.primary)),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
           )
         ],
       ),
@@ -202,7 +268,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  Widget _buildOrderSummary(CartProvider provider) {
+  Widget _buildOrderSummary(CartProvider provider, bool isPro, int freeDeliveriesLeft) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -223,7 +289,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
               Text(
-                '${provider.subtotalAmount} FCFA',
+                '${provider.subtotalAmount(isPro).toInt()} FCFA',
                 style: TextStyle(
                   fontFamily: BaanaTypography.bodyFont,
                   fontWeight: FontWeight.w600,
@@ -244,11 +310,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
               Text(
-                provider.deliveryFee == 0 ? 'Gratuite' : '${provider.deliveryFee} FCFA',
+                provider.getDeliveryFee(isPro, freeDeliveriesLeft) == 0 ? 'Gratuite' : '${provider.getDeliveryFee(isPro, freeDeliveriesLeft)} FCFA',
                 style: TextStyle(
                   fontFamily: BaanaTypography.bodyFont,
                   fontWeight: FontWeight.w600,
-                  color: provider.deliveryFee == 0 ? BaanaColors.primary : BaanaColors.textPrimary,
+                  color: provider.getDeliveryFee(isPro, freeDeliveriesLeft) == 0 ? BaanaColors.primary : BaanaColors.textPrimary,
                 ),
               ),
             ],
@@ -270,7 +336,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
               Text(
-                '${provider.totalAmount} FCFA',
+                '${provider.getTotalAmount(isPro, freeDeliveriesLeft)} FCFA',
                 style: TextStyle(
                   fontFamily: BaanaTypography.headlineFont,
                   fontSize: 20,

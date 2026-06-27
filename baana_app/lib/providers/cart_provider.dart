@@ -17,25 +17,28 @@ class CartProvider extends ChangeNotifier {
     return total;
   }
 
-  double get subtotalAmount {
+  double subtotalAmount(bool isPro) {
     double total = 0.0;
     _items.forEach((key, cartItem) {
-      total += cartItem.totalPrice;
+      total += cartItem.totalPrice(isPro);
     });
     return total;
   }
 
-  double get deliveryFee {
-    // Logique basique: Livraison gratuite si plus de 50000 FCFA, sinon 2000 FCFA
-    // TODO: À lier avec le profil de l'utilisateur (Membre Pro = Livraison Gratuite)
-    if (subtotalAmount >= 50000 || _items.isEmpty) {
+  double getDeliveryFee(bool isPro, int freeDeliveriesLeft) {
+    if (_items.isEmpty) return 0.0;
+
+    // Livraison gratuite si Membre Pro et possède encore des livraisons gratuites
+    if (isPro && freeDeliveriesLeft > 0) {
       return 0.0;
     }
-    return 2000.0; 
+    
+    // Frais de livraison standard (CDC)
+    return 1500.0; 
   }
 
-  double get totalAmount {
-    return subtotalAmount + deliveryFee;
+  double getTotalAmount(bool isPro, int freeDeliveriesLeft) {
+    return subtotalAmount(isPro) + getDeliveryFee(isPro, freeDeliveriesLeft);
   }
 
   void addItem(Product product, {int quantity = 1}) {

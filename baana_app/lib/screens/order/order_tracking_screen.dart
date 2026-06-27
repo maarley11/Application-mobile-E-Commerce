@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'dart:ui';
 import '../../config/colors.dart';
 import '../../models/order.dart';
 import '../../providers/order_provider.dart';
@@ -54,12 +53,13 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: BaanaColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: false,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: BaanaColors.primary),
+          icon: const Icon(Icons.arrow_back_ios, color: BaanaColors.primary),
           onPressed: () => context.pop(),
         ),
         title: Text(
@@ -72,154 +72,123 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
       ),
       body: Stack(
         children: [
-          // Premium Artistic Background
           Positioned.fill(
             child: CustomPaint(
               painter: ArtisticBackgroundPainter(),
             ),
           ),
-
           SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Timeline Section (Glassmorphism)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                      child: Container(
-                        padding: const EdgeInsets.all(24),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.65),
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.white.withOpacity(0.8), width: 1.5),
-                          boxShadow: [
-                            BoxShadow(
-                              color: BaanaColors.primary.withOpacity(0.08),
-                              blurRadius: 20,
-                              offset: const Offset(0, 10),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                  children: [
-                    _buildTimelineStep(
-                      context,
-                      title: 'Confirmée',
-                      time: 'Aujourd\'hui, 09:42',
-                      isCompleted: true,
-                      isCurrent: false,
-                      isLast: false,
-                    ),
-                    _buildTimelineStep(
-                      context,
-                      title: 'En préparation',
-                      time: 'Aujourd\'hui, 10:15',
-                      isCompleted: order.status.index >= OrderStatus.preparing.index,
-                      isCurrent: order.status == OrderStatus.preparing,
-                      isLast: false,
-                    ),
-                    _buildTimelineStep(
-                      context,
-                      title: 'En livraison',
-                      time: 'Arrivée estimée : 11:30',
-                      isCompleted: order.status.index >= OrderStatus.shipping.index,
-                      isCurrent: order.status == OrderStatus.shipping,
-                      isLast: false,
-                    ),
-                    _buildTimelineStep(
-                      context,
-                      title: 'Livrée',
-                      time: order.status == OrderStatus.delivered ? 'Aujourd\'hui, 11:45' : 'En attente',
-                      isCompleted: order.status == OrderStatus.delivered,
-                      isCurrent: false,
-                      isLast: true,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 32),
-
-          // Delivery Driver Card (Glassmorphism)
-          if (order.status == OrderStatus.shipping || order.status == OrderStatus.delivered)
-                    ClipRRect(
+                  // Timeline Section
+                  Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.65),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.white.withOpacity(0.8), width: 1.5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: BaanaColors.primary.withOpacity(0.05),
-                                blurRadius: 15,
-                                offset: const Offset(0, 8),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.white, width: 2),
-                                  color: const Color(0xFFe0e3e1),
-                                ),
-                                child: const Icon(Icons.person, color: Color(0xFF6B7D75)),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Mamadou Diop', style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: const Color(0xFF181c1c))),
-                                    const SizedBox(height: 4),
-                                    Text('+221 77 123 45 67', style: textTheme.bodySmall?.copyWith(color: const Color(0xFF6B7D75))),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF10b981), // primary-container
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(Icons.call, color: Color(0xFF00422b), size: 20),
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ],
-                          ),
+                      border: Border.all(color: BaanaColors.border, width: 1),
+                    ),
+                    child: Column(
+                      children: [
+                        _buildTimelineStep(
+                          context,
+                          title: 'Confirmée',
+                          time: 'Aujourd\'hui, 09:42',
+                          isCompleted: true,
+                          isCurrent: false,
+                          isLast: false,
                         ),
+                        _buildTimelineStep(
+                          context,
+                          title: 'En préparation',
+                          time: 'Aujourd\'hui, 10:15',
+                          isCompleted: order.status.index >= OrderStatus.preparing.index,
+                          isCurrent: order.status == OrderStatus.preparing,
+                          isLast: false,
+                        ),
+                        _buildTimelineStep(
+                          context,
+                          title: 'En livraison',
+                          time: 'Arrivée estimée : 11:30',
+                          isCompleted: order.status.index >= OrderStatus.delivering.index,
+                          isCurrent: order.status == OrderStatus.delivering,
+                          isLast: false,
+                        ),
+                        _buildTimelineStep(
+                          context,
+                          title: 'Livrée',
+                          time: order.status == OrderStatus.delivered ? 'Aujourd\'hui, 11:45' : 'En attente',
+                          isCompleted: order.status == OrderStatus.delivered,
+                          isCurrent: false,
+                          isLast: true,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 32),
+
+                  // Delivery Driver Card
+                  if (order.status == OrderStatus.delivering || order.status == OrderStatus.delivered)
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: BaanaColors.inputBackground,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
+                              image: const DecorationImage(
+                                image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuA1bgrsH9QvyFmxnyU53rH10_kvbcB84NXWBY2dy2EQqkjbAxj39h-JOfcUyAM-TzOERhkt7yUnpSolSrSp29IlCGyM57h00DNBcYjkjHOF4cuUQ-iIJqcwe61TtcSzyfek1NHZUjf7woGGR73W0D5DGaUMI1lS5BIfxWTcUnq8FCz001h58dqQMnzAG7dKgTXgBRnmEzNS9HNhVz_HW97GIfDyYCM1skqblHseUcUBekPumrTMytn6ZBcbf1bUQY7LND34TwpZDZk'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Mamadou Diop', style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: BaanaColors.textPrimary)),
+                                const SizedBox(height: 4),
+                                Text('+221 77 123 45 67', style: textTheme.bodySmall?.copyWith(color: BaanaColors.textSecondary)),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: const BoxDecoration(
+                              color: BaanaColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              icon: const Icon(Icons.call, color: Colors.white, size: 20),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
                       ),
                     ),
 
-              const SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
-              // GPS Mini-map Placeholder (Glassmorphism)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Container(
+                  // GPS Mini-map Placeholder
+                  Container(
                     height: 200,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
+                      color: BaanaColors.inputBackground,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.white.withOpacity(0.8), width: 1.5),
+                      border: Border.all(color: BaanaColors.border, width: 1),
                     ),
                     child: Stack(
                       children: [
@@ -244,48 +213,46 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.9),
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: const Color(0xFFD4DDD8)),
+                              border: Border.all(color: BaanaColors.border),
                             ),
                             child: Text(
                               'Dakar - Plateau',
-                              style: textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold, color: const Color(0xFF181c1c)),
+                              style: textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold, color: BaanaColors.textPrimary),
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ),
 
-              const SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
-              // Action Buttons
-              SizedBox(
-                height: 52,
-                child: OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: BaanaColors.primary, width: 2),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  // Action Buttons
+                  SizedBox(
+                    height: 52,
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: BaanaColors.primary, width: 2),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      onPressed: () {},
+                      icon: const Icon(Icons.download, color: BaanaColors.primary),
+                      label: Text('Télécharger facture PDF', style: textTheme.titleMedium?.copyWith(color: BaanaColors.primary, fontWeight: FontWeight.w700)),
+                    ),
                   ),
-                  onPressed: () {},
-                  icon: const Icon(Icons.download, color: BaanaColors.primary),
-                  label: Text('Télécharger facture PDF', style: textTheme.titleMedium?.copyWith(color: BaanaColors.primary, fontWeight: FontWeight.w700)),
-                ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 52,
-                child: OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFF6c7a71), width: 1), // outline
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    height: 52,
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: BaanaColors.textSecondary, width: 1), // outline
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      onPressed: () {},
+                      icon: const Icon(Icons.support_agent, color: BaanaColors.textPrimary), // on-surface-variant
+                      label: Text('Contacter support', style: textTheme.titleMedium?.copyWith(color: BaanaColors.textPrimary, fontWeight: FontWeight.w700)),
+                    ),
                   ),
-                  onPressed: () {},
-                  icon: const Icon(Icons.support_agent, color: Color(0xFF3c4a42)), // on-surface-variant
-                  label: Text('Contacter support', style: textTheme.titleMedium?.copyWith(color: const Color(0xFF3c4a42), fontWeight: FontWeight.w700)),
-                ),
-              ),
                 ],
               ),
             ),
@@ -319,7 +286,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                     width: 24,
                     height: 24,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF10b981), // primary-container
+                      color: BaanaColors.primary,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.check, color: Colors.white, size: 14),
@@ -332,11 +299,11 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                         width: 24,
                         height: 24,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF97316),
+                          color: BaanaColors.cta,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFFF97316).withOpacity(0.5 * (1.2 - _pulseAnimation.value)),
+                              color: BaanaColors.cta.withOpacity(0.5 * (1.2 - _pulseAnimation.value)),
                               blurRadius: 10 * _pulseAnimation.value,
                               spreadRadius: 5 * _pulseAnimation.value,
                             )
@@ -359,9 +326,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                     width: 24,
                     height: 24,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFe0e3e1), // surface-variant
+                      color: BaanaColors.inputBackground,
                       shape: BoxShape.circle,
-                      border: Border.all(color: const Color(0xFFbbcabf), width: 2), // outline-variant
+                      border: Border.all(color: BaanaColors.border, width: 2),
                     ),
                   ),
                 
@@ -369,7 +336,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                   Expanded(
                     child: Container(
                       width: 2,
-                      color: isCompleted ? const Color(0xFF10b981) : const Color(0xFFbbcabf),
+                      color: isCompleted ? BaanaColors.primary : BaanaColors.border,
                     ),
                   ),
               ],
@@ -390,14 +357,14 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                     title,
                     style: textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: isCurrent ? const Color(0xFFF97316) : (isCompleted ? const Color(0xFF181c1c) : const Color(0xFF6B7D75)),
+                      color: isCurrent ? BaanaColors.cta : (isCompleted ? BaanaColors.textPrimary : BaanaColors.textSecondary),
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     time,
                     style: textTheme.bodySmall?.copyWith(
-                      color: isCompleted || isCurrent ? const Color(0xFF6B7D75) : const Color(0xFF6c7a71),
+                      color: BaanaColors.textSecondary,
                     ),
                   ),
                 ],
@@ -414,7 +381,7 @@ class MapPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFbbcabf).withOpacity(0.5)
+      ..color = BaanaColors.border
       ..strokeWidth = 1
       ..style = PaintingStyle.fill;
 
@@ -434,7 +401,7 @@ class RoutePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFF97316)
+      ..color = BaanaColors.cta
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
       
@@ -447,8 +414,8 @@ class RoutePainter extends CustomPainter {
     canvas.drawPath(dashPath(path, dashArray: CircularIntervalList([5, 5])), paint);
 
     // Draw start and end circles
-    canvas.drawCircle(Offset(size.width * 0.2, size.height * 0.8), 4, Paint()..color = const Color(0xFF10b981));
-    canvas.drawCircle(Offset(size.width * 0.8, size.height * 0.2), 4, Paint()..color = const Color(0xFFF97316));
+    canvas.drawCircle(Offset(size.width * 0.2, size.height * 0.8), 4, Paint()..color = BaanaColors.primary);
+    canvas.drawCircle(Offset(size.width * 0.8, size.height * 0.2), 4, Paint()..color = BaanaColors.cta);
   }
 
   @override

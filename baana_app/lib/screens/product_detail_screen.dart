@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../config/colors.dart';
 import '../config/typography.dart';
 import '../providers/product_provider.dart';
+import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -36,6 +37,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = context.read<ProductProvider>();
+    final isPro = context.watch<AuthProvider>().isPro;
     final product = provider.getProductById(widget.productId);
 
     if (product == null) {
@@ -180,14 +182,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       const SizedBox(height: 12),
                       
                       // Prix
-                      Text(
-                        '${product.price.toInt()} FCFA',
-                        style: TextStyle(
-                          fontFamily: BaanaTypography.bodyFont,
-                          fontSize: 26,
-                          fontWeight: FontWeight.w900,
-                          color: BaanaColors.primary,
-                        ),
+                      Row(
+                        children: [
+                          if (isPro) ...[
+                            Text(
+                              '${product.publicPrice.toInt()} FCFA',
+                              style: TextStyle(
+                                fontFamily: BaanaTypography.bodyFont,
+                                fontSize: 18,
+                                color: BaanaColors.textSecondary,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                          Text(
+                            '${isPro ? product.proPrice.toInt() : product.publicPrice.toInt()} FCFA',
+                            style: TextStyle(
+                              fontFamily: BaanaTypography.bodyFont,
+                              fontSize: 26,
+                              fontWeight: FontWeight.w900,
+                              color: BaanaColors.primary,
+                            ),
+                          ),
+                        ],
                       ),
                       
                       const SizedBox(height: 40),
@@ -340,7 +358,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               ),
                             ),
                             Text(
-                              '${(product.price * _quantity).toInt()} FCFA',
+                              '${((isPro ? product.proPrice : product.publicPrice) * _quantity).toInt()} FCFA',
                               style: TextStyle(
                                 fontFamily: BaanaTypography.headlineFont,
                                 fontSize: 24,

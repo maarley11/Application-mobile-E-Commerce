@@ -122,11 +122,10 @@ async function seedDatabase() {
     console.log('✅ 10 produits insérés avec succès.');
 
     console.log('👤 Création d\'un compte utilisateur de test...');
-    const hashedOtp = await bcrypt.hash('1234', 10);
     const user = await User.create({
       phone: '+221770000000',
       name: 'Boutique Mame Diarra',
-      otpCode: hashedOtp,
+      otpCode: '1234',
       otpExpiresAt: new Date(Date.now() + 10 * 60000), // valide 10 min
       isVerified: true,
       isPro: true, // Pro par défaut pour tester les prix Pro

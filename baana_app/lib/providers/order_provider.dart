@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../models/order.dart';
+import '../services/api_client.dart';
 
 class OrderProvider with ChangeNotifier {
   List<Order> _orders = [];
@@ -9,49 +10,59 @@ class OrderProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   OrderProvider() {
-    _loadMockOrders();
+    fetchOrders();
   }
 
-  void _loadMockOrders() {
+  Future<void> fetchOrders() async {
     _isLoading = true;
     notifyListeners();
 
-    // Simuler une requête réseau
-    Future.delayed(const Duration(milliseconds: 800), () {
+    try {
+      final response = await apiClient.client.get('/orders/history');
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data;
+        _orders = data.map((json) => Order.fromJson(json)).toList();
+      }
+    } catch (e) {
+      debugPrint('Erreur fetchOrders: $e');
+      // Mocks en fallback
       _orders = [
         Order(
           id: 'CMD-8829',
+          orderNumber: '#SDP-8829',
           date: DateTime.now().subtract(const Duration(hours: 2)),
           totalAmount: 45000,
-          status: OrderStatus.shipping,
+          status: OrderStatus.delivering,
           items: [
             OrderItem(productId: '1', title: 'Riz Parfumé 25kg', quantity: 1, price: 20000),
-            OrderItem(productId: '2', title: 'Huile Végétale 5L', quantity: 2, price: 12500),
-          ],
-        ),
-        Order(
-          id: 'CMD-8828',
-          date: DateTime.now().subtract(const Duration(days: 4)),
-          totalAmount: 12500,
-          status: OrderStatus.delivered,
-          items: [
-            OrderItem(productId: '3', title: 'Sucre en Poudre 5kg', quantity: 1, price: 3500),
-            OrderItem(productId: '4', title: 'Lait Concentré (Pack)', quantity: 1, price: 9000),
-          ],
-        ),
-        Order(
-          id: 'CMD-8825',
-          date: DateTime.now().subtract(const Duration(days: 15)),
-          totalAmount: 85000,
-          status: OrderStatus.delivered,
-          items: [
-            OrderItem(productId: '1', title: 'Achat en gros (Divers)', quantity: 10, price: 8500),
           ],
         ),
       ];
+    } finally {
       _isLoading = false;
       notifyListeners();
-    });
+    }
+  }
+
+  Future<void> createOrder(List<dynamic> items, double totalAmount, String paymentMethod) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      await apiClient.client.post('/orders', data: {
+        'items': items,
+        'totalAmount': totalAmount,
+        'paymentMethod': paymentMethod,
+      });
+      // Optionally re-fetch history
+      await fetchOrders();
+    } catch (e) {
+      debugPrint('Erreur createOrder: $e');
+      throw e;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   Order? getOrderById(String id) {

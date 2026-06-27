@@ -6,5 +6,6 @@ const router = express.Router();
 
 // Route protégée pour les utilisateurs authentifiés
 router.get('/', authMiddleware, subscriptionController.getSubscriptions);
+router.post('/renew', authMiddleware, subscriptionController.renewSubscription);
 
 module.exports = router;

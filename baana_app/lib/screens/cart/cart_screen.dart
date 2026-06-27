@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../config/colors.dart';
 import '../../config/typography.dart';
 import '../../providers/cart_provider.dart';
+import '../../providers/auth_provider.dart';
 import '../../models/cart_item.dart';
 import '../../widgets/baana_button.dart';
 
@@ -13,6 +14,9 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartProvider = context.watch<CartProvider>();
+    final authProvider = context.watch<AuthProvider>();
+    final isPro = authProvider.isPro;
+    final freeDeliveriesLeft = authProvider.freeDeliveriesLeft;
     final items = cartProvider.items.values.toList();
 
     return Scaffold(
@@ -48,7 +52,7 @@ class CartScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                _buildBottomSummary(context, cartProvider),
+                _buildBottomSummary(context, cartProvider, isPro, freeDeliveriesLeft),
               ],
             ),
     );
@@ -96,6 +100,7 @@ class CartScreen extends StatelessWidget {
   }
 
   Widget _buildCartItem(BuildContext context, CartItem item, CartProvider provider) {
+    final isPro = context.watch<AuthProvider>().isPro;
     return Dismissible(
       key: ValueKey(item.product.id),
       direction: DismissDirection.endToStart,
@@ -161,7 +166,7 @@ class CartScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${item.product.price} FCFA',
+                    '${isPro ? item.product.proPrice : item.product.publicPrice} FCFA',
                     style: TextStyle(
                       fontFamily: BaanaTypography.bodyFont,
                       fontSize: 16,
@@ -206,7 +211,7 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomSummary(BuildContext context, CartProvider provider) {
+  Widget _buildBottomSummary(BuildContext context, CartProvider provider, bool isPro, int freeDeliveriesLeft) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -236,7 +241,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${provider.subtotalAmount} FCFA',
+                  '${provider.subtotalAmount(isPro).toInt()} FCFA',
                   style: TextStyle(
                     fontFamily: BaanaTypography.bodyFont,
                     fontSize: 16,
@@ -259,12 +264,12 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  provider.deliveryFee == 0 ? 'Gratuite' : '${provider.deliveryFee} FCFA',
+                  provider.getDeliveryFee(isPro, freeDeliveriesLeft) == 0 ? 'Gratuite' : '${provider.getDeliveryFee(isPro, freeDeliveriesLeft)} FCFA',
                   style: TextStyle(
                     fontFamily: BaanaTypography.bodyFont,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: provider.deliveryFee == 0 ? BaanaColors.primary : BaanaColors.textPrimary,
+                    color: provider.getDeliveryFee(isPro, freeDeliveriesLeft) == 0 ? BaanaColors.primary : BaanaColors.textPrimary,
                   ),
                 ),
               ],
@@ -286,7 +291,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${provider.totalAmount} FCFA',
+                  '${provider.getTotalAmount(isPro, freeDeliveriesLeft)} FCFA',
                   style: TextStyle(
                     fontFamily: BaanaTypography.headlineFont,
                     fontSize: 24,

@@ -84,3 +84,38 @@ exports.verifyOtp = async (req, res) => {
     return res.status(500).json({ message: 'Erreur lors de la vérification' });
   }
 };
+
+exports.login = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { phone } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { phone } });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé. Veuillez vous inscrire.' });
+    }
+
+    // Générer OTP (ex: "1234" en mode dev)
+    const otpCode = process.env.NODE_ENV === 'production' 
+      ? Math.floor(1000 + Math.random() * 9000).toString() 
+      : '1234';
+
+    user.otpCode = otpCode;
+    await user.save();
+
+    // Dans un cas réel, on envoie le SMS ici via une API (Twilio, InfoBip, etc.)
+
+    return res.status(200).json({ 
+      message: 'OTP envoyé avec succès', 
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Erreur lors de la connexion' });
+  }
+};

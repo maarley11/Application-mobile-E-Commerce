@@ -7,11 +7,16 @@ import 'providers/auth_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/order_provider.dart';
+import 'providers/dashboard_provider.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'services/push_notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('fr_FR', null);
+  
+  // Initialisation du service de notifications Push
+  await pushNotificationService.initialize();
 
   // Barre de statut transparente pour le splash en plein écran
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -36,6 +41,7 @@ class BaanaApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
+        ChangeNotifierProvider(create: (_) => DashboardProvider()),
       ],
       child: MaterialApp.router(
         title: 'Baana',

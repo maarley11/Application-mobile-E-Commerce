@@ -5,6 +5,7 @@ import '../config/typography.dart';
 import 'home_screen.dart';
 import 'catalog_screen.dart';
 import 'profile/profile_screen.dart';
+import 'order/order_history_screen.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   const MainLayoutScreen({super.key});
@@ -16,20 +17,20 @@ class MainLayoutScreen extends StatefulWidget {
 class _MainLayoutScreenState extends State<MainLayoutScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomeScreen(),
-    const CatalogScreen(),
-    const Scaffold(body: Center(child: Text('Commandes'))),
-    const ProfileScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      const HomeScreen(),
+      const CatalogScreen(),
+      const OrderHistoryScreen(),
+      const ProfileScreen(),
+    ];
+
     return Scaffold(
       extendBody: true,
       body: IndexedStack(
         index: _currentIndex,
-        children: _pages,
+        children: pages,
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(

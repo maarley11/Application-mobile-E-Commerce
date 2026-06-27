@@ -6,8 +6,9 @@ import '../config/colors.dart';
 import '../config/typography.dart';
 import '../providers/product_provider.dart';
 import '../providers/cart_provider.dart';
+import '../providers/auth_provider.dart';
 import '../widgets/product_card.dart';
-import '../widgets/animated_reactive_background.dart';
+import '../models/product.dart';
 
 class CatalogScreen extends StatefulWidget {
   const CatalogScreen({super.key});
@@ -18,6 +19,7 @@ class CatalogScreen extends StatefulWidget {
 
 class _CatalogScreenState extends State<CatalogScreen> {
   String _selectedCategory = 'Tout';
+  String _sortBy = 'default'; // 'default', 'priceAsc', 'priceDesc', 'name'
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -40,18 +42,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
       backgroundColor: Colors.transparent, // Transparent pour voir le fond animé
       body: Stack(
         children: [
-          // Background Animé
-          AnimatedBuilder(
-            animation: _scrollController,
-            builder: (context, child) {
-              double offset = 0;
-              if (_scrollController.hasClients) {
-                offset = _scrollController.offset;
-              }
-              return Positioned.fill(
-                child: AnimatedReactiveBackground(scrollOffset: offset),
-              );
-            },
+          // Fond uni
+          const Positioned.fill(
+            child: ColoredBox(color: BaanaColors.background),
           ),
           
           Consumer<ProductProvider>(
@@ -59,7 +52,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
           final categories = ['Tout', ...provider.categories.map((c) => c.name)];
           
           // Filtrage local
-          var filteredProducts = provider.products;
+          var filteredProducts = List<Product>.from(provider.products);
           if (_selectedCategory != 'Tout') {
             final catObj = provider.categories.firstWhere((c) => c.name == _selectedCategory, orElse: () => provider.categories.first);
             filteredProducts = filteredProducts.where((p) => p.categoryId == catObj.id).toList();
@@ -67,6 +60,15 @@ class _CatalogScreenState extends State<CatalogScreen> {
           if (_searchController.text.isNotEmpty) {
             final query = _searchController.text.toLowerCase();
             filteredProducts = filteredProducts.where((p) => p.name.toLowerCase().contains(query)).toList();
+          }
+
+          // Tri local
+          if (_sortBy == 'priceAsc') {
+            filteredProducts.sort((a, b) => a.publicPrice.compareTo(b.publicPrice));
+          } else if (_sortBy == 'priceDesc') {
+            filteredProducts.sort((a, b) => b.publicPrice.compareTo(a.publicPrice));
+          } else if (_sortBy == 'name') {
+            filteredProducts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
           }
 
           return CustomScrollView(
@@ -140,7 +142,67 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ],
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        ),
+                        builder: (context) {
+                          return StatefulBuilder(
+                            builder: (context, setSheetState) {
+                              Widget buildSortOption(String value, String title) {
+                                final isSelected = _sortBy == value;
+                                return ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  title: Text(
+                                    title,
+                                    style: TextStyle(
+                                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                      color: isSelected ? BaanaColors.primary : BaanaColors.textPrimary,
+                                    ),
+                                  ),
+                                  trailing: isSelected ? const Icon(Icons.check_circle, color: BaanaColors.primary) : null,
+                                  onTap: () {
+                                    setState(() {
+                                      _sortBy = value;
+                                    });
+                                    setSheetState(() {});
+                                    Navigator.pop(context);
+                                  },
+                                );
+                              }
+
+                              return SafeArea(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Trier les produits',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: BaanaColors.textPrimary,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      buildSortOption('default', 'Par défaut'),
+                                      buildSortOption('priceAsc', 'Prix : Croissant'),
+                                      buildSortOption('priceDesc', 'Prix : Décroissant'),
+                                      buildSortOption('name', 'Nom : A-Z'),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
                     icon: const Icon(Icons.tune_rounded, color: BaanaColors.textPrimary),
                   ),
                   const SizedBox(width: 16),
@@ -252,9 +314,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
+                        final isPro = context.watch<AuthProvider>().isPro;
                         return ProductCard(
                           product: filteredProducts[index],
-                          onTap: () {},
+                          isPro: isPro,
+                          onTap: () => context.push('/product/${filteredProducts[index].id}'),
                         );
                       },
                       childCount: filteredProducts.length,

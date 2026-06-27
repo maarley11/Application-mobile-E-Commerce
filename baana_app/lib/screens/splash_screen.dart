@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../config/colors.dart';
 import '../config/typography.dart';
+import '../providers/auth_provider.dart';
 
 /// Écran Splash — Premier écran visible au lancement de l'app.
 /// Affiche le logo Baana sur un dégradé émeraude, puis redirige
@@ -47,9 +49,18 @@ class _SplashScreenState extends State<SplashScreen>
     _animController.forward();
 
     // Navigation automatique après 2.5 secondes
-    _navigationTimer = Timer(const Duration(milliseconds: 2500), () {
+    _navigationTimer = Timer(const Duration(milliseconds: 2500), () async {
       if (mounted) {
-        context.go('/onboarding');
+        final authProvider = context.read<AuthProvider>();
+        final isLoggedIn = await authProvider.checkAuthStatus();
+        
+        if (mounted) {
+          if (isLoggedIn) {
+            context.go('/main');
+          } else {
+            context.go('/onboarding');
+          }
+        }
       }
     });
   }
