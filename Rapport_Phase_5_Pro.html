@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.6; }
+        h1 { text-align: center; font-family: Arial, Helvetica, sans-serif; color: #0d5c3a; font-size: 22pt; margin-bottom: 40px; }
+        h2 { font-family: Arial, Helvetica, sans-serif; color: #10b981; font-size: 16pt; margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        p { margin-bottom: 15px; text-align: justify; }
+        .placeholder { text-align: center; border: 2px dashed #d9534f; padding: 50px; margin: 30px 0; background-color: #fdf2f2; }
+        .placeholder h3 { color: #d9534f; margin-top: 0; font-family: Arial, Helvetica, sans-serif; }
+        .placeholder p { color: #555; font-style: italic; margin-bottom: 0; text-align: center; }
+        .legende { text-align: center; font-style: italic; font-size: 11pt; color: #333; margin-top: -15px; margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+
+    <h1>CHAPITRE X : MIGRATION POSTGRESQL ET INTÉGRATION FRONT-END (PHASE 5)</h1>
+
+    <br>
+
+    <h2>1. Introduction et Contexte de la Phase 5</h2>
+    <p>L'application <strong>Baana (by SEN DIGITAL PULSE)</strong> a franchi une étape décisive lors de cette cinquième phase de développement. Après avoir conçu l'architecture logicielle de base, défini la logique métier complexe et développé l'interface de l'application mobile en Flutter (réalisée en collaboration avec le pôle Front-end "Héritage Signature Premium"), il était impératif de connecter et de synchroniser les deux environnements de manière sécurisée.</p>
+    <p>Mon objectif principal et ma responsabilité en tant qu'Architecte Backend étaient d'abandonner définitivement la base de données légère (SQLite) utilisée jusqu'ici pour les tests de développement locaux, et de la remplacer par un Système de Gestion de Base de Données Relationnelle (SGBDR) extrêmement robuste, hautement disponible et taillé pour la mise en production : <strong>PostgreSQL</strong>. Cette transition était un prérequis indispensable pour garantir l'intégrité absolue des données financières, sécuriser les transactions e-commerce B2B et supporter une charge importante de commerçants simultanés.</p>
+
+    <br><br><br>
+
+    <h2>2. Sécurisation des Accès : Implémentation du standard JWT</h2>
+    <p>L'application mobile (Flutter) nécessitant une communication avec une API de type "Stateless" (c'est-à-dire sans aucun état ni session mémorisée sur le serveur), j'ai dû concevoir et mettre en place un système d'authentification cryptographique basé sur la norme internationale <strong>JSON Web Tokens (JWT)</strong>.</p>
+    <p>Le processus est le suivant : lorsqu'un utilisateur vérifie avec succès son code OTP (One-Time Password) reçu par SMS, le backend génère un token crypté via l'algorithme HMAC SHA-256. Ce token contient, de manière sécurisée, l'identifiant du commerçant ainsi que son statut d'abonnement (ex: <i>isPro</i>). Ce token agit dès lors comme un passeport numérique infalsifiable, garantissant la sécurité de toutes les requêtes ultérieures vers l'API sans avoir besoin d'interroger inutilement la base de données à chaque vérification de route.</p>
+
+    <div class="placeholder">
+        <h3>📸 [ INSÉRER ICI LA CAPTURE D'ÉCRAN : Capture_1_Authentification_JWT.png ]</h3>
+        <p>Description de l'image : Placez ici la capture d'écran Postman montrant le code JSON qui affiche "Authentification réussie" avec la longue chaîne de caractères du Token JWT généré et les informations de l'utilisateur (id, phone, name, isPro).</p>
+    </div>
+    <p class="legende">Figure 1 - Génération d'un Token d'authentification JWT sécurisé suite à une validation OTP réussie</p>
+
+    <br><br><br>
+
+    <h2>3. Initialisation du Catalogue Sénégalais (Seeders)</h2>
+    <p>Pour que mon binôme en charge du Front-end puisse tester son application mobile dans des conditions strictement réelles, j'ai développé un script d'initialisation automatisé (<i>init_seed.js</i>). Ce script a pour mission de peupler massivement la base de données PostgreSQL avec un catalogue de produits e-commerce 100% adapté aux réalités du marché local sénégalais (ex: Huile d'arachide en bidon, Sac de Riz brisé parfumé, Bouillons, etc.).</p>
+    <p>Outre les produits, ce script génère l'architecture des catégories (Alimentaire, Cosmétique, Entretien) et intègre un compte utilisateur de test possédant les privilèges "Abonné Pro". Cela nous a permis de valider avec précision l'application des réductions exclusives sur les prix de gros.</p>
+
+    <div class="placeholder">
+        <h3>📸 [ INSÉRER ICI LA CAPTURE D'ÉCRAN : Capture_2_Catalogue_PostgreSQL.png ]</h3>
+        <p>Description de l'image : Placez ici la capture d'écran Postman de la route GET /api/products montrant la liste JSON des produits locaux, incluant les nouveaux champs imageUrl, badge (ex: PROMO, POPULAIRE) et les différents prix.</p>
+    </div>
+    <p class="legende">Figure 2 - Rendu de l'API listant les produits du catalogue synchronisés avec PostgreSQL</p>
+
+    <br><br><br>
+
+    <h2>4. Gestion des Commandes et Intégrité Transactionnelle</h2>
+    <p>Le cœur névralgique de tout système e-commerce réside incontestablement dans son tunnel de paiement et de validation des achats (Checkout). J'ai implémenté l'endpoint de création de commande (<code>POST /api/orders</code>) en exploitant le puissant mécanisme des <strong>Transactions SQL</strong> offert nativement par PostgreSQL.</p>
+    <p>Cette approche architecturale est vitale car elle garantit le respect strict du principe ACID (Atomicité, Cohérence, Isolation, Durabilité). Si la moindre erreur survient lors du processus (par exemple lors de la déduction du stock d'un produit ou lors de l'enregistrement du statut de paiement WAVE), l'ensemble de la transaction est immédiatement annulé (Rollback automatique). Cela empêche formellement la création de commandes fantômes ou l'apparition d'incohérences de stock critiques. Le système algorithmique vérifie également dynamiquement si l'utilisateur est un abonné Pro afin de substituer le prix public par le tarif réduit (<i>proPrice</i>).</p>
+
+    <div class="placeholder">
+        <h3>📸 [ INSÉRER ICI LA CAPTURE D'ÉCRAN : Capture_3_Creation_Commande.png ]</h3>
+        <p>Description de l'image : Placez ici la capture d'écran Postman montrant la création d'une commande réussie avec le totalAmount calculé en fonction des réductions Pro.</p>
+    </div>
+    <p class="legende">Figure 3 - Validation d'une commande via transaction SQL avec application des tarifs préférentiels</p>
+
+    <br>
+
+    <p>Dans un souci de traçabilité, j'ai également développé des endpoints spécifiques permettant à l'application mobile Flutter de récupérer l'historique complet et détaillé des commandes d'un utilisateur, incluant l'association relationnelle des produits achetés (OrderItems).</p>
+
+    <div class="placeholder">
+        <h3>📸 [ INSÉRER ICI LA CAPTURE D'ÉCRAN : Capture_5_Historique_Commandes.png ]</h3>
+        <p>Description de l'image : Placez ici la capture d'écran Postman de la route GET /api/orders montrant l'historique détaillé (avec la liste des produits pour chaque commande passée).</p>
+    </div>
+    <p class="legende">Figure 4 - Historique détaillé des commandes et relations (OrderItems) renvoyé à l'application mobile</p>
+
+    <br><br><br>
+
+    <h2>5. Algorithmique Avancée : Le Dashboard Analytique</h2>
+    <p>L'une des propositions de valeur fondamentales de l'application Baana est sa capacité à démontrer tangiblement aux commerçants la rentabilité financière de leur abonnement Pro. À cette fin, j'ai conçu un contrôleur analytique (<code>dashboardController.js</code>) dont le rôle est d'effectuer des calculs d'agrégation mathématique complexes directement au niveau du backend.</p>
+    <p>L'endpoint de statistiques renvoie en temps réel des "Key Performance Indicators" (KPIs) cruciaux pour l'utilisateur : le total global dépensé sur la plateforme, le nombre de livraisons gratuites restantes liées à l'abonnement, et surtout, le montant exact des <strong>économies réalisées</strong> calculé via le différentiel cumulé entre le prix public de chaque article acheté et son prix de gros.</p>
+
+    <div class="placeholder">
+        <h3>📸 [ INSÉRER ICI LA CAPTURE D'ÉCRAN : Capture_4_Dashboard_Analytics.png ]</h3>
+        <p>Description de l'image : Placez ici la capture d'écran Postman de la route GET /api/dashboard/stats montrant le JSON avec les champs totalOrders, totalSpent et les fameux savings (économies).</p>
+    </div>
+    <p class="legende">Figure 5 - Retour de l'API analytique démontrant concrètement les économies financières du client</p>
+
+    <br><br><br>
+
+    <h2>6. Conclusion de la Phase 5</h2>
+    <p>Cette cinquième phase marque l'aboutissement fonctionnel du développement Backend de l'application Baana. La migration technologique réussie vers PostgreSQL, couplée à la sécurisation stricte des endpoints via JWT et à la gestion transactionnelle rigoureuse des processus d'achat, a permis de fournir au pôle Front-end une API RESTful parfaitement documentée, hautement stable et prête pour une utilisation intensive.</p>
+    <p>L'application mobile Flutter étant désormais entièrement synchronisée avec les données réelles du serveur, la voie est libre pour entamer la sixième et dernière phase de notre projet de fin d'étude : le Déploiement Cloud et l'Hébergement en production.</p>
+
+</body>
+</html>

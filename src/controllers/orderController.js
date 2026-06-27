@@ -4,7 +4,7 @@ const { Order, OrderItem, Product, Notification, sequelize } = require('../model
 const VALID_PAYMENT_METHODS = ['WAVE', 'ORANGE_MONEY', 'MOBILE_MONEY', 'CASH', 'CASH_ON_DELIVERY', 'mobile_money', 'cash', 'À la livraison'];
 
 exports.createOrder = async (req, res) => {
-  const { paymentMethod, items } = req.body;
+  const { paymentMethod, items, latitude, longitude } = req.body;
 
   // Validation du panier
   if (!items || items.length === 0) {
@@ -58,12 +58,26 @@ exports.createOrder = async (req, res) => {
       });
     }
 
+    // Générer le orderNumber format #SDP-XXXXX
+    const randomCode = Math.floor(10000 + Math.random() * 90000); // 5 digits
+    const orderNumber = `#SDP-${randomCode}`;
+
     // 2. Création de la commande
     const order = await Order.create({
       userId: req.user.userId,
+      orderNumber,
       paymentMethod,
       totalAmount,
-      status: 'PAID' // On assume que le paiement est validé pour l'exercice
+      status: 'PAID', // On assume que le paiement est validé pour l'exercice
+      timeline: [
+        {
+          status: 'PAID',
+          date: new Date().toISOString(),
+          description: 'Commande confirmée et paiement reçu'
+        }
+      ],
+      deliveryLatitude: latitude || null,
+      deliveryLongitude: longitude || null
     }, { transaction: t });
 
     // 3. ✅ FIX Bug #2 : Utilisation de bulkCreate au lieu d'une boucle for
@@ -84,6 +98,7 @@ exports.createOrder = async (req, res) => {
       message: 'Commande créée avec succès',
       order: {
         id: order.id,
+        orderNumber: order.orderNumber,
         totalAmount: order.totalAmount,
         status: order.status
       }
@@ -103,7 +118,7 @@ exports.updateOrderStatus = async (req, res) => {
     return res.status(403).json({ message: 'Accès interdit. Réservé aux administrateurs.' });
   }
 
-  const { status } = req.body;
+  const { status, description, deliveryPersonName, deliveryPersonPhone } = req.body;
   const validStatuses = ['PENDING', 'PREPARING', 'SHIPPING', 'DELIVERED'];
 
   if (!validStatuses.includes(status)) {
@@ -120,7 +135,40 @@ exports.updateOrderStatus = async (req, res) => {
 
     const oldStatus = order.status;
     order.status = status;
+    
+    // Update timeline
+    const timeline = order.timeline || [];
+    timeline.push({
+      status,
+      date: new Date().toISOString(),
+      description: description || `Mise à jour du statut: ${status}`
+    });
+    order.timeline = timeline;
+
+    if (status === 'SHIPPING' || status === 'DELIVERED') {
+       if (deliveryPersonName) order.deliveryPersonName = deliveryPersonName;
+       if (deliveryPersonPhone) order.deliveryPersonPhone = deliveryPersonPhone;
+    }
+    
     await order.save();
+
+    // Ajouter des points de fidélité si la commande est livrée
+    if (status === 'DELIVERED') {
+      const { User } = require('../models');
+      const user = await User.findByPk(order.userId);
+      if (user) {
+        const points = Math.floor(order.totalAmount / 1000);
+        user.loyaltyPoints = (user.loyaltyPoints || 0) + points;
+        await user.save();
+        
+        await Notification.create({
+          userId: user.id,
+          title: 'Points de fidélité ajoutés ! 🎉',
+          message: `Vous avez gagné ${points} points de fidélité grâce à votre dernière commande.`,
+          type: 'LOYALTY',
+        });
+      }
+    }
 
     // Messages de notification selon le statut
     const statusMessages = {

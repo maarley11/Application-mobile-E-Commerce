@@ -6,6 +6,7 @@ exports.getCategories = async (req, res) => {
     const categories = await Category.findAll({
       order: [['name', 'ASC']]
     });
+    res.setHeader('Cache-Control', 'public, max-age=3600');
     return res.status(200).json(categories);
   } catch (error) {
     console.error('Erreur getCategories:', error);

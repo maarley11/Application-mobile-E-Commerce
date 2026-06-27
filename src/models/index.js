@@ -6,6 +6,8 @@ const Order = require('./Order');
 const OrderItem = require('./OrderItem');
 const Subscription = require('./subscription');
 const Notification = require('./Notification');
+const Cart = require('./Cart');
+const CartItem = require('./CartItem');
 
 // Associations
 Category.hasMany(Product, {
@@ -33,6 +35,16 @@ Subscription.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(Notification, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Notification.belongsTo(User, { foreignKey: 'userId' });
 
+// Associations Cart
+User.hasOne(Cart, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Cart.belongsTo(User, { foreignKey: 'userId' });
+
+Cart.hasMany(CartItem, { foreignKey: 'cartId', onDelete: 'CASCADE' });
+CartItem.belongsTo(Cart, { foreignKey: 'cartId' });
+
+Product.hasMany(CartItem, { foreignKey: 'productId', onDelete: 'CASCADE' });
+CartItem.belongsTo(Product, { foreignKey: 'productId' });
+
 module.exports = {
   sequelize,
   User,
@@ -42,4 +54,6 @@ module.exports = {
   OrderItem,
   Subscription,
   Notification,
+  Cart,
+  CartItem,
 };

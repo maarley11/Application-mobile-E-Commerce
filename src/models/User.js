@@ -43,6 +43,18 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  loyaltyPoints: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  gpsLatitude: {
+    type: DataTypes.DECIMAL,
+    allowNull: true,
+  },
+  gpsLongitude: {
+    type: DataTypes.DECIMAL,
+    allowNull: true,
+  },
 });
 
 module.exports = User;
