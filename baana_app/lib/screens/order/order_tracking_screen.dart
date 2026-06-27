@@ -92,40 +92,29 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                       border: Border.all(color: BaanaColors.border, width: 1),
                     ),
                     child: Column(
-                      children: [
-                        _buildTimelineStep(
-                          context,
-                          title: 'Confirmée',
-                          time: 'Aujourd\'hui, 09:42',
-                          isCompleted: true,
-                          isCurrent: false,
-                          isLast: false,
-                        ),
-                        _buildTimelineStep(
-                          context,
-                          title: 'En préparation',
-                          time: 'Aujourd\'hui, 10:15',
-                          isCompleted: order.status.index >= OrderStatus.preparing.index,
-                          isCurrent: order.status == OrderStatus.preparing,
-                          isLast: false,
-                        ),
-                        _buildTimelineStep(
-                          context,
-                          title: 'En livraison',
-                          time: 'Arrivée estimée : 11:30',
-                          isCompleted: order.status.index >= OrderStatus.delivering.index,
-                          isCurrent: order.status == OrderStatus.delivering,
-                          isLast: false,
-                        ),
-                        _buildTimelineStep(
-                          context,
-                          title: 'Livrée',
-                          time: order.status == OrderStatus.delivered ? 'Aujourd\'hui, 11:45' : 'En attente',
-                          isCompleted: order.status == OrderStatus.delivered,
-                          isCurrent: false,
-                          isLast: true,
-                        ),
-                      ],
+                      children: order.timeline.isEmpty
+                          ? [
+                              _buildTimelineStep(
+                                context,
+                                title: order.statusText,
+                                time: 'Aujourd\'hui',
+                                isCompleted: true,
+                                isCurrent: true,
+                                isLast: true,
+                              )
+                            ]
+                          : List.generate(order.timeline.length, (index) {
+                              final entry = order.timeline[index];
+                              final isLast = index == order.timeline.length - 1;
+                              return _buildTimelineStep(
+                                context,
+                                title: _localizeStatus(entry.status),
+                                time: entry.description,
+                                isCompleted: true,
+                                isCurrent: isLast,
+                                isLast: isLast,
+                              );
+                            }),
                     ),
                   ),
 
@@ -158,9 +147,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Mamadou Diop', style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: BaanaColors.textPrimary)),
+                                Text(order.deliveryPersonName ?? 'Livreur', style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: BaanaColors.textPrimary)),
                                 const SizedBox(height: 4),
-                                Text('+221 77 123 45 67', style: textTheme.bodySmall?.copyWith(color: BaanaColors.textSecondary)),
+                                Text(order.deliveryPersonPhone ?? 'Numéro masqué', style: textTheme.bodySmall?.copyWith(color: BaanaColors.textSecondary)),
                               ],
                             ),
                           ),
@@ -260,6 +249,18 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> with SingleTi
         ],
       ),
     );
+  }
+
+  String _localizeStatus(String status) {
+    switch (status.toUpperCase()) {
+      case 'PENDING': return 'En attente';
+      case 'PREPARING': return 'En préparation';
+      case 'SHIPPING': return 'En cours de livraison';
+      case 'DELIVERED': return 'Livrée';
+      case 'PAID': return 'Payée';
+      case 'FAILED': return 'Échouée';
+      default: return status;
+    }
   }
 
   Widget _buildTimelineStep(

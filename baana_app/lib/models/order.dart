@@ -21,6 +21,26 @@ class OrderItem {
   }
 }
 
+class OrderTimelineEntry {
+  final String status;
+  final String description;
+  final DateTime timestamp;
+
+  OrderTimelineEntry({
+    required this.status,
+    required this.description,
+    required this.timestamp,
+  });
+
+  factory OrderTimelineEntry.fromJson(Map<String, dynamic> json) {
+    return OrderTimelineEntry(
+      status: json['status'] ?? '',
+      description: json['description'] ?? '',
+      timestamp: json['timestamp'] != null ? DateTime.parse(json['timestamp']) : DateTime.now(),
+    );
+  }
+}
+
 enum OrderStatus {
   confirmed,    // Commande validée
   preparing,    // En préparation
@@ -39,6 +59,12 @@ class Order {
   final String paymentMethod;
   final String paymentStatus;
   final String deliveryAddress;
+  final String? deliveryPersonName;
+  final String? deliveryPersonPhone;
+  final DateTime? estimatedDeliveryAt;
+  final double? deliveryLatitude;
+  final double? deliveryLongitude;
+  final List<OrderTimelineEntry> timeline;
 
   Order({
     required this.id,
@@ -50,6 +76,12 @@ class Order {
     this.paymentMethod = 'À la livraison',
     this.paymentStatus = 'pending',
     this.deliveryAddress = 'Adresse non renseignée',
+    this.deliveryPersonName,
+    this.deliveryPersonPhone,
+    this.estimatedDeliveryAt,
+    this.deliveryLatitude,
+    this.deliveryLongitude,
+    this.timeline = const [],
   });
 
   String get statusText {
@@ -88,6 +120,7 @@ class Order {
     }
 
     var itemsList = json['OrderItems'] as List? ?? [];
+    var timelineList = json['timeline'] as List? ?? [];
 
     return Order(
       id: json['id']?.toString() ?? '',
@@ -98,6 +131,12 @@ class Order {
       paymentMethod: json['paymentMethod'] ?? 'À la livraison',
       paymentStatus: json['paymentStatus'] ?? 'pending',
       items: itemsList.map((item) => OrderItem.fromJson(item)).toList(),
+      deliveryPersonName: json['deliveryPersonName'],
+      deliveryPersonPhone: json['deliveryPersonPhone'],
+      estimatedDeliveryAt: json['estimatedDeliveryAt'] != null ? DateTime.parse(json['estimatedDeliveryAt']) : null,
+      deliveryLatitude: json['deliveryLatitude'] != null ? double.tryParse(json['deliveryLatitude'].toString()) : null,
+      deliveryLongitude: json['deliveryLongitude'] != null ? double.tryParse(json['deliveryLongitude'].toString()) : null,
+      timeline: timelineList.map((t) => OrderTimelineEntry.fromJson(t)).toList(),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../config/colors.dart';
 import '../../config/typography.dart';
 import '../../providers/cart_provider.dart';
@@ -18,6 +19,7 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   String _selectedPaymentMethod = 'mobile_money'; // 'mobile_money' ou 'cash'
   String? _customAddress;
+  LatLng? _selectedLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +100,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 final totalAmount = cartProvider.getTotalAmount(isPro, freeDeliveriesLeft);
 
                 try {
-                  await orderProvider.createOrder(items, totalAmount, _selectedPaymentMethod);
+                  await orderProvider.createOrder(
+                    items, 
+                    totalAmount, 
+                    _selectedPaymentMethod,
+                    deliveryLatitude: _selectedLocation?.latitude,
+                    deliveryLongitude: _selectedLocation?.longitude,
+                  );
                   
                   if (!mounted) return;
 
@@ -178,6 +186,66 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ],
             ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.map_outlined, color: BaanaColors.primary),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                builder: (context) {
+                  LatLng tempLocation = _selectedLocation ?? const LatLng(14.7167, -17.4677); // Dakar
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    ),
+                    child: Column(
+                      children: [
+                        AppBar(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          title: const Text('Pointer sur la carte', style: TextStyle(color: Colors.black)),
+                          leading: IconButton(
+                            icon: const Icon(Icons.close, color: Colors.black),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _selectedLocation = tempLocation;
+                                });
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Valider', style: TextStyle(color: BaanaColors.primary, fontWeight: FontWeight.bold)),
+                            )
+                          ],
+                        ),
+                        Expanded(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              GoogleMap(
+                                initialCameraPosition: CameraPosition(target: tempLocation, zoom: 14),
+                                onCameraMove: (position) {
+                                  tempLocation = position.target;
+                                },
+                                zoomControlsEnabled: false,
+                                myLocationEnabled: true,
+                              ),
+                              const Icon(Icons.location_pin, color: BaanaColors.primary, size: 40),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.edit_outlined, color: BaanaColors.primary),

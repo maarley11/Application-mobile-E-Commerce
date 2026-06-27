@@ -44,16 +44,22 @@ class OrderProvider with ChangeNotifier {
     }
   }
 
-  Future<void> createOrder(List<dynamic> items, double totalAmount, String paymentMethod) async {
+  Future<void> createOrder(List<dynamic> items, double totalAmount, String paymentMethod, {double? deliveryLatitude, double? deliveryLongitude}) async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      await apiClient.client.post('/orders', data: {
+      final Map<String, dynamic> data = {
         'items': items,
         'totalAmount': totalAmount,
         'paymentMethod': paymentMethod,
-      });
+      };
+      if (deliveryLatitude != null && deliveryLongitude != null) {
+        data['deliveryLatitude'] = deliveryLatitude;
+        data['deliveryLongitude'] = deliveryLongitude;
+      }
+      
+      await apiClient.client.post('/orders', data: data);
       // Optionally re-fetch history
       await fetchOrders();
     } catch (e) {

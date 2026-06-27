@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
+import '../services/api_client.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthService _authService = AuthService();
@@ -145,6 +146,21 @@ class AuthProvider extends ChangeNotifier {
       return false;
     } catch (e) {
       return false;
+    }
+  }
+
+  /// Récupère le profil complet de l'utilisateur (dont les points de fidélité)
+  Future<void> fetchProfile() async {
+    try {
+      final response = await apiClient.client.get('/users/profile');
+      final user = response.data['user'];
+      if (user != null) {
+        _loyaltyPoints = user['loyaltyPoints'] ?? 0;
+        _isPro = user['isPro'] ?? false;
+        notifyListeners();
+      }
+    } catch (e) {
+      debugPrint('Erreur fetchProfile: \$e');
     }
   }
 
