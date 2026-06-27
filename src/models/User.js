@@ -55,6 +55,11 @@ const User = sequelize.define('User', {
     type: DataTypes.DECIMAL,
     allowNull: true,
   },
+  // Token FCM pour les notifications Push (Firebase Cloud Messaging)
+  fcmToken: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = User;

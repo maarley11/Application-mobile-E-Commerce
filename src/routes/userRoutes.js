@@ -81,4 +81,37 @@ router.put('/location', authMiddleware, async (req, res) => {
   }
 });
 
+// GET /api/users/profile → Récupère le profil complet de l'utilisateur connecté
+router.get('/profile', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.userId, {
+      attributes: { exclude: ['otpCode', 'fcmToken'] }
+    });
+    if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: 'Erreur serveur.' });
+  }
+});
+
+// PUT /api/users/fcm-token → Enregistre le token FCM de l'appareil (appelé par Flutter au démarrage)
+router.put('/fcm-token', authMiddleware, async (req, res) => {
+  const { fcmToken } = req.body;
+  if (!fcmToken) {
+    return res.status(400).json({ message: 'Le champ fcmToken est obligatoire.' });
+  }
+  try {
+    const user = await User.findByPk(req.user.userId);
+    if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
+
+    user.fcmToken = fcmToken;
+    await user.save();
+
+    return res.status(200).json({ message: 'Token FCM enregistré avec succès.' });
+  } catch (error) {
+    console.error('Erreur enregistrement FCM token:', error);
+    return res.status(500).json({ message: 'Erreur serveur.' });
+  }
+});
+
 module.exports = router;

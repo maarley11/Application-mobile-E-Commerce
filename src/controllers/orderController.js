@@ -1,4 +1,5 @@
 const { Order, OrderItem, Product, Notification, sequelize } = require('../models');
+const { sendPushNotification } = require('../services/fcmService');
 
 // Méthodes de paiement autorisées
 const VALID_PAYMENT_METHODS = ['WAVE', 'ORANGE_MONEY', 'MOBILE_MONEY', 'CASH', 'CASH_ON_DELIVERY', 'mobile_money', 'cash', 'À la livraison'];
@@ -179,12 +180,29 @@ exports.updateOrderStatus = async (req, res) => {
     };
 
     // Création automatique de la notification pour l'utilisateur
+    const notifMessage = statusMessages[status] || `Votre commande ${order.orderNumber || order.id} a changé de statut : ${status}`;
     await Notification.create({
       userId: order.userId,
       title: 'Mise à jour de votre commande',
-      message: statusMessages[status] || `Votre commande #${order.id} a changé de statut : ${status}`,
+      message: notifMessage,
       type: 'ORDER',
     });
+
+    // Envoi de la notification Push FCM
+    try {
+      const { User } = require('../models');
+      const userForFcm = await User.findByPk(order.userId, { attributes: ['fcmToken'] });
+      if (userForFcm && userForFcm.fcmToken) {
+        await sendPushNotification(
+          userForFcm.fcmToken,
+          'Mise à jour de votre commande 📦',
+          notifMessage,
+          { orderId: String(order.id), status }
+        );
+      }
+    } catch (fcmErr) {
+      console.warn('FCM non bloquant :', fcmErr.message);
+    }
 
     return res.status(200).json({
       message: `Statut mis à jour : ${oldStatus} → ${status}`,

@@ -1,6 +1,7 @@
 const express = require('express');
 const { body } = require('express-validator');
 const orderController = require('../controllers/orderController');
+const invoiceController = require('../controllers/invoiceController');
 const authMiddleware = require('../middlewares/auth');
 
 const router = express.Router();
@@ -50,6 +51,9 @@ router.patch(
 // GET /api/orders → Historique de l'utilisateur connecté
 router.get('/', authMiddleware, orderController.getUserOrders);
 router.get('/history', authMiddleware, orderController.getUserOrders);
+
+// GET /api/orders/:id/invoice → Télécharger la facture PDF de la commande
+router.get('/:id/invoice', authMiddleware, invoiceController.generateInvoice);
 
 // GET /api/orders/:id → Détails et suivi de commande
 router.get('/:id', authMiddleware, orderController.getOrderById);
