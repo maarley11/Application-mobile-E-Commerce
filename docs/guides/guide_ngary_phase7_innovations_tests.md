@@ -99,7 +99,7 @@ FIREBASE_SERVER_KEY=ta_cle_secrete_firebase_pour_les_notifications
 
 ### B. Déploiement de l'Application Mobile (Flutter)
 
-Une fois le backend en ligne et l'URL de base (ex: `https://api.baana.sn/api`) mise à jour dans le code Flutter (`api_client.dart`), Mouhamed (ou toi) pourra compiler l'application.
+Une fois le backend en ligne, mets à jour l'URL de base (ex: `https://api.baana.sn/api`) dans le code Flutter (`baana_app/lib/services/api_client.dart`). C'est toi (Ngary) qui te chargeras de compiler et publier l'application mobile finale.
 
 **1. Android (Google Play Store)**
 - Assure-toi que les clés d'API Google Maps et Firebase sont configurées pour la production (SHA-1 release).
