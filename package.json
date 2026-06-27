@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
     "test": "jest --detectOpenHandles --coverage",
     "test:watch": "jest --watch",
     "test:e2e": "newman run postman/baana-api.postman_collection.json -e postman/env.test.json"
