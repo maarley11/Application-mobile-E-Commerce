@@ -25,7 +25,7 @@ const app = express();
 app.use(helmet());
 
 // ─── CORS strict : n'accepte que le frontend Flutter Web ──────────────────────
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3001').split(',');
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3001,http://localhost:3000,https://maarley11.github.io').split(',');
 app.use(cors({
   origin: (origin, callback) => {
     // Autoriser les requêtes sans origin (ex: Postman, scripts serveur)
