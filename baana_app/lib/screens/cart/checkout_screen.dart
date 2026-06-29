@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -190,61 +191,102 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           IconButton(
             icon: const Icon(Icons.map_outlined, color: BaanaColors.primary),
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-                builder: (context) {
-                  LatLng tempLocation = _selectedLocation ?? const LatLng(14.7167, -17.4677); // Dakar
-                  return Container(
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                    ),
-                    child: Column(
-                      children: [
-                        AppBar(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          title: const Text('Pointer sur la carte', style: TextStyle(color: Colors.black)),
-                          leading: IconButton(
-                            icon: const Icon(Icons.close, color: Colors.black),
-                            onPressed: () => Navigator.pop(context),
+              // Sur Web : saisie manuelle des coordonnées
+              if (kIsWeb) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    final latCtrl = TextEditingController(text: _selectedLocation?.latitude.toString() ?? '14.7167');
+                    final lngCtrl = TextEditingController(text: _selectedLocation?.longitude.toString() ?? '-17.4677');
+                    return AlertDialog(
+                      title: const Text('Coordonnées GPS'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextField(
+                            controller: latCtrl,
+                            decoration: const InputDecoration(labelText: 'Latitude'),
+                            keyboardType: TextInputType.number,
                           ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  _selectedLocation = tempLocation;
-                                });
-                                Navigator.pop(context);
-                              },
-                              child: const Text('Valider', style: TextStyle(color: BaanaColors.primary, fontWeight: FontWeight.bold)),
-                            )
-                          ],
-                        ),
-                        Expanded(
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              GoogleMap(
-                                initialCameraPosition: CameraPosition(target: tempLocation, zoom: 14),
-                                onCameraMove: (position) {
-                                  tempLocation = position.target;
-                                },
-                                zoomControlsEnabled: false,
-                                myLocationEnabled: true,
-                              ),
-                              const Icon(Icons.location_pin, color: BaanaColors.primary, size: 40),
-                            ],
+                          TextField(
+                            controller: lngCtrl,
+                            decoration: const InputDecoration(labelText: 'Longitude'),
+                            keyboardType: TextInputType.number,
                           ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Annuler')),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedLocation = LatLng(
+                                double.tryParse(latCtrl.text) ?? 14.7167,
+                                double.tryParse(lngCtrl.text) ?? -17.4677,
+                              );
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Valider', style: TextStyle(color: BaanaColors.primary)),
                         ),
                       ],
-                    ),
-                  );
-                },
-              );
+                    );
+                  },
+                );
+              } else {
+                // Sur Mobile : carte Google Maps
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) {
+                    LatLng tempLocation = _selectedLocation ?? const LatLng(14.7167, -17.4677);
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                      ),
+                      child: Column(
+                        children: [
+                          AppBar(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            title: const Text('Pointer sur la carte', style: TextStyle(color: Colors.black)),
+                            leading: IconButton(
+                              icon: const Icon(Icons.close, color: Colors.black),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  setState(() { _selectedLocation = tempLocation; });
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Valider', style: TextStyle(color: BaanaColors.primary, fontWeight: FontWeight.bold)),
+                              )
+                            ],
+                          ),
+                          Expanded(
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                GoogleMap(
+                                  initialCameraPosition: CameraPosition(target: tempLocation, zoom: 14),
+                                  onCameraMove: (position) { tempLocation = position.target; },
+                                  zoomControlsEnabled: false,
+                                  myLocationEnabled: true,
+                                ),
+                                const Icon(Icons.location_pin, color: BaanaColors.primary, size: 40),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              }
             },
           ),
           IconButton(
