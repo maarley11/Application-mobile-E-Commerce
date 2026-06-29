@@ -23,6 +23,7 @@ async function seedDatabase() {
         proPrice: 5800,
         stock: 100,
         categoryId: catAlimentaire.id,
+        // Bouteille d'huile de cuisson - vérifié 200
         imageUrl: 'https://images.unsplash.com/photo-1620706857370-e1b9770e8bb1?w=500&q=80',
         badge: 'PROMO'
       },
@@ -33,7 +34,8 @@ async function seedDatabase() {
         proPrice: 19500,
         stock: 50,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=500&q=80',
+        // Grains de riz blancs - vérifié 200
+        imageUrl: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=500&q=80',
         badge: 'POPULAIRE'
       },
       {
@@ -43,7 +45,8 @@ async function seedDatabase() {
         proPrice: 13500,
         stock: 80,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1622484211148-52b86a8ff3b5?w=500&q=80',
+        // Sucre en poudre blanc - vérifié 200
+        imageUrl: 'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=500&q=80',
         badge: null
       },
       {
@@ -53,6 +56,7 @@ async function seedDatabase() {
         proPrice: 3000,
         stock: 200,
         categoryId: catAlimentaire.id,
+        // Lait en poudre / produit laitier - vérifié 200
         imageUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&q=80',
         badge: null
       },
@@ -63,7 +67,8 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 500,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1596647285141-94576326e6c7?w=500&q=80',
+        // Épices / assaisonnement - vérifié 200
+        imageUrl: 'https://images.unsplash.com/photo-1565895405138-6c3a1555da6a?w=500&q=80',
         badge: null
       },
       {
@@ -73,6 +78,7 @@ async function seedDatabase() {
         proPrice: 4000,
         stock: 120,
         categoryId: catMenager.id,
+        // Savon en pain - vérifié 200
         imageUrl: 'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=500&q=80',
         badge: 'PROMO'
       },
@@ -83,7 +89,8 @@ async function seedDatabase() {
         proPrice: 2500,
         stock: 80,
         categoryId: catMenager.id,
-        imageUrl: 'https://images.unsplash.com/photo-1584820927498-cafe3c0b1154?w=500&q=80',
+        // Produits ménagers / nettoyage - vérifié 200
+        imageUrl: 'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=500&q=80',
         badge: null
       },
       {
@@ -93,6 +100,7 @@ async function seedDatabase() {
         proPrice: 2000,
         stock: 150,
         categoryId: catCosmetique.id,
+        // Crème / lotion corporelle - vérifié 200
         imageUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&q=80',
         badge: 'POPULAIRE'
       },
@@ -103,7 +111,8 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 60,
         categoryId: catCosmetique.id,
-        imageUrl: 'https://images.unsplash.com/photo-1607006411021-d70a927a92b2?w=500&q=80',
+        // Savon artisanal naturel - vérifié 200
+        imageUrl: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&q=80',
         badge: 'PROMO'
       },
       {
@@ -113,7 +122,8 @@ async function seedDatabase() {
         proPrice: 1500,
         stock: 90,
         categoryId: catCosmetique.id,
-        imageUrl: 'https://images.unsplash.com/photo-1585365313936-07755e1075ff?w=500&q=80',
+        // Spray / produit cosmétique homme - vérifié 200
+        imageUrl: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=500&q=80',
         badge: null
       }
     ];
