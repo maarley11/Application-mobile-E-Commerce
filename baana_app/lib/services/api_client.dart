@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart';
 
 class ApiClient {
-  static const String _baseUrl = 'http://localhost:3000/api'; // Changé pour localhost car on est sur Web
+  static const String _baseUrl = 'https://baana-app.onrender.com/api'; // Point vers le backend Render en production
   final Dio _dio;
   final FlutterSecureStorage _storage;
 
