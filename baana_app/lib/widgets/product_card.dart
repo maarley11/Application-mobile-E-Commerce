@@ -4,6 +4,7 @@ import '../models/product.dart';
 import '../providers/favorites_provider.dart';
 import '../config/colors.dart';
 import '../config/typography.dart';
+import 'baana_image.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -58,17 +59,9 @@ class ProductCard extends StatelessWidget {
                           bottomRight: Radius.circular(60),
                           bottomLeft: Radius.circular(20),
                         ),
-                        child: Image.network(
-                          product.imageUrl,
+                        child: BaanaImage(
+                          imageUrl: product.imageUrl,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: BaanaColors.inputBackground,
-                              child: const Center(
-                                child: Icon(Icons.image_not_supported, color: BaanaColors.textSecondary),
-                              ),
-                            );
-                          },
                         ),
                       ),
                     ),

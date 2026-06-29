@@ -28,7 +28,7 @@ class Product {
       description: json['description'] ?? '',
       publicPrice: (json['publicPrice'] ?? 0).toDouble(),
       proPrice: (json['proPrice'] ?? 0).toDouble(),
-      imageUrl: json['imageUrl'] ?? 'https://via.placeholder.com/150',
+      imageUrl: json['imageUrl'] ?? 'assets/images/products/peanut_oil.png',
       categoryId: json['categoryId']?.toString() ?? '1',
       badge: json['badge'],
       stock: json['stock'] ?? 100,

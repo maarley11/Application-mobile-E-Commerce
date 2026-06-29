@@ -23,7 +23,7 @@ async function seedDatabase() {
         proPrice: 5800,
         stock: 100,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Huile',
+        imageUrl: 'assets/images/products/peanut_oil.png',
         badge: 'PROMO'
       },
       {
@@ -33,7 +33,7 @@ async function seedDatabase() {
         proPrice: 19500,
         stock: 50,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Riz',
+        imageUrl: 'assets/images/products/fragrant_rice.png',
         badge: 'POPULAIRE'
       },
       {
@@ -43,7 +43,7 @@ async function seedDatabase() {
         proPrice: 13500,
         stock: 80,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Sucre',
+        imageUrl: 'assets/images/products/white_sugar.png',
         badge: null
       },
       {
@@ -53,7 +53,7 @@ async function seedDatabase() {
         proPrice: 3000,
         stock: 200,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Lait',
+        imageUrl: 'assets/images/products/milk_powder.png',
         badge: null
       },
       {
@@ -63,7 +63,7 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 500,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Bouillon',
+        imageUrl: 'assets/images/products/bouillon_cube.png',
         badge: null
       },
       {
@@ -73,7 +73,7 @@ async function seedDatabase() {
         proPrice: 4000,
         stock: 120,
         categoryId: catMenager.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Savon',
+        imageUrl: 'assets/images/products/marseille_soap.png',
         badge: 'PROMO'
       },
       {
@@ -83,37 +83,37 @@ async function seedDatabase() {
         proPrice: 2500,
         stock: 80,
         categoryId: catMenager.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Javel',
+        imageUrl: 'assets/images/products/bleach_jug.png',
         badge: null
       },
       {
-        name: 'Lait de Corps Karité (500ml)',
-        description: 'Lait hydratant au beurre de karité pur pour peaux sèches.',
-        publicPrice: 2500,
-        proPrice: 2000,
-        stock: 150,
-        categoryId: catCosmetique.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Karite',
-        badge: 'POPULAIRE'
+        name: 'Détergent en Poudre (Sachet 1kg)',
+        description: 'Lessive efficace contre les taches tenaces.',
+        publicPrice: 1200,
+        proPrice: 1000,
+        stock: 300,
+        categoryId: catMenager.id,
+        imageUrl: 'assets/images/products/detergent_powder.png',
+        badge: null
       },
       {
-        name: 'Savon Noir (Pot 500g)',
-        description: 'Savon noir traditionnel, excellent gommage naturel.',
-        publicPrice: 1500,
-        proPrice: 1200,
+        name: 'Beurre de Karité (Pot 500g)',
+        description: 'Beurre de karité pur, hydratant naturel.',
+        publicPrice: 3000,
+        proPrice: 2500,
+        stock: 80,
+        categoryId: catCosmetique.id,
+        imageUrl: 'assets/images/products/shea_butter.png',
+        badge: 'LOCAL'
+      },
+      {
+        name: 'Lait de Corps (Flacon 400ml)',
+        description: 'Lait hydratant pour peaux sèches.',
+        publicPrice: 3800,
+        proPrice: 3500,
         stock: 60,
         categoryId: catCosmetique.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Savon+Noir',
-        badge: 'PROMO'
-      },
-      {
-        name: 'Déodorant Spray Homme (200ml)',
-        description: 'Protection longue durée 48h.',
-        publicPrice: 1800,
-        proPrice: 1500,
-        stock: 90,
-        categoryId: catCosmetique.id,
-        imageUrl: 'https://via.placeholder.com/300?text=Deo',
+        imageUrl: 'assets/images/products/body_lotion.png',
         badge: null
       }
     ];

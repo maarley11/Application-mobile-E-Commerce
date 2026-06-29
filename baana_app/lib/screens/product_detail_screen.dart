@@ -7,6 +7,7 @@ import '../config/typography.dart';
 import '../providers/product_provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
+import '../widgets/baana_image.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String productId;
@@ -110,8 +111,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   background: Stack(
                     fit: StackFit.expand,
                     children: [
-                      Image.network(
-                        product.imageUrl,
+                      BaanaImage(
+                        imageUrl: product.imageUrl,
                         fit: BoxFit.cover,
                       ),
                       // Overlay dégradé pour la transition douce avec le contenu en dessous

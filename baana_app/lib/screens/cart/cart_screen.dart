@@ -7,6 +7,7 @@ import '../../providers/cart_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../models/cart_item.dart';
 import '../../widgets/baana_button.dart';
+import '../../widgets/baana_image.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -134,8 +135,8 @@ class CartScreen extends StatelessWidget {
             // Image
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                item.product.imageUrl,
+              child: BaanaImage(
+                imageUrl: item.product.imageUrl,
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,

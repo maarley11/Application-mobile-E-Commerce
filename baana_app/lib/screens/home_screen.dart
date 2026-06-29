@@ -661,8 +661,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       bottomRight: Radius.circular(30),
                       bottomLeft: Radius.circular(4),
                     ),
-                    child: Image.network(
-                      product.imageUrl,
+                    child: BaanaImage(
+                      imageUrl: product.imageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
