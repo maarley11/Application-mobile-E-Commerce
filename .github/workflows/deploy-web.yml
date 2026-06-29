@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'baana_app/**'
-      - '.github/workflows/deploy-web.yml'
 
 permissions:
   contents: write
