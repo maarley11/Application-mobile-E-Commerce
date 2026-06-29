@@ -10,6 +10,7 @@ import 'providers/order_provider.dart';
 import 'providers/dashboard_provider.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'services/push_notification_service.dart';
+import 'services/api_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +18,9 @@ void main() async {
   
   // Initialisation du service de notifications Push
   await pushNotificationService.initialize();
+
+  // Initialisation du cache HTTP
+  await apiClient.init();
 
   // Barre de statut transparente pour le splash en plein écran
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

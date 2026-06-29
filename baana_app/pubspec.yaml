@@ -46,8 +46,11 @@ dependencies:
   firebase_core: ^3.8.0
   firebase_messaging: ^15.1.5
   url_launcher: ^6.3.0
-  google_maps_flutter: any
-
+  google_maps_flutter: ^2.17.1
+  location: ^8.0.1
+  dio_cache_interceptor: ^3.5.1
+  dio_cache_interceptor_hive_store: ^4.0.0
+  path_provider: ^2.1.6
 dev_dependencies:
   flutter_test:
     sdk: flutter

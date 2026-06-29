@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import '../models/cart_item.dart';
 import '../models/product.dart';
+import '../services/cart_service.dart';
 
 class CartProvider extends ChangeNotifier {
-  final Map<String, CartItem> _items = {};
+  Map<String, CartItem> _items = {};
+  bool _isLoading = false;
 
   Map<String, CartItem> get items => {..._items};
-
+  bool get isLoading => _isLoading;
   int get itemCount => _items.length;
 
   int get totalItemQuantity {
@@ -27,13 +29,7 @@ class CartProvider extends ChangeNotifier {
 
   double getDeliveryFee(bool isPro, int freeDeliveriesLeft) {
     if (_items.isEmpty) return 0.0;
-
-    // Livraison gratuite si Membre Pro et possède encore des livraisons gratuites
-    if (isPro && freeDeliveriesLeft > 0) {
-      return 0.0;
-    }
-    
-    // Frais de livraison standard (CDC)
+    if (isPro && freeDeliveriesLeft > 0) return 0.0;
     return 1500.0; 
   }
 
@@ -41,53 +37,85 @@ class CartProvider extends ChangeNotifier {
     return subtotalAmount(isPro) + getDeliveryFee(isPro, freeDeliveriesLeft);
   }
 
-  void addItem(Product product, {int quantity = 1}) {
-    if (_items.containsKey(product.id)) {
-      // Met à jour la quantité si le produit est déjà dans le panier
-      _items.update(
-        product.id,
-        (existingCartItem) => CartItem(
-          id: existingCartItem.id,
-          product: existingCartItem.product,
-          quantity: existingCartItem.quantity + quantity,
-        ),
-      );
-    } else {
-      // Ajoute le nouveau produit
-      _items.putIfAbsent(
-        product.id,
-        () => CartItem(
-          id: DateTime.now().toString(),
-          product: product,
-          quantity: quantity,
-        ),
-      );
+  Future<void> fetchCart() async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final cartItems = await cartService.getCart();
+      _items.clear();
+      for (var item in cartItems) {
+        // La clé côté client peut être le productId pour faciliter les vérifications
+        _items[item.product.id] = item; 
+      }
+    } catch (e) {
+      print("Erreur fetchCart: \$e");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-    notifyListeners();
   }
 
-  void removeItem(String productId) {
-    _items.remove(productId);
+  Future<void> addItem(Product product, {int quantity = 1}) async {
+    _isLoading = true;
     notifyListeners();
+    try {
+      if (_items.containsKey(product.id)) {
+        final existingItem = _items[product.id]!;
+        final newQuantity = existingItem.quantity + quantity;
+        await cartService.updateCartItem(existingItem.id, newQuantity);
+      } else {
+        await cartService.addToCart(product.id, quantity);
+      }
+      // Re-fetch pour avoir le bon ID de CartItem généré par la BDD
+      await fetchCart();
+    } catch (e) {
+      print("Erreur addItem: \$e");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
-  void updateQuantity(String productId, int newQuantity) {
+  Future<void> removeItem(String productId) async {
+    if (!_items.containsKey(productId)) return;
+    final cartItemId = _items[productId]!.id;
+    _isLoading = true;
+    notifyListeners();
+    try {
+      await cartService.removeFromCart(cartItemId);
+      _items.remove(productId);
+    } catch (e) {
+      print("Erreur removeItem: \$e");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> updateQuantity(String productId, int newQuantity) async {
     if (!_items.containsKey(productId)) return;
 
     if (newQuantity <= 0) {
-      removeItem(productId);
+      await removeItem(productId);
       return;
     }
 
-    _items.update(
-      productId,
-      (existingCartItem) => CartItem(
-        id: existingCartItem.id,
-        product: existingCartItem.product,
-        quantity: newQuantity,
-      ),
-    );
+    final cartItemId = _items[productId]!.id;
+    _isLoading = true;
     notifyListeners();
+    try {
+      await cartService.updateCartItem(cartItemId, newQuantity);
+      _items[productId] = CartItem(
+        id: cartItemId,
+        product: _items[productId]!.product,
+        quantity: newQuantity,
+      );
+    } catch (e) {
+      print("Erreur updateQuantity: \$e");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   void clear() {
