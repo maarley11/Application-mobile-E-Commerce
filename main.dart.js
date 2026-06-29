@@ -51748,7 +51748,7 @@ case 2:s=4
 return A.u(A.ca(n,!1,t.d).CQ(),$async$$0)
 case 4:p=b
 o=o.c
-if(o!=null)if(p)A.bc(o).fW("/main",null)
+if(o!=null)if(p)A.bc(o).fW("/home",null)
 else A.bc(o).fW("/onboarding",null)
 case 3:return A.C(null,r)}})
 return A.D($async$$0,r)},
