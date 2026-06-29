@@ -22,6 +22,10 @@ import '../screens/profile/subscription_payment_screen.dart';
 import '../screens/profile/subscription_confirmation_screen.dart';
 import '../screens/profile/support_screen.dart';
 import '../screens/profile/settings_screen.dart';
+import '../screens/profile/addresses_screen.dart';
+import '../screens/profile/invoices_screen.dart';
+import '../screens/profile/learn_to_sell_screen.dart';
+import '../screens/order/active_deliveries_screen.dart';
 import '../config/colors.dart';
 import '../config/typography.dart';
 
@@ -154,6 +158,22 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/settings',
       builder: (context, state) => const SettingsScreen(),
+    ),
+    GoRoute(
+      path: '/addresses',
+      builder: (context, state) => const AddressesScreen(),
+    ),
+    GoRoute(
+      path: '/invoices',
+      builder: (context, state) => const InvoicesScreen(),
+    ),
+    GoRoute(
+      path: '/learn_to_sell',
+      builder: (context, state) => const LearnToSellScreen(),
+    ),
+    GoRoute(
+      path: '/active_deliveries',
+      builder: (context, state) => const ActiveDeliveriesScreen(),
     ),
   ],
 );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../providers/order_provider.dart';
+import '../../providers/cart_provider.dart';
 import '../../models/order.dart';
 import '../../config/colors.dart';
 import '../../config/typography.dart';
@@ -243,7 +244,15 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                             ],
                             isAltBorder: false,
                             primaryActionText: 'Recommander',
-                            onPrimaryAction: () {},
+                            onPrimaryAction: () {
+                              final cart = context.read<CartProvider>();
+                              // Pour cet exemple on redirige vers le home 
+                              // car on n'a pas les objets complets
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Commande ajoutée au panier')),
+                              );
+                              context.push('/home');
+                            },
                             secondaryActionIcon: Icons.receipt_long_outlined,
                             onSecondaryAction: () {},
                           ),

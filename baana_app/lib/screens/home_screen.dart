@@ -22,11 +22,57 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _searchController.dispose();
     super.dispose();
+  }
+
+  void _showFilterBottomSheet(BuildContext context, ProductProvider provider) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Trier par', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 16),
+            ListTile(
+              title: const Text('Prix : Croissant'),
+              trailing: provider.sortMode == 'price_asc' ? const Icon(Icons.check, color: BaanaColors.primary) : null,
+              onTap: () {
+                provider.sortProducts('price_asc');
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Prix : Décroissant'),
+              trailing: provider.sortMode == 'price_desc' ? const Icon(Icons.check, color: BaanaColors.primary) : null,
+              onTap: () {
+                provider.sortProducts('price_desc');
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Nom : A-Z'),
+              trailing: provider.sortMode == 'name_asc' ? const Icon(Icons.check, color: BaanaColors.primary) : null,
+              onTap: () {
+                provider.sortProducts('name_asc');
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -199,20 +245,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       child: BaanaInput(
+                        controller: _searchController,
+                        onChanged: (val) => provider.searchProducts(val),
                         hintText: 'Rechercher un produit...',
                         prefixIcon: const Icon(Icons.search, color: BaanaColors.textSecondary),
-                        suffixIcon: Container(
-                          margin: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: BaanaColors.primary,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(24),
-                              bottomRight: Radius.circular(8),
-                              bottomLeft: Radius.circular(16),
+                        suffixIcon: GestureDetector(
+                          onTap: () => _showFilterBottomSheet(context, provider),
+                          child: Container(
+                            margin: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(
+                              color: BaanaColors.primary,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(24),
+                                bottomRight: Radius.circular(8),
+                                bottomLeft: Radius.circular(16),
+                              ),
                             ),
+                            child: const Icon(Icons.tune, color: Colors.white, size: 20),
                           ),
-                          child: const Icon(Icons.tune, color: Colors.white, size: 20),
                         ),
                       ),
                     ),

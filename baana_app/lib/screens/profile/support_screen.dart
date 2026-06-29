@@ -233,7 +233,9 @@ class SupportScreen extends StatelessWidget {
                                     bottomLeft: Radius.circular(12),
                                     bottomRight: Radius.circular(32),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.push('/learn_to_sell');
+                                  },
                                 ),
                               ),
                             ],
@@ -283,7 +285,9 @@ class SupportScreen extends StatelessWidget {
                                     bottomLeft: Radius.circular(14),
                                     bottomRight: Radius.circular(28),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.push('/active_deliveries');
+                                  },
                                 ),
                               ),
                             ],

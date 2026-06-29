@@ -8,13 +8,36 @@ class ProductProvider extends ChangeNotifier {
   List<Category> _categories = [];
   List<Product> _products = [];
   String _selectedCategoryId = 'all';
+  String _searchQuery = '';
+  String _sortMode = ''; // price_asc, price_desc, name_asc
 
   bool get isLoading => _isLoading;
   List<Category> get categories => _categories;
-  List<Product> get products => _selectedCategoryId == 'all'
-      ? _products
-      : _products.where((p) => p.categoryId == _selectedCategoryId).toList();
+  List<Product> get products {
+    List<Product> filtered = _products;
+    
+    if (_selectedCategoryId != 'all') {
+      filtered = filtered.where((p) => p.categoryId == _selectedCategoryId).toList();
+    }
+    
+    if (_searchQuery.isNotEmpty) {
+      filtered = filtered.where((p) => p.name.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
+    }
+    
+    if (_sortMode == 'price_asc') {
+      filtered.sort((a, b) => a.publicPrice.compareTo(b.publicPrice));
+    } else if (_sortMode == 'price_desc') {
+      filtered.sort((a, b) => b.publicPrice.compareTo(a.publicPrice));
+    } else if (_sortMode == 'name_asc') {
+      filtered.sort((a, b) => a.name.compareTo(b.name));
+    }
+    
+    return filtered;
+  }
+  
   String get selectedCategoryId => _selectedCategoryId;
+  String get searchQuery => _searchQuery;
+  String get sortMode => _sortMode;
 
   ProductProvider() {
     fetchData();
@@ -83,6 +106,16 @@ class ProductProvider extends ChangeNotifier {
 
   void selectCategory(String categoryId) {
     _selectedCategoryId = categoryId;
+    notifyListeners();
+  }
+
+  void searchProducts(String query) {
+    _searchQuery = query;
+    notifyListeners();
+  }
+
+  void sortProducts(String mode) {
+    _sortMode = mode;
     notifyListeners();
   }
 

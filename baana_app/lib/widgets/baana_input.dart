@@ -11,6 +11,7 @@ class BaanaInput extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
 
   const BaanaInput({
     super.key,
@@ -22,6 +23,7 @@ class BaanaInput extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.validator,
+    this.onChanged,
   });
 
   @override
@@ -46,6 +48,7 @@ class BaanaInput extends StatelessWidget {
           keyboardType: keyboardType,
           obscureText: obscureText,
           validator: validator,
+          onChanged: onChanged,
           style: TextStyle(
             fontFamily: BaanaTypography.bodyFont,
             fontSize: 16,

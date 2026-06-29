@@ -18,6 +18,8 @@ const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const favoriteRoutes = require('./routes/favoriteRoutes');
+const addressRoutes = require('./routes/addressRoutes');
 
 const app = express();
 
@@ -56,6 +58,8 @@ app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/favorites', favoriteRoutes);
+app.use('/api/addresses', addressRoutes);
 
 // ─── Middleware global de gestion d'erreurs (doit être en DERNIER) ────────────
 app.use(errorHandler);

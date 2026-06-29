@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import '../../providers/theme_provider.dart';
 import '../../config/colors.dart';
 import '../../config/typography.dart';
 import '../../widgets/manjak_pattern.dart';
@@ -14,11 +16,11 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
-  bool _darkModeEnabled = false;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final themeProvider = context.watch<ThemeProvider>();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -65,20 +67,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       _buildSwitchItem(
                         'Mode Sombre',
                         Icons.dark_mode_outlined,
-                        _darkModeEnabled,
-                        (val) {
-                          setState(() => _darkModeEnabled = val);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Le mode sombre sera disponible prochainement.')),
-                          );
-                        },
+                        themeProvider.isDarkMode,
+                        (val) => themeProvider.toggleDarkMode(),
                       ),
                       _buildDivider(),
                       _buildActionItem(
                         'Langue',
                         Icons.language_outlined,
-                        trailingText: 'Français',
-                        onTap: () {},
+                        trailingText: themeProvider.locale.languageCode == 'fr' ? 'Français' : 'English',
+                        onTap: () {
+                          final newLang = themeProvider.locale.languageCode == 'fr' ? 'en' : 'fr';
+                          themeProvider.setLocale(newLang);
+                        },
                       ),
                     ],
                   ),

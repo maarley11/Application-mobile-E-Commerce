@@ -118,8 +118,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             _buildMenuItem(context, Icons.card_membership_outlined, 'Abonnement', onTap: () {
                               context.push('/subscription_compare');
                             }),
-                            _buildMenuItem(context, Icons.location_on_outlined, 'Adresses'),
-                            _buildMenuItem(context, Icons.payments_outlined, 'Factures'),
+                            if (authProvider.isPro)
+                              _buildMenuItem(context, Icons.school_outlined, 'Apprendre à vendre', onTap: () {
+                                context.push('/learn_to_sell');
+                              }),
+                            _buildMenuItem(context, Icons.location_on_outlined, 'Adresses', onTap: () {
+                              context.push('/addresses');
+                            }),
+                            _buildMenuItem(context, Icons.payments_outlined, 'Factures', onTap: () {
+                              context.push('/invoices');
+                            }),
                             _buildMenuItem(context, Icons.chat_bubble_outline, 'Support & Aide', onTap: () {
                               context.push('/support');
                             }),

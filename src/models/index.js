@@ -8,6 +8,8 @@ const Subscription = require('./subscription');
 const Notification = require('./Notification');
 const Cart = require('./Cart');
 const CartItem = require('./CartItem');
+const Favorite = require('./Favorite');
+const Address = require('./Address');
 
 // Associations
 Category.hasMany(Product, {
@@ -45,6 +47,16 @@ CartItem.belongsTo(Cart, { foreignKey: 'cartId' });
 Product.hasMany(CartItem, { foreignKey: 'productId', onDelete: 'CASCADE' });
 CartItem.belongsTo(Product, { foreignKey: 'productId' });
 
+// Associations Favorite
+User.hasMany(Favorite, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Favorite.belongsTo(User, { foreignKey: 'userId' });
+Product.hasMany(Favorite, { foreignKey: 'productId', onDelete: 'CASCADE' });
+Favorite.belongsTo(Product, { foreignKey: 'productId' });
+
+// Associations Address
+User.hasMany(Address, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Address.belongsTo(User, { foreignKey: 'userId' });
+
 module.exports = {
   sequelize,
   User,
@@ -56,4 +68,6 @@ module.exports = {
   Notification,
   Cart,
   CartItem,
+  Favorite,
+  Address,
 };

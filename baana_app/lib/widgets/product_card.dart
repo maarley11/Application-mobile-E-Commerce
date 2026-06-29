@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/product.dart';
+import '../providers/favorites_provider.dart';
 import '../config/colors.dart';
 import '../config/typography.dart';
 
@@ -92,6 +94,38 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                     ),
+                  // Favoris Button
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Consumer<FavoritesProvider>(
+                      builder: (context, favProvider, child) {
+                        final isFav = favProvider.isFavorite(product.id);
+                        return GestureDetector(
+                          onTap: () => favProvider.toggleFavorite(product.id),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.9),
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              isFav ? Icons.favorite : Icons.favorite_border,
+                              color: isFav ? BaanaColors.error : BaanaColors.textSecondary,
+                              size: 18,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   // "+" Button
                   Positioned(
                     bottom: 8,
