@@ -23,7 +23,7 @@ async function seedDatabase() {
         proPrice: 5800,
         stock: 100,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.pexels.com/photos/1028599/pexels-photo-1028599.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Huile',
         badge: 'PROMO'
       },
       {
@@ -33,7 +33,7 @@ async function seedDatabase() {
         proPrice: 19500,
         stock: 50,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.pexels.com/photos/2647338/pexels-photo-2647338.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Riz',
         badge: 'POPULAIRE'
       },
       {
@@ -43,7 +43,7 @@ async function seedDatabase() {
         proPrice: 13500,
         stock: 80,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Sucre',
         badge: null
       },
       {
@@ -53,7 +53,7 @@ async function seedDatabase() {
         proPrice: 3000,
         stock: 200,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.pexels.com/photos/3735218/pexels-photo-3735218.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Lait',
         badge: null
       },
       {
@@ -63,7 +63,7 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 500,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Bouillon',
         badge: null
       },
       {
@@ -73,7 +73,7 @@ async function seedDatabase() {
         proPrice: 4000,
         stock: 120,
         categoryId: catMenager.id,
-        imageUrl: 'https://images.pexels.com/photos/2735970/pexels-photo-2735970.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Savon',
         badge: 'PROMO'
       },
       {
@@ -83,7 +83,7 @@ async function seedDatabase() {
         proPrice: 2500,
         stock: 80,
         categoryId: catMenager.id,
-        imageUrl: 'https://images.pexels.com/photos/4239130/pexels-photo-4239130.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Javel',
         badge: null
       },
       {
@@ -93,7 +93,7 @@ async function seedDatabase() {
         proPrice: 2000,
         stock: 150,
         categoryId: catCosmetique.id,
-        imageUrl: 'https://images.pexels.com/photos/3765170/pexels-photo-3765170.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Karite',
         badge: 'POPULAIRE'
       },
       {
@@ -103,7 +103,7 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 60,
         categoryId: catCosmetique.id,
-        imageUrl: 'https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Savon+Noir',
         badge: 'PROMO'
       },
       {
@@ -113,7 +113,7 @@ async function seedDatabase() {
         proPrice: 1500,
         stock: 90,
         categoryId: catCosmetique.id,
-        imageUrl: 'https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=500',
+        imageUrl: 'https://via.placeholder.com/300?text=Deo',
         badge: null
       }
     ];
