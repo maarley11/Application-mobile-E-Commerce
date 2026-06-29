@@ -23,7 +23,7 @@ async function seedDatabase() {
         proPrice: 5800,
         stock: 100,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1620706857370-e1b9770e8bb1?w=500&q=80',
+        imageUrl: 'https://via.placeholder.com/300?text=Huile',
         badge: 'PROMO'
       },
       {
@@ -33,7 +33,7 @@ async function seedDatabase() {
         proPrice: 19500,
         stock: 50,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=500&q=80',
+        imageUrl: 'https://via.placeholder.com/300?text=Riz',
         badge: 'POPULAIRE'
       },
       {
@@ -43,7 +43,7 @@ async function seedDatabase() {
         proPrice: 13500,
         stock: 80,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1622484211148-52b86a8ff3b5?w=500&q=80',
+        imageUrl: 'https://via.placeholder.com/300?text=Sucre',
         badge: null
       },
       {
@@ -53,7 +53,7 @@ async function seedDatabase() {
         proPrice: 3000,
         stock: 200,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&q=80',
+        imageUrl: 'https://via.placeholder.com/300?text=Lait',
         badge: null
       },
       {
@@ -63,7 +63,7 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 500,
         categoryId: catAlimentaire.id,
-        imageUrl: 'https://images.unsplash.com/photo-1596647285141-94576326e6c7?w=500&q=80',
+        imageUrl: 'https://via.placeholder.com/300?text=Bouillon',
         badge: null
       },
       {
@@ -73,47 +73,47 @@ async function seedDatabase() {
         proPrice: 4000,
         stock: 120,
         categoryId: catMenager.id,
-        imageUrl: 'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=500&q=80',
+        imageUrl: 'https://via.placeholder.com/300?text=Savon',
         badge: 'PROMO'
       },
       {
         name: 'Eau de Javel (Bidon 5L)',
-        description: 'Produit désinfectant et blanchissant pour la maison.',
-        publicPrice: 3000,
-        proPrice: 2500,
-        stock: 80,
-        categoryId: catMenager.id,
-        imageUrl: 'https://images.unsplash.com/photo-1584820927498-cafe3c0b1154?w=500&q=80',
-        badge: null
-      },
-      {
-        name: 'Lait de Corps Karité (500ml)',
-        description: 'Lait hydratant au beurre de karité pur pour peaux sèches.',
+        description: 'Désinfectant puissant pour l\'entretien de la maison.',
         publicPrice: 2500,
         proPrice: 2000,
         stock: 150,
-        categoryId: catCosmetique.id,
-        imageUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&q=80',
-        badge: 'POPULAIRE'
+        categoryId: catMenager.id,
+        imageUrl: 'https://via.placeholder.com/300?text=Javel',
+        badge: null
       },
       {
-        name: 'Savon Noir (Pot 500g)',
-        description: 'Savon noir traditionnel, excellent gommage naturel.',
-        publicPrice: 1500,
-        proPrice: 1200,
+        name: 'Détergent en Poudre (Sachet 1kg)',
+        description: 'Lessive efficace contre les taches tenaces.',
+        publicPrice: 1200,
+        proPrice: 1000,
+        stock: 300,
+        categoryId: catMenager.id,
+        imageUrl: 'https://via.placeholder.com/300?text=Detergent',
+        badge: null
+      },
+      {
+        name: 'Beurre de Karité (Pot 500g)',
+        description: 'Beurre de karité pur, hydratant naturel.',
+        publicPrice: 3000,
+        proPrice: 2500,
+        stock: 80,
+        categoryId: catCosmetique.id,
+        imageUrl: 'https://via.placeholder.com/300?text=Karite',
+        badge: 'LOCAL'
+      },
+      {
+        name: 'Lait de Corps Éclaircissant (Flacon 400ml)',
+        description: 'Lait de beauté hydratant pour une peau douce.',
+        publicPrice: 4500,
+        proPrice: 3800,
         stock: 60,
         categoryId: catCosmetique.id,
-        imageUrl: 'https://images.unsplash.com/photo-1607006411021-d70a927a92b2?w=500&q=80',
-        badge: 'PROMO'
-      },
-      {
-        name: 'Déodorant Spray Homme (200ml)',
-        description: 'Protection longue durée 48h.',
-        publicPrice: 1800,
-        proPrice: 1500,
-        stock: 90,
-        categoryId: catCosmetique.id,
-        imageUrl: 'https://images.unsplash.com/photo-1585365313936-07755e1075ff?w=500&q=80',
+        imageUrl: 'https://via.placeholder.com/300?text=LaitCorps',
         badge: null
       }
     ];
