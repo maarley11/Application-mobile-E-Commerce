@@ -23,8 +23,7 @@ async function seedDatabase() {
         proPrice: 5800,
         stock: 100,
         categoryId: catAlimentaire.id,
-        // Bouteille d'huile de cuisson - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1620706857370-e1b9770e8bb1?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/1028599/pexels-photo-1028599.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: 'PROMO'
       },
       {
@@ -34,8 +33,7 @@ async function seedDatabase() {
         proPrice: 19500,
         stock: 50,
         categoryId: catAlimentaire.id,
-        // Grains de riz blancs - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/2647338/pexels-photo-2647338.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: 'POPULAIRE'
       },
       {
@@ -45,8 +43,7 @@ async function seedDatabase() {
         proPrice: 13500,
         stock: 80,
         categoryId: catAlimentaire.id,
-        // Sucre en poudre blanc - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: null
       },
       {
@@ -56,8 +53,7 @@ async function seedDatabase() {
         proPrice: 3000,
         stock: 200,
         categoryId: catAlimentaire.id,
-        // Lait en poudre / produit laitier - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/3735218/pexels-photo-3735218.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: null
       },
       {
@@ -67,8 +63,7 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 500,
         categoryId: catAlimentaire.id,
-        // Épices / assaisonnement - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1565895405138-6c3a1555da6a?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: null
       },
       {
@@ -78,8 +73,7 @@ async function seedDatabase() {
         proPrice: 4000,
         stock: 120,
         categoryId: catMenager.id,
-        // Savon en pain - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/2735970/pexels-photo-2735970.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: 'PROMO'
       },
       {
@@ -89,8 +83,7 @@ async function seedDatabase() {
         proPrice: 2500,
         stock: 80,
         categoryId: catMenager.id,
-        // Produits ménagers / nettoyage - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/4239130/pexels-photo-4239130.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: null
       },
       {
@@ -100,8 +93,7 @@ async function seedDatabase() {
         proPrice: 2000,
         stock: 150,
         categoryId: catCosmetique.id,
-        // Crème / lotion corporelle - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/3765170/pexels-photo-3765170.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: 'POPULAIRE'
       },
       {
@@ -111,8 +103,7 @@ async function seedDatabase() {
         proPrice: 1200,
         stock: 60,
         categoryId: catCosmetique.id,
-        // Savon artisanal naturel - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: 'PROMO'
       },
       {
@@ -122,8 +113,7 @@ async function seedDatabase() {
         proPrice: 1500,
         stock: 90,
         categoryId: catCosmetique.id,
-        // Spray / produit cosmétique homme - vérifié 200
-        imageUrl: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=500&q=80',
+        imageUrl: 'https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=500',
         badge: null
       }
     ];
