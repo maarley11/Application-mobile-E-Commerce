@@ -12,6 +12,7 @@ import '../widgets/baana_input.dart';
 import '../widgets/baana_input.dart';
 import '../models/product.dart';
 import 'dart:ui';
+import '../widgets/baana_image.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
