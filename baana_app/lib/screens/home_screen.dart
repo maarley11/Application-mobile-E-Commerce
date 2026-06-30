@@ -250,10 +250,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         onChanged: (val) => provider.searchProducts(val),
                         hintText: 'Rechercher un produit...',
                         prefixIcon: const Icon(Icons.search, color: BaanaColors.textSecondary),
-                        suffixIcon: GestureDetector(
-                          onTap: () => _showFilterBottomSheet(context, provider),
-                          child: Container(
-                            margin: const EdgeInsets.all(4),
+                        suffixIcon: PopupMenuButton<String>(
+                          onSelected: (value) => provider.sortProducts(value),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          offset: const Offset(0, 50),
+                          icon: Container(
                             decoration: const BoxDecoration(
                               color: BaanaColors.primary,
                               borderRadius: BorderRadius.only(
@@ -263,8 +264,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 bottomLeft: Radius.circular(16),
                               ),
                             ),
+                            padding: const EdgeInsets.all(8),
                             child: const Icon(Icons.tune, color: Colors.white, size: 20),
                           ),
+                          itemBuilder: (context) => [
+                            const PopupMenuItem(
+                              value: 'price_asc',
+                              child: Text('Prix : Croissant'),
+                            ),
+                            const PopupMenuItem(
+                              value: 'price_desc',
+                              child: Text('Prix : Décroissant'),
+                            ),
+                            const PopupMenuItem(
+                              value: 'name_asc',
+                              child: Text('Nom : A-Z'),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -307,13 +323,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: BaanaColors.textPrimary,
                           ),
                         ),
-                        Text(
-                          'Voir tout',
-                          style: TextStyle(
-                            fontFamily: BaanaTypography.bodyFont,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: BaanaColors.primary, // Green text
+                        GestureDetector(
+                          onTap: () => provider.selectCategory('all'),
+                          child: Text(
+                            'Voir tout',
+                            style: TextStyle(
+                              fontFamily: BaanaTypography.bodyFont,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: BaanaColors.primary, // Green text
+                            ),
                           ),
                         ),
                       ],

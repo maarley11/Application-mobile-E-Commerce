@@ -7,6 +7,10 @@ class CartProvider extends ChangeNotifier {
   Map<String, CartItem> _items = {};
   bool _isLoading = false;
 
+  CartProvider() {
+    fetchCart();
+  }
+
   Map<String, CartItem> get items => {..._items};
   bool get isLoading => _isLoading;
   int get itemCount => _items.length;

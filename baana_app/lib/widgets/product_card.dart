@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/product.dart';
 import '../providers/favorites_provider.dart';
+import '../providers/cart_provider.dart';
 import '../config/colors.dart';
 import '../config/typography.dart';
 import 'baana_image.dart';
@@ -123,22 +124,34 @@ class ProductCard extends StatelessWidget {
                   Positioned(
                     bottom: 8,
                     right: 8,
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: BaanaColors.primary,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<CartProvider>().addItem(product);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('${product.name} ajouté au panier'),
+                            backgroundColor: BaanaColors.primary,
+                            duration: const Duration(seconds: 2),
                           ),
-                        ],
-                      ),
-                      child: const Center(
-                        child: Icon(Icons.add, color: Colors.white),
+                        );
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: BaanaColors.primary,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.add, color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
