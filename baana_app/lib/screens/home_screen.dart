@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Bonjour, ${context.watch<AuthProvider>().currentName.split(' ').first} 👋',
+                            'Bonjour, ${context.watch<AuthProvider>().currentName.split(' ').first}',
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontFamily: BaanaTypography.headlineFont,
