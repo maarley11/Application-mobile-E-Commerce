@@ -50078,7 +50078,7 @@ g=A.dZ(B.aC,A.el(A.al(k,k,B.k,B.z,k,k,k,k,k,k,k,k,k),!0,g))
 s=A.ot("assets/images/logo/baana_logo.png",B.M,new A.azV(),k,32,k)
 r=A.cb(a,!0,t.d).d
 q=t.p
-r=A.b9(A.b([s,B.es,A.ct(A.N("Bonjour, "+B.b.ga7((r.length!==0?r:"Client").split(" "))+" \ud83d\udc4b",k,k,B.bm,k,B.agd,k,k),1)],q),B.r,B.n,B.m,0,k)
+r=A.b9(A.b([s,B.es,A.ct(A.N("Bonjour, "+B.b.ga7((r.length!==0?r:"Client").split(" ")),k,k,B.bm,k,B.agd,k,k),1)],q),B.r,B.n,B.m,0,k)
 s=A.b([A.cp(k,k,k,B.uT,k,k,new A.azW(a),k,k,k,k)],q)
 p=t.BW
 if(A.cb(a,!0,p).a.a>0)s.push(A.dA(k,A.al(k,A.N(""+A.cb(a,!0,p).a.a,k,k,k,k,B.iW,k,k),B.k,k,k,B.rm,k,k,k,B.fz,k,k,k),k,k,k,4,4,k))
