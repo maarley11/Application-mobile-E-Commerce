@@ -48,8 +48,8 @@ class _SplashScreenState extends State<SplashScreen>
     // Lancer l'animation immédiatement
     _animController.forward();
 
-    // Navigation automatique après 2.5 secondes
-    _navigationTimer = Timer(const Duration(milliseconds: 2500), () async {
+    // Navigation automatique après 4.5 secondes
+    _navigationTimer = Timer(const Duration(milliseconds: 4500), () async {
       if (mounted) {
         final authProvider = context.read<AuthProvider>();
         final isLoggedIn = await authProvider.checkAuthStatus();
@@ -129,6 +129,20 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
               ),
+
+              // Barre de chargement
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 60),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    minHeight: 4,
+                    backgroundColor: Colors.white.withValues(alpha: 0.2),
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
 
               // Ligne blanche fine en bas (comme sur la maquette)
               Padding(
