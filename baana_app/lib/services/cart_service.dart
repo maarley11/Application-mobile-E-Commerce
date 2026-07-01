@@ -5,12 +5,12 @@ import '../models/product.dart';
 class CartService {
   Future<List<CartItem>> getCart() async {
     final response = await apiClient.client.get('/cart');
-    final data = response.data['cart'];
-    if (data == null || data['CartItems'] == null) {
+    final data = response.data;
+    if (data == null || data['items'] == null) {
       return [];
     }
     
-    final itemsList = data['CartItems'] as List;
+    final itemsList = data['items'] as List;
     return itemsList.map((item) {
       final productJson = item['Product'];
       final product = Product(
