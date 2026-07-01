@@ -13,10 +13,8 @@ exports.register = async (req, res) => {
   try {
     let user = await User.findOne({ where: { phone } });
     
-    // Générer OTP (ex: "1234" en mode dev)
-    const otpCode = process.env.NODE_ENV === 'production' 
-      ? Math.floor(1000 + Math.random() * 9000).toString() 
-      : '1234';
+    // Forcer le code OTP à "1234" pour la présentation
+    const otpCode = '1234';
 
     if (!user) {
       user = await User.create({ phone, name, otpCode });
@@ -100,10 +98,8 @@ exports.login = async (req, res) => {
       return res.status(404).json({ message: 'Utilisateur non trouvé. Veuillez vous inscrire.' });
     }
 
-    // Générer OTP (ex: "1234" en mode dev)
-    const otpCode = process.env.NODE_ENV === 'production' 
-      ? Math.floor(1000 + Math.random() * 9000).toString() 
-      : '1234';
+    // Forcer le code OTP à "1234" pour la présentation
+    const otpCode = '1234';
 
     user.otpCode = otpCode;
     await user.save();
