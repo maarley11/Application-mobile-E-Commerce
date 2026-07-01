@@ -4,7 +4,8 @@ import '../models/product.dart';
 
 class CartService {
   Future<List<CartItem>> getCart() async {
-    final response = await apiClient.client.get('/cart');
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final response = await apiClient.client.get('/cart?_t=$timestamp');
     final data = response.data;
     if (data == null || data['items'] == null) {
       return [];
