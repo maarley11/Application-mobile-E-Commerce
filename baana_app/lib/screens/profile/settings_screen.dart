@@ -17,63 +17,78 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
 
+  String tr(BuildContext context, String fr, String en) {
+    return context.watch<ThemeProvider>().locale.languageCode == 'en' ? en : fr;
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final themeProvider = context.watch<ThemeProvider>();
+    final isDark = themeProvider.isDarkMode;
+
+    final bgColor = isDark ? const Color(0xFF121212) : Colors.white;
+    final textColor = isDark ? Colors.white : BaanaColors.textPrimary;
+    final containerBg = isDark ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.5);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'Paramètres',
+          tr(context, 'Paramètres', 'Settings'),
           style: textTheme.headlineSmall?.copyWith(
-            color: BaanaColors.primary,
+            color: isDark ? Colors.white : BaanaColors.primary,
             fontWeight: FontWeight.w800,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: BaanaColors.primary),
+          icon: Icon(Icons.arrow_back_ios, color: isDark ? Colors.white : BaanaColors.primary),
           onPressed: () => context.pop(),
         ),
       ),
       body: Stack(
         children: [
-          Positioned.fill(
-            child: CustomPaint(
-              painter: ArtisticBackgroundPainter(),
+          if (!isDark)
+            Positioned.fill(
+              child: CustomPaint(
+                painter: ArtisticBackgroundPainter(),
+              ),
             ),
-          ),
           SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSectionTitle('Général'),
+                  _buildSectionTitle(tr(context, 'Général', 'General'), textColor),
                   _buildSettingsContainer(
                     context,
+                    containerBg,
                     children: [
                       _buildSwitchItem(
-                        'Notifications Push',
+                        tr(context, 'Notifications Push', 'Push Notifications'),
                         Icons.notifications_active_outlined,
                         _notificationsEnabled,
                         (val) => setState(() => _notificationsEnabled = val),
+                        textColor,
                       ),
                       _buildDivider(),
                       _buildSwitchItem(
-                        'Mode Sombre',
+                        tr(context, 'Mode Sombre', 'Dark Mode'),
                         Icons.dark_mode_outlined,
-                        themeProvider.isDarkMode,
+                        isDark,
                         (val) => themeProvider.toggleDarkMode(),
+                        textColor,
                       ),
                       _buildDivider(),
                       _buildActionItem(
-                        'Langue',
+                        tr(context, 'Langue', 'Language'),
                         Icons.language_outlined,
+                        textColor,
                         trailingText: themeProvider.locale.languageCode == 'fr' ? 'Français' : 'English',
                         onTap: () {
                           final newLang = themeProvider.locale.languageCode == 'fr' ? 'en' : 'fr';
@@ -85,19 +100,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   
                   const SizedBox(height: 32),
                   
-                  _buildSectionTitle('Sécurité'),
+                  _buildSectionTitle(tr(context, 'Sécurité', 'Security'), textColor),
                   _buildSettingsContainer(
                     context,
+                    containerBg,
                     children: [
                       _buildActionItem(
-                        'Changer le code PIN',
+                        tr(context, 'Changer le code PIN', 'Change PIN code'),
                         Icons.lock_outline,
+                        textColor,
                         onTap: () {},
                       ),
                       _buildDivider(),
                       _buildActionItem(
-                        'Modifier l\'adresse de livraison',
+                        tr(context, 'Modifier l\'adresse de livraison', 'Edit delivery address'),
                         Icons.location_on_outlined,
+                        textColor,
                         onTap: () {},
                       ),
                     ],
@@ -105,25 +123,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   
                   const SizedBox(height: 32),
                   
-                  _buildSectionTitle('À propos'),
+                  _buildSectionTitle(tr(context, 'À propos', 'About'), textColor),
                   _buildSettingsContainer(
                     context,
+                    containerBg,
                     children: [
                       _buildActionItem(
-                        'Conditions générales',
+                        tr(context, 'Conditions générales', 'Terms & Conditions'),
                         Icons.description_outlined,
+                        textColor,
                         onTap: () {},
                       ),
                       _buildDivider(),
                       _buildActionItem(
-                        'Politique de confidentialité',
+                        tr(context, 'Politique de confidentialité', 'Privacy Policy'),
                         Icons.privacy_tip_outlined,
+                        textColor,
                         onTap: () {},
                       ),
                       _buildDivider(),
                       _buildActionItem(
-                        'Version de l\'application',
+                        tr(context, 'Version de l\'application', 'App Version'),
                         Icons.info_outline,
+                        textColor,
                         trailingText: 'v1.0.0',
                         showArrow: false,
                         onTap: () {},
@@ -139,7 +161,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildSectionTitle(String title) {
+  Widget _buildSectionTitle(String title, Color textColor) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, bottom: 12),
       child: Text(
@@ -148,22 +170,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           fontFamily: BaanaTypography.headlineFont,
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: BaanaColors.textPrimary,
+          color: textColor,
         ),
       ),
     );
   }
 
-  Widget _buildSettingsContainer(BuildContext context, {required List<Widget> children}) {
+  Widget _buildSettingsContainer(BuildContext context, Color containerBg, {required List<Widget> children}) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.5),
+            color: containerBg,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.6), width: 1.5),
+            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1.5),
           ),
           child: Column(
             children: children,
@@ -173,27 +195,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildSwitchItem(String title, IconData icon, bool value, ValueChanged<bool> onChanged) {
+  Widget _buildSwitchItem(String title, IconData icon, bool value, ValueChanged<bool> onChanged, Color textColor) {
     return ListTile(
-      leading: Icon(icon, color: BaanaColors.primary),
+      leading: Icon(icon, color: BaanaColors.primaryLight),
       title: Text(
         title,
-        style: const TextStyle(fontWeight: FontWeight.w600, color: BaanaColors.textPrimary),
+        style: TextStyle(fontWeight: FontWeight.w600, color: textColor),
       ),
       trailing: Switch(
         value: value,
         onChanged: onChanged,
-        activeColor: BaanaColors.primary,
+        activeColor: BaanaColors.primaryLight,
       ),
     );
   }
 
-  Widget _buildActionItem(String title, IconData icon, {String? trailingText, bool showArrow = true, required VoidCallback onTap}) {
+  Widget _buildActionItem(String title, IconData icon, Color textColor, {String? trailingText, bool showArrow = true, required VoidCallback onTap}) {
     return ListTile(
-      leading: Icon(icon, color: BaanaColors.primary),
+      leading: Icon(icon, color: BaanaColors.primaryLight),
       title: Text(
         title,
-        style: const TextStyle(fontWeight: FontWeight.w600, color: BaanaColors.textPrimary),
+        style: TextStyle(fontWeight: FontWeight.w600, color: textColor),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -217,3 +239,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Divider(height: 1, color: BaanaColors.primary.withOpacity(0.1), indent: 16, endIndent: 16);
   }
 }
+
